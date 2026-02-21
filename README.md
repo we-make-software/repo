@@ -238,20 +238,25 @@
     The goal is simple: make intent explicit and keep the compiler free to inline aggressively.
   </p>
 <pre><code class="language-c">
-#define Inline(type)\
-        static inline type __attribute__((always_inline,flatten,__unused__))
+    #define Inline(type)\
+            static inline type __attribute__((always_inline,flatten,__unused__))
 
-#define Function(type,project,name,...)\
-        Inline(type) project##_##name(__VA_ARGS__)
+    #define Function(type,project,name,...)\
+            Inline(type) project##_##name(__VA_ARGS__)
 
-#define Void(project,name,...)\
-        Function(void,project,name,__VA_ARGS__)
+    #define Void(project,name,...)\
+            Function(void,project,name,__VA_ARGS__)
 
-#define DefineFunction(type,project,name,...)\
-        Function(type,project,name,__VA_ARGS__)
+    #define DefineFunction(type,project,name,...)\
+            Function(type,project,name,__VA_ARGS__)
 
-#define DefineVoid(project,name,...)\
-        Void(project,name,__VA_ARGS__)
+    #define DefineVoid(project,name,...)\
+            Void(project,name,__VA_ARGS__)
+    
+    
+    #define Call(project,name,...)\
+            project##_##name(__VA_ARGS__)
+
 </code></pre>
 
   <p>
