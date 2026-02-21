@@ -97,3 +97,30 @@
     such as UI, apps, and high level behavior. The low level core should stay simple and controlled.
   </p>
 </details>
+<details>
+  <summary><b>Between the compiler and the code</b></summary>
+
+  <p>
+    The Makefile sits between your code and the compiler.
+    It defines how files are compiled, which flags are used, which libraries are linked,
+    and how the final output is built.
+  </p>
+
+  <p>
+    Small changes in the Makefile can change the generated machine code,
+    because optimization levels, target CPU settings, and link options matter.
+  </p>
+</details>
+<details>
+  <summary><b>Cross build: kernel object for testing, vmlinuz for real development</b></summary>
+
+  <p>
+    I cross build in two modes.
+    First, I build a kernel object for fast testing and iteration.
+    Second, I build a full vmlinuz image when I want real development and full system validation.
+  </p>
+
+  <p>
+    The goal is simple: quick feedback during experiments, and a complete bootable kernel when it matters.
+  </p>
+</details>
