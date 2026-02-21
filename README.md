@@ -237,7 +237,7 @@
     I use macros to enforce a consistent style for function declarations and inlining.
     The goal is simple: make intent explicit and keep the compiler free to inline aggressively.
   </p>
-<pre><code>
+<pre><code class="language-c">
 #define Inline(type)\
         static inline type __attribute__((always_inline,flatten,__unused__))
 
