@@ -183,3 +183,32 @@
 #endif
   </code></pre>
 </details>
+<details>
+  <summary><b>Headers depend on the platform</b></summary>
+
+  <p>
+    The headers you include depend on the platform you build against.
+    When working on Linux kernel code, you will typically include Linux kernel headers
+    for the subsystem you are targeting.
+  </p>
+
+  <pre><code>
+#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/notifier.h&gt;
+#include &lt;linux/reboot.h&gt;
+#include &lt;linux/ethtool.h&gt;
+#include &lt;linux/netdevice.h&gt;
+#include &lt;linux/skbuff.h&gt;
+#include &lt;linux/etherdevice.h&gt;
+#include &lt;linux/if_packet.h&gt;
+#include &lt;linux/ktime.h&gt;
+#include &lt;linux/timekeeping.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/types.h&gt;
+#include &lt;linux/atomic.h&gt;
+#include &lt;linux/blkdev.h&gt;
+#include &lt;linux/mutex.h&gt;
+#include &lt;linux/rtnetlink.h&gt;
+  </code></pre>
+</details>
