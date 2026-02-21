@@ -49,3 +49,28 @@
   </p>
 
 </details>
+<details>
+  <summary><b>Garbage Collection, Platforms, GCC, and building a DSL</b></summary>
+
+  <p>
+    Let’s be clear up front: C has no built-in garbage collector.
+    You manage memory yourself, and that is part of the language’s power and responsibility.
+  </p>
+
+  <p>
+    If you don’t want to build an entire operating system from scratch, you can use an existing platform.
+    A common choice is the Linux kernel (for example, Torvalds’ repository), and you can even test against
+    release candidates (RC) if you want the newest changes.
+  </p>
+
+  <p>
+    Make sure GCC is installed. It can be valuable to experiment with the newest GCC versions:
+    better diagnostics, new optimizations, and sometimes a “better” way to write code (in the sense of what
+    the compiler warns about and what it can optimize cleanly).
+  </p>
+
+  <p>
+    And if plain C is not enough for your style, we can build our own DSL on top of C
+    (macros, code generation, or a small preprocessor) while still producing standard C that GCC can compile.
+  </p>
+</details>
