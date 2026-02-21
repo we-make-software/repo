@@ -137,3 +137,30 @@
     Information is valuable, and GitHub is a great place to share it.
   </p>
 </details>
+<details>
+  <summary><b>Smart coding, fast coding, and why a DSL helps</b></summary>
+
+  <p>
+    You should do things that make coding smart, but you should also keep it fast.
+    There can be obstacles, or a different approach than you first expected.
+  </p>
+
+  <p>
+    That is why a DSL can be useful. It creates a bridge between the compiler, testing,
+    and the way you write code. The goal is to iterate quickly while still producing
+    clean C that the compiler can optimize.
+  </p>
+</details>
+<details>
+  <summary><b>Servers, trust, and building a platform</b></summary>
+
+  <p>
+    A server is a place where you receive and process data, and where you build a good relationship with users.
+    There are many malicious tools and sometimes hostile people.
+  </p>
+
+  <p>
+    If you follow the laws in different countries and provide the best possible safety for users,
+    you may be able to build a large platform.
+  </p>
+</details>
