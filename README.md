@@ -254,7 +254,6 @@
     #define DefineVoid(project,name,...)\
             Void(project,name,__VA_ARGS__)
     
-    
     #define Call(project,name,...)\
             project##_##name(__VA_ARGS__)
 
