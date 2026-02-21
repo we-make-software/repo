@@ -1,7 +1,4 @@
 <img src="./elephant.png" alt="Elephant">
-
-<img src="./elephant.png" alt="Elephant">
-
 <details>
   <summary><b>CPU flags & what they mean (GCC)</b></summary>
   <br>
