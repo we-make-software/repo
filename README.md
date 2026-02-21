@@ -212,3 +212,51 @@
 #include &lt;linux/rtnetlink.h&gt;
   </code></pre>
 </details>
+<details>
+  <summary><b>Why inline can be useful</b></summary>
+
+  <p>
+    Inline can remove the function call overhead. No call and return, and no extra stack setup.
+    That can matter in hot paths.
+  </p>
+
+  <p>
+    Inline also gives the compiler more context, so it can optimize across the call boundary.
+    It can propagate constants, fold branches, and remove unused work.
+  </p>
+
+  <p>
+    The downside is bigger code size if you inline too much, which can hurt instruction cache.
+    That is why I use it where it matters, not everywhere.
+  </p>
+</details>
+<details>
+  <summary><b>Inline, macros, and define</b></summary>
+
+  <p>
+    I use macros to enforce a consistent style for function declarations and inlining.
+    The goal is simple: make intent explicit and keep the compiler free to inline aggressively.
+  </p>
+
+  <pre><code>
+#define Inline(type)\
+        static inline type __attribute__((always_inline,flatten,__unused__))
+
+#define Function(type,name,...)\
+        Inline(type)name(__VA_ARGS__)
+
+#define Void(name,...)\
+        Function(void,name,__VA_ARGS__)
+
+#define DefineFunction(type,name,...)\
+        Function(type,name,__VA_ARGS__)
+
+#define DefineVoid(name,...)\
+        Void(name,__VA_ARGS__)
+  </code></pre>
+
+  <p>
+    This creates one pattern for function declarations, so the code base stays uniform.
+    It also avoids repeating attributes and keywords everywhere.
+  </p>
+</details>
