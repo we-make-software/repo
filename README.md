@@ -164,3 +164,22 @@
     you may be able to build a large platform.
   </p>
 </details>
+<details>
+  <summary><b>VS Code IntelliSense bypass for kernel headers</b></summary>
+
+  <p>
+    VS Code IntelliSense can report false errors when working with Linux kernel headers.
+    I use this block to bypass missing macros and types in the editor, without changing real builds.
+  </p>
+
+  <pre><code>
+#ifdef __INTELLISENSE__
+  #define MODULE_LICENSE(x)
+  #define MODULE_AUTHOR(x)
+  #define MODULE_DESCRIPTION(x)
+  typedef struct { s64 counter; } atomic64_t;
+  #define READ_ONCE(x) (x)
+  #define WRITE_ONCE(x, v) ((x) = (v))
+#endif
+  </code></pre>
+</details>
