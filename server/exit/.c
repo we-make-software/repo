@@ -1,4 +1,4 @@
 #include ".h"
-Void(init,execute,void){
-
+Void(exit,execute,void){
+    Call(hardware_network,exit);
 }

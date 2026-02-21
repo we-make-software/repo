@@ -43,6 +43,25 @@
             Void(project,name,__VA_ARGS__)
 
     #define Call(project,name,...)\
-        project##_##name(__VA_ARGS__)
-        
+            project##_##name(__VA_ARGS__)
+
+    #define DefineStruct(name)\
+        struct s_##name;\
+        typedef struct s_##name name;\
+        struct s_##name
+
+    #define DefineNetworkStruct(name)\
+        struct __attribute__((packed))ns_##name;\
+        typedef struct ns_##name name;\
+        struct __attribute__((packed))ns_##name
+
+    #define DefineDiskStruct(name)\
+        struct __aligned((4096))ds_##name;\
+        typedef struct ds_##name name;
+
+    #define NetworkAddStruct\
+           struct __attribute__((packed))
+
+    #define DiskStruct(name)\
+        struct __aligned((4096))ds_##name
 #endif

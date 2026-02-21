@@ -20,16 +20,14 @@ stop:
 	rmmod server 2>/dev/null || true
 	$(MAKE) clean
 
-log:
-	dmesg -C
-	clear
-	dmesg -w
 
 start:
+	dmesg -C
+	clear
 	rm -rf -- "/root/repo/server/debug";
 	mkdir -p -- "/root/repo/server/debug"
 	make all
-	make log
+	dmesg -w
 
 pp:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) server.i

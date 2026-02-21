@@ -1,8 +1,17 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 #include "server.h"
+#ifndef HeadView
+#define HeadView
+#define Head
+    #include "define/.h"
+#endif
 #include "init/.c"
 #include "exit/.c"
+#ifndef BodyView
+#define BodyView
+    #include "define/.c"
+#endif
 #ifndef MODULE
     static int reboot_notify(struct notifier_block*,unsigned long,void*){
         Call(exit,execute);
