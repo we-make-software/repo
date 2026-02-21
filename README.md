@@ -51,7 +51,6 @@
 </details>
 <details>
   <summary><b>Garbage Collection, Platforms, GCC, and building a DSL</b></summary>
-
   <p>
     Let’s be clear up front: C has no built-in garbage collector.
     You manage memory yourself, and that is part of the language’s power and responsibility.
@@ -72,5 +71,29 @@
   <p>
     And if plain C is not enough for your style, we can build our own DSL on top of C
     (macros, code generation, or a small preprocessor) while still producing standard C that GCC can compile.
+  </p>
+</details>
+<details>
+  <summary><b>C and C++ are not the same</b></summary>
+
+  <p>
+    C and C++ are not the same language.
+    C is often used where you want direct control, such as low level code, kernels, drivers, and tight systems code.
+  </p>
+
+  <p>
+    C++ is most commonly used in user space. In user space you have a full platform around you:
+    standard libraries, runtimes, allocators, exceptions and RTTI if enabled, and higher level abstractions.
+    That can make development faster, but it can also add overhead if you are not careful.
+  </p>
+
+  <p>
+    C++ does not have a built in garbage collector by default, but user space gives you many memory management
+    models and frameworks, so the platform often feels closer to managed systems than bare metal C.
+  </p>
+
+  <p>
+    Some things must be user space. In my opinion, that should mainly be user view logic,
+    such as UI, apps, and high level behavior. The low level core should stay simple and controlled.
   </p>
 </details>
