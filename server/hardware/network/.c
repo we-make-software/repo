@@ -16,7 +16,7 @@ Void(hardware_network,init,void){
             InitLock(hn->lock);
             InitList(hn->node);
             AddList(hn->node,hardware_networks);
-            InitList(hn->g);
+            InitList(hn->device);
             rtnl_lock();
 
             Set(hn,features_old,dev->features);

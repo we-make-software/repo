@@ -287,3 +287,18 @@
     Call(net,rx,buff,ns);
 </code></pre>
 </details>
+<details>
+  <summary><b>Network device hook and offload control</b></summary>
+
+  <p>
+    Purpose: attach a packet handler to every non loopback, non usb network device and keep state per device while the service is running.
+  </p>
+
+  <p>
+    Init flow: iterate <code>for_each_netdev</code>, skip devices that are loopback, have a zero MAC, or are behind a usb bus. For each remaining device allocate a <code>hardware_network</code> entry, store the current <code>features</code>, <code>wanted_features</code>, and <code>gso_partial_features</code>. Then clear GRO, LRO, GSO, TSO, checksum offloads, SG, and VLAN offload flags, call <code>netdev_update_features</code>, and finally hook <code>ETH_P_ALL</code> via <code>dev_add_pack</code>.
+  </p>
+
+  <p>
+    Exit flow: for each tracked device remove the packet hook with <code>dev_remove_pack</code>, restore the saved feature flags, call <code>netdev_update_features</code>, and free the entry. Uses RTNL around feature changes and pack add remove, and calls <code>synchronize_net</code> after init and exit to flush in flight packets.
+  </p>
+</details>
