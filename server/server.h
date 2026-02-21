@@ -60,8 +60,30 @@
         typedef struct ds_##name name;
 
     #define NetworkAddStruct\
-           struct __attribute__((packed))
+        struct __attribute__((packed))
 
     #define DiskStruct(name)\
         struct __aligned((4096))ds_##name
+    
+    typedef struct mutex Lock;
+    typedef struct sk_buff*buffer;
+    typedef struct list_head list;
+
+    #define InitList(node)\
+        INIT_LIST_HEAD(&(node))
+
+    #define AddList(node,head)\
+        list_add(&(node),&(head))
+
+    #define UpdateList(node,head)\
+        list_move(&(node),&(head))
+
+    #define Set(obj,field,value)\
+        (obj)->field=(value)
+    
+    #define Clear(obj,field,mask)\
+        (obj)->field&=~(mask)
+
+    #define InitLock(lock)\
+        mutex_init(&(lock))
 #endif
