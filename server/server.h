@@ -1,6 +1,5 @@
 #ifndef server_h
-#define server_h
-
+    #define server_h
     #include <linux/module.h>
     #include <linux/kernel.h>
     #include <linux/notifier.h>
@@ -27,5 +26,23 @@
         #define READ_ONCE(x)(x)
         #define WRITE_ONCE(x,v)((x) = (v))
     #endif
-    
+
+    #define Inline(type)\
+            static inline type __attribute__((always_inline,flatten,__unused__))
+
+    #define Function(type,project,name,...)\
+            Inline(type) project##_##name(__VA_ARGS__)
+
+    #define Void(project,name,...)\
+            Function(void,project,name,__VA_ARGS__)
+
+    #define DefineFunction(type,project,name,...)\
+            Function(type,project,name,__VA_ARGS__)
+
+    #define DefineVoid(project,name,...)\
+            Void(project,name,__VA_ARGS__)
+
+    #define Call(project,name,...)\
+        project##_##name(__VA_ARGS__)
+        
 #endif

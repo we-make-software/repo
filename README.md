@@ -237,23 +237,22 @@
     I use macros to enforce a consistent style for function declarations and inlining.
     The goal is simple: make intent explicit and keep the compiler free to inline aggressively.
   </p>
-
-  <pre><code>
+<pre><code>
 #define Inline(type)\
         static inline type __attribute__((always_inline,flatten,__unused__))
 
-#define Function(type,name,...)\
-        Inline(type)name(__VA_ARGS__)
+#define Function(type,project,name,...)\
+        Inline(type) project##_##name(__VA_ARGS__)
 
-#define Void(name,...)\
-        Function(void,name,__VA_ARGS__)
+#define Void(project,name,...)\
+        Function(void,project,name,__VA_ARGS__)
 
-#define DefineFunction(type,name,...)\
-        Function(type,name,__VA_ARGS__)
+#define DefineFunction(type,project,name,...)\
+        Function(type,project,name,__VA_ARGS__)
 
-#define DefineVoid(name,...)\
-        Void(name,__VA_ARGS__)
-  </code></pre>
+#define DefineVoid(project,name,...)\
+        Void(project,name,__VA_ARGS__)
+</code></pre>
 
   <p>
     This creates one pattern for function declarations, so the code base stays uniform.
