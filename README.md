@@ -264,3 +264,26 @@
     It also avoids repeating attributes and keywords everywhere.
   </p>
 </details>
+<details>
+  <summary><b>void in the parameter list</b></summary>
+
+  <p>
+    In C, <code>f()</code> in a declaration means “unknown parameter list”.
+    If the function takes zero arguments, write <code>f(void)</code>.
+    This also avoids <code>-Werror=strict-prototypes</code> errors when using my variadic macros.
+  </p>
+
+<pre><code class="language-c">
+    /* 0 parameters */
+    DefineVoid(init,execute,void);
+    Void(init,execute,void){
+    }
+    Call(init,execute);
+
+    /* with parameters */
+    DefineVoid(net,rx,buffer buff,NS*ns);
+    Void(net,rx,buffer buff,NS*ns){
+    }
+    Call(net,rx,buff,ns);
+</code></pre>
+</details>

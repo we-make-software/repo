@@ -2,6 +2,6 @@
     #define exit_h
     #include "../server.h"
     
-    DefineVoid(exit,caller);
-    
+    DefineVoid(exit,execute,void);
+
 #endif
