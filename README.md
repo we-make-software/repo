@@ -1,4 +1,5 @@
 <img src="./elephant.png" alt="Elephant">
+
 <details>
   <summary><b>CPU flags & what they mean (GCC)</b></summary>
   <br>
@@ -32,4 +33,19 @@
   <p>
     As developers, we optimize for performance and flow. Write clean C, and let the compiler generate efficient assembly.
   </p>
+</details>
+<details>
+  <summary><b>Human-readable C vs. hard-to-read ASM</b></summary>
+
+  <p>
+    Human-readable code matters. Assembly can be hard to read, even when it is correct.
+    C often makes the intent obvious: you can see the logic directly, while the compiler
+    translates it into machine instructions.
+  </p>
+
+  <p>
+    Most software is built on standards. Sometimes we follow existing standards, and
+    sometimes we define internal standards for our own projects to keep code consistent.
+  </p>
+
 </details>
