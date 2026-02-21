@@ -124,3 +124,16 @@
     The goal is simple: quick feedback during experiments, and a complete bootable kernel when it matters.
   </p>
 </details>
+<details>
+  <summary><b>GitHub push and teamwork</b></summary>
+
+  <p>
+    Teamwork is great as long as the team understands the basics.
+    There are many ways to solve a problem. The goal is not to teach a team member how to code,
+    but to understand the logic behind a choice.
+  </p>
+
+  <p>
+    Information is valuable, and GitHub is a great place to share it.
+  </p>
+</details>
