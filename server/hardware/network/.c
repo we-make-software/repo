@@ -24,7 +24,6 @@ static void hardware_network_work_rx_ws(struct work_struct*ws){
         kfree_skb(w->buff);
     CacheFree(hardware_network_work_rx,w);
 }
-
 Void(hardware_network,work_rx_creator,buffer buff,hardware_network*nh){
     hardware_network_work_rx*w=CacheAlloc(hardware_network_work_rx);
     if(!w)
