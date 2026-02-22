@@ -8,7 +8,7 @@
                 lock;
             list
                 node,
-                device;
+                endpoint_device;
             netdev_features_t
                 features_old,
                 wanted_old,

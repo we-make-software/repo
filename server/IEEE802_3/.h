@@ -1,6 +1,7 @@
 #ifndef IEEE802_3_h
     #define IEEE802_3_h
-    #include "../server.h"
+    #include "../hardware/network/.h"
+    #include "../endpoint/device/.h"
     DefineNetworkStruct(IEEE802_3MAC){
         union{
             NetworkAddStruct{
@@ -19,4 +20,5 @@
         }dest,src;
         __be16 type;
     };
+    DefineVoid(IEEE802_3,RX,buffer,hardware_network*);
 #endif

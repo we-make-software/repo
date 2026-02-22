@@ -419,7 +419,7 @@
   </p>
 
   <p>
-    <code>connections</code> is reserved for connected entities and connection tracking.
+    <code>endpoint</code> is reserved for connected entities and endpoints tracking.
   </p>
 </details>
 <details>
@@ -443,5 +443,17 @@
 
   <p>
     Exit flow: for each tracked device remove the packet hook with <code>dev_remove_pack</code>, restore the saved feature flags, call <code>netdev_update_features</code>, and free the entry. Uses RTNL around feature changes and pack add remove, and calls <code>synchronize_net</code> after init and exit to flush in flight packets.
+  </p>
+</details>
+<details>
+  <summary><b>IEEE802.3</b></summary>
+
+  <p>
+    This header defines the on wire Ethernet header layout using packed network structs.
+    It provides <code>IEEE802_3MAC</code> as a MAC representation with both a bit view for IG and UL and a normal raw view, and <code>IEEE802_3</code> which contains destination, source, and EtherType.
+  </p>
+
+  <p>
+    It also declares the RX entry point <code>IEEE802_3_RX(buffer,hardware_network*)</code>, which is used by the hardware network layer to hand off received frames for parsing and dispatch.
   </p>
 </details>

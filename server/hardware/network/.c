@@ -15,8 +15,7 @@ DefineStruct(hardware_network_work_rx){
 InitGlobalCache(hardware_network_work_rx)
 static void hardware_network_work_rx_ws(struct work_struct*ws){
     hardware_network_work_rx*w=container_of(ws,hardware_network_work_rx,ws);
-    //IEEE802_3_RX(w->buff,w->nh);
-
+    Call(IEEE802_3,RX,w->buff,w->nh);
     spin_lock_bh(&hardware_network_work_rxlock);
     list_del(&w->node);
     spin_unlock_bh(&hardware_network_work_rxlock);
@@ -57,7 +56,7 @@ Void(hardware_network,init,void){
             InitLock(hn->lock);
             InitList(hn->node);
             AddList(hn->node,hardware_networks);
-            InitList(hn->device);
+            InitList(hn->endpoint_device);
             rtnl_lock();
             Set(hn,features_old,dev->features);
             Set(hn,wanted_old,dev->wanted_features);
