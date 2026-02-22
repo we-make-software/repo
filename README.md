@@ -366,7 +366,8 @@
   <summary><b>Lock helpers</b></summary>
 
   <p>
-    <code>InitLock</code> wraps <code>mutex_init</code> so lock initialization follows the same style as the rest of my DSL helpers.
+    I wrap the kernel mutex API to keep lock usage consistent with the rest of my DSL helpers.
+    <code>InitLock</code> initializes a mutex, <code>WaitForLock</code> acquires it, and <code>ReleaseLock</code> releases it.
   </p>
 </details>
 
