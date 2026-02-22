@@ -383,6 +383,25 @@
   </p>
 </details>
 <details>
+  <summary><b>Folder layout: define, init, exit</b></summary>
+
+  <p>
+    I split the project into three folders to keep structure consistent.
+  </p>
+
+  <p>
+    <code>define</code> contains the core definitions used across the project, such as macros, typedefs, and struct layouts.
+  </p>
+
+  <p>
+    <code>init</code> contains initialization code that sets up global state, caches, hooks, and runtime flags.
+  </p>
+
+  <p>
+    <code>exit</code> contains cleanup code that unregisters hooks, restores state, frees memory, and shuts down caches.
+  </p>
+</details>
+<details>
   <summary><b>Online status flag</b></summary>
 
   <p>
