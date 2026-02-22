@@ -1636,6 +1636,11 @@ deps_server.o := \
     $(wildcard include/config/NET_INGRESS) \
   /root/linux/include/uapi/linux/rtnetlink.h \
   /root/linux/include/uapi/linux/if_addr.h \
+  define/.h \
+  define/../hardware/network/.h \
+  define/../hardware/network/../../server.h \
+  define/.c \
+  define/../hardware/network/.c \
   init/.c \
   init/.h \
   init/../server.h \

@@ -288,6 +288,97 @@
 </code></pre>
 </details>
 <details>
+  <summary><b>Global cache allocator macros</b></summary>
+
+  <p>
+    <code>InitGlobalCache(type)</code> generates a single global <code>kmem_cache</code> for a struct type and a small API around it.
+    It is meant for fast allocations in hot paths by reusing slab objects instead of calling <code>kmalloc</code> for every instance.
+  </p>
+
+  <p>
+    What it generates for each <code>type</code>:
+    a static <code>type_cache</code> pointer,
+    <code>InitCache_type()</code> which creates the cache with <code>kmem_cache_create</code> and <code>BUG_ON</code> if it fails,
+    <code>ExitCache_type()</code> which destroys the cache,
+    <code>Alloc_type()</code> which allocates with <code>GFP_ATOMIC</code>,
+    and <code>Free_type(ptr)</code> which frees back to the cache.
+  </p>
+
+  <p>
+    Call pattern:
+    initialize once at startup with <code>InitCache(type)</code>,
+    allocate with <code>CacheAlloc(type)</code>,
+    free with <code>CacheFree(type,ptr)</code>,
+    and destroy at shutdown with <code>ExitCache(type)</code>.
+  </p>
+</details>
+<details>
+  <summary><b>Struct definition helpers</b></summary>
+
+  <p>
+    These macros enforce a consistent naming scheme for types and make intent explicit at the declaration site.
+    I always forward declare the underlying struct name, create a typedef alias, then open the struct body in one step.
+  </p>
+
+  <p>
+    <code>DefineStruct(name)</code> creates a normal struct type using the internal name <code>s_name</code> and typedefs it to <code>name</code>.
+    This keeps user facing types short while still having a predictable internal symbol name.
+  </p>
+
+  <p>
+    <code>DefineNetworkStruct(name)</code> does the same but marks the struct as <code>packed</code>, for network headers and on wire layouts where padding must not be inserted.
+    <code>NetworkAddStruct</code> is a helper for declaring additional packed structs inline.
+  </p>
+
+  <p>
+    <code>DefineDiskStruct(name)</code> is for disk aligned data. It forward declares an internal <code>ds_name</code> type and typedefs it to <code>name</code>.
+    <code>DiskStruct(name)</code> opens the aligned struct body, aligned to 4096 bytes, matching my sector based storage layout.
+  </p>
+</details>
+<details>
+  <summary><b>Core typedef aliases</b></summary>
+
+  <p>
+    I use short aliases for common kernel types to keep call sites compact and consistent across the project.
+    <code>Lock</code> maps to <code>struct mutex</code>, <code>buffer</code> maps to <code>struct sk_buff*</code>, and <code>list</code> maps to <code>struct list_head</code>.
+  </p>
+</details>
+
+<details>
+  <summary><b>List helpers</b></summary>
+
+  <p>
+    Small wrappers around the kernel list API to make list operations read like intent.
+    <code>InitList</code> initializes a list head, <code>AddList</code> inserts a node into a list, and <code>UpdateList</code> moves an existing node to a new position or head.
+  </p>
+</details>
+
+<details>
+  <summary><b>Field assignment helpers</b></summary>
+
+  <p>
+    <code>Set</code> and <code>Clear</code> are used to make direct field writes explicit.
+    <code>Set</code> assigns a value, <code>Clear</code> clears a bitmask from a field.
+  </p>
+</details>
+
+<details>
+  <summary><b>Lock helpers</b></summary>
+
+  <p>
+    <code>InitLock</code> wraps <code>mutex_init</code> so lock initialization follows the same style as the rest of my DSL helpers.
+  </p>
+</details>
+
+<details>
+  <summary><b>Online status flag</b></summary>
+
+  <p>
+    A single global runtime flag used as a fast gate in hot paths.
+    <code>OnlineStatus</code> reads the current state using <code>READ_ONCE</code> to avoid compiler reordering and tearing.
+  </p>
+</details>
+<details>
   <summary><b>Network device hook and offload control</b></summary>
 
   <p>

@@ -1,6 +1,9 @@
 #include ".h"
 static int hardware_network_incoming(buffer skb,struct net_device*,struct packet_type*pt,struct net_device*){
-
+    if(!skb||skb->pkt_type==PACKET_OUTGOING||!OnlineStatus||!skb->dev||skb->len<34||!pskb_may_pull(skb,skb->len))
+        return NET_RX_SUCCESS;
+    printk(KERN_INFO "hardware_network_incoming:ok\n");
+   // WRXM(skb,container_of(pt,hardware_network,pt));
     return NET_RX_DROP;
 }
 Void(hardware_network,init,void){

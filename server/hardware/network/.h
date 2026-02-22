@@ -1,6 +1,6 @@
 #ifndef hardware_network_h
     #define hardware_network_h
-    #include "../server.h"
+    #include "../../server.h"
     DefineStruct(hardware_network){
             struct packet_type
                 pt;

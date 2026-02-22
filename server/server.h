@@ -86,4 +86,36 @@
 
     #define InitLock(lock)\
         mutex_init(&(lock))
+    static bool _IsOnline=true;
+   
+    #define OnlineStatus\
+        READ_ONCE(_IsOnline)
+    
+        #define InitGlobalCache(type)\
+            static struct kmem_cache*type##_cache;\
+            Void(InitCache_##type,void){\
+                type##_cache=kmem_cache_create(#type,sizeof(type),0,SLAB_HWCACHE_ALIGN,NULL);\
+                BUG_ON(!type##_cache);\
+            }\
+            Void(ExitCache_##type,void){\
+                kmem_cache_destroy(type##_cache);\
+            }\
+            Function(type*,Alloc_##type,void){\
+                return kmem_cache_alloc(type##_cache,GFP_ATOMIC);\
+            }\
+            Void(Free_##type,type*ptr){\
+                kmem_cache_free(type##_cache,ptr);\
+            }
+
+    #define InitCache(type)\
+            InitCache_##type()
+
+    #define ExitCache(type)\
+            ExitCache_##type()
+
+    #define CacheAlloc(type)\
+            Alloc_##type()
+
+    #define CacheFree(type,ptr)\
+            Free_##type(ptr)
 #endif

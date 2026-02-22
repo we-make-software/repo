@@ -6,14 +6,15 @@
 #define Head
     #include "define/.h"
 #endif
-#include "init/.c"
-#include "exit/.c"
 #ifndef BodyView
 #define BodyView
     #include "define/.c"
 #endif
+#include "init/.c"
+#include "exit/.c"
 #ifndef MODULE
     static int reboot_notify(struct notifier_block*,unsigned long,void*){
+        WRITE_ONCE(_IsOnline,false);
         Call(exit,execute);
         return NOTIFY_OK;
     }
@@ -23,6 +24,7 @@ static int __init server_Init(void){
     #ifndef MODULE
         register_reboot_notifier(&reboot_nb);
     #endif
+    WRITE_ONCE(_IsOnline,false);
     Call(init,execute);
     return 0;
 }
