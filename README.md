@@ -370,7 +370,18 @@
     <code>InitLock</code> initializes a mutex, <code>WaitForLock</code> acquires it, and <code>ReleaseLock</code> releases it.
   </p>
 </details>
+<details>
+  <summary><b>Header guard</b></summary>
 
+  <p>
+    I use a header guard to make sure the header is only processed once per compilation unit, even if it is included multiple times through different include paths.
+    This prevents duplicate typedefs, struct definitions, and macro redefinitions, and it keeps build output stable.
+  </p>
+
+  <p>
+    The pattern is <code>#ifndef NAME</code>, <code>#define NAME</code>, then the header content, and finally <code>#endif</code>.
+  </p>
+</details>
 <details>
   <summary><b>Online status flag</b></summary>
 
