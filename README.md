@@ -386,19 +386,40 @@
   <summary><b>Folder layout: define, init, exit</b></summary>
 
   <p>
-    I split the project into three folders to keep structure consistent.
+    I use three folders with strict rules to keep the build predictable and avoid accidental coupling.
   </p>
 
   <p>
-    <code>define</code> contains the core definitions used across the project, such as macros, typedefs, and struct layouts.
+    <code>define</code> is where I place the actual modules and features.
+    Each feature lives as two files, a <code>.h</code> and a <code>.c</code>.
+    All feature headers are included from one central <code>define/.h</code>, and all feature implementations are included from one central <code>define/.c</code>.
   </p>
 
   <p>
-    <code>init</code> contains initialization code that sets up global state, caches, hooks, and runtime flags.
+    <code>init</code> is only an init dispatcher.
+    It calls the init routines from other parts of the project.
+    The header in this folder is treated as locked and should not be edited in normal development.
   </p>
 
   <p>
-    <code>exit</code> contains cleanup code that unregisters hooks, restores state, frees memory, and shuts down caches.
+    <code>exit</code> is only an exit dispatcher.
+    It calls the cleanup routines from other parts of the project.
+    The header in this folder is treated as locked and should not be edited in normal development.
+  </p>
+</details>
+<details>
+  <summary><b>Other folders</b></summary>
+
+  <p>
+    Any other folder under <code>server</code> is either standard infrastructure or a link to a specific subsystem.
+  </p>
+
+  <p>
+    <code>hardware</code> is reserved for hardware related code, for example network adapters and storage devices.
+  </p>
+
+  <p>
+    <code>connections</code> is reserved for connected entities and connection tracking.
   </p>
 </details>
 <details>
