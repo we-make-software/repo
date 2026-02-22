@@ -1,5 +1,4 @@
 #include ".h"
-
 static struct workqueue_struct*hardware_network_work_rx_WQ;
 static LIST_HEAD(hardware_network_works);
 static DEFINE_SPINLOCK(hardware_network_work_rxlock);
@@ -13,10 +12,7 @@ DefineStruct(hardware_network_work_rx){
     list
         node;
 };
-
 InitGlobalCache(hardware_network_work_rx)
-
-
 static void hardware_network_work_rx_ws(struct work_struct*ws){
     hardware_network_work_rx*w=container_of(ws,hardware_network_work_rx,ws);
     //IEEE802_3_RX(w->buff,w->nh);
@@ -33,7 +29,6 @@ Void(hardware_network,work_rx_creator,buffer buff,hardware_network*nh){
     hardware_network_work_rx*w=CacheAlloc(hardware_network_work_rx);
     if(!w)
         return;
-
     INIT_WORK(&w->ws,hardware_network_work_rx_ws);
     InitList(w->node);
     Set(w,nh,nh);
@@ -41,11 +36,8 @@ Void(hardware_network,work_rx_creator,buffer buff,hardware_network*nh){
     spin_lock_bh(&hardware_network_work_rxlock);
     AddBottom(w->node,hardware_network_works);
     spin_unlock_bh(&hardware_network_work_rxlock);
-
     queue_work(hardware_network_work_rx_WQ,&w->ws);
 }
-
-
 static int hardware_network_incoming(buffer skb,struct net_device*,struct packet_type*pt,struct net_device*){
     if(!skb||skb->pkt_type==PACKET_OUTGOING||!OnlineStatus||!skb->dev||skb->len<34||!pskb_may_pull(skb,skb->len))
         return NET_RX_SUCCESS;
@@ -59,7 +51,6 @@ Void(hardware_network,init,void){
         for_each_netdev(&init_net,dev){
             if((dev->flags&IFF_LOOPBACK)||({struct device*dp=dev->dev.parent;is_zero_ether_addr(dev->dev_addr)||(dp&&dp->bus&&!strcmp(dp->bus->name,"usb"));}))
                 continue;
-
             hardware_network*hn=kmalloc(sizeof(*hn),GFP_KERNEL);
             if(!hn)
                 continue;
@@ -69,7 +60,6 @@ Void(hardware_network,init,void){
             AddList(hn->node,hardware_networks);
             InitList(hn->device);
             rtnl_lock();
-
             Set(hn,features_old,dev->features);
             Set(hn,wanted_old,dev->wanted_features);
             Set(hn,gso_partial_features_old,dev->gso_partial_features);
@@ -102,33 +92,35 @@ Void(hardware_network,init,void){
         synchronize_net();
 }
 Void(hardware_network,exit,void){
-    hardware_network*hn,*tmp;
-    list_for_each_entry_safe(hn,tmp,&hardware_networks,node){
-        rtnl_lock();
-        dev_remove_pack(&hn->pt);
-        Set(hn->pt.dev,features,hn->features_old);
-        Set(hn->pt.dev,wanted_features,hn->wanted_old);
-        Set(hn->pt.dev,gso_partial_features,hn->gso_partial_features_old);
-        netdev_update_features(hn->pt.dev);
-        rtnl_unlock();
-        list_del(&hn->node);
-        kfree(hn);
-    }
-    synchronize_net();
-    hardware_network_work_rx*w,*tmp;
-    flush_workqueue(hardware_network_work_rx_WQ);
-    destroy_workqueue(hardware_network_work_rx_WQ);
-    spin_lock_bh(&hardware_network_work_rxlock);
-    list_for_each_entry_safe(w,tmp,&hardware_network_works,node){
-        list_del(&w->node);
-        spin_unlock_bh(&hardware_network_work_rxlock);
-
-        if(w->buff)
-            kfree_skb(w->buff);
-        CacheFree(hardware_network_work_rx,w);
-
+    {
+        hardware_network_work_rx*w,*tmp;
+        flush_workqueue(hardware_network_work_rx_WQ);
+        destroy_workqueue(hardware_network_work_rx_WQ);
         spin_lock_bh(&hardware_network_work_rxlock);
+        list_for_each_entry_safe(w,tmp,&hardware_network_works,node){
+            list_del(&w->node);
+            spin_unlock_bh(&hardware_network_work_rxlock);
+            if(w->buff)
+                kfree_skb(w->buff);
+            CacheFree(hardware_network_work_rx,w);
+            spin_lock_bh(&hardware_network_work_rxlock);
+        }
+        spin_unlock_bh(&hardware_network_work_rxlock);
+        ExitCache(hardware_network_work_rx);
     }
-    spin_unlock_bh(&hardware_network_work_rxlock);
-    ExitCache(hardware_network_work_rx);
+    {
+        hardware_network*hn,*tmp;
+        list_for_each_entry_safe(hn,tmp,&hardware_networks,node){
+            rtnl_lock();
+            dev_remove_pack(&hn->pt);
+            Set(hn->pt.dev,features,hn->features_old);
+            Set(hn->pt.dev,wanted_features,hn->wanted_old);
+            Set(hn->pt.dev,gso_partial_features,hn->gso_partial_features_old);
+            netdev_update_features(hn->pt.dev);
+            rtnl_unlock();
+            list_del(&hn->node);
+            kfree(hn);
+        }
+        synchronize_net();
+    }
 }
