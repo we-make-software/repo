@@ -3,7 +3,6 @@
 #include "server.h"
 #ifndef HeadView
 #define HeadView
-#define Head
     #include "define/.h"
 #endif
 #ifndef BodyView

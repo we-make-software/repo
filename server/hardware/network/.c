@@ -1,12 +1,60 @@
 #include ".h"
+
+static struct workqueue_struct*hardware_network_work_rx_WQ;
+static LIST_HEAD(hardware_network_works);
+static DEFINE_SPINLOCK(hardware_network_work_rxlock);
+DefineStruct(hardware_network_work_rx){
+    struct work_struct
+        ws;
+    buffer
+        buff;
+    hardware_network
+        *nh;
+    list
+        node;
+};
+
+InitGlobalCache(hardware_network_work_rx)
+
+
+static void hardware_network_work_rx_ws(struct work_struct*ws){
+    hardware_network_work_rx*w=container_of(ws,hardware_network_work_rx,ws);
+    //IEEE802_3_RX(w->buff,w->nh);
+
+    spin_lock_bh(&hardware_network_work_rxlock);
+    list_del(&w->node);
+    spin_unlock_bh(&hardware_network_work_rxlock);
+    if(w->buff)
+        kfree_skb(w->buff);
+    CacheFree(hardware_network_work_rx,w);
+}
+
+Void(hardware_network,work_rx_creator,buffer buff,hardware_network*nh){
+    hardware_network_work_rx*w=CacheAlloc(hardware_network_work_rx);
+    if(!w)
+        return;
+
+    INIT_WORK(&w->ws,hardware_network_work_rx_ws);
+    InitList(w->node);
+    Set(w,nh,nh);
+    Set(w,buff,skb_get(buff));
+    spin_lock_bh(&hardware_network_work_rxlock);
+    AddBottom(w->node,hardware_network_works);
+    spin_unlock_bh(&hardware_network_work_rxlock);
+
+    queue_work(hardware_network_work_rx_WQ,&w->ws);
+}
+
+
 static int hardware_network_incoming(buffer skb,struct net_device*,struct packet_type*pt,struct net_device*){
     if(!skb||skb->pkt_type==PACKET_OUTGOING||!OnlineStatus||!skb->dev||skb->len<34||!pskb_may_pull(skb,skb->len))
         return NET_RX_SUCCESS;
-    printk(KERN_INFO "hardware_network_incoming:ok\n");
-   // WRXM(skb,container_of(pt,hardware_network,pt));
+    Call(hardware_network,work_rx_creator,skb,container_of(pt,hardware_network,pt));
     return NET_RX_DROP;
 }
 Void(hardware_network,init,void){
+        InitCache(hardware_network_work_rx);
+        hardware_network_work_rx_WQ=alloc_workqueue("hardware_network_work_rx_WQ",WQ_UNBOUND,0);
         struct net_device*dev;
         for_each_netdev(&init_net,dev){
             if((dev->flags&IFF_LOOPBACK)||({struct device*dp=dev->dev.parent;is_zero_ether_addr(dev->dev_addr)||(dp&&dp->bus&&!strcmp(dp->bus->name,"usb"));}))
@@ -46,7 +94,7 @@ Void(hardware_network,init,void){
             netdev_update_features(dev);
             Set(hn,pt.dev,dev);
             Set(hn,pt.func,hardware_network_incoming);
-            Set(hn,pt.type,htons(ETH_P_ALL));
+            Set(hn,pt.type,htonh(ETH_P_ALL));
             dev_add_pack(&hn->pt);
             rtnl_unlock();
         }
@@ -67,4 +115,20 @@ Void(hardware_network,exit,void){
         kfree(hn);
     }
     synchronize_net();
+    hardware_network_work_rx*w,*tmp;
+    flush_workqueue(hardware_network_work_rx_WQ);
+    destroy_workqueue(hardware_network_work_rx_WQ);
+    spin_lock_bh(&hardware_network_work_rxlock);
+    list_for_each_entry_safe(w,tmp,&hardware_network_works,node){
+        list_del(&w->node);
+        spin_unlock_bh(&hardware_network_work_rxlock);
+
+        if(w->buff)
+            kfree_skb(w->buff);
+        CacheFree(hardware_network_work_rx,w);
+
+        spin_lock_bh(&hardware_network_work_rxlock);
+    }
+    spin_unlock_bh(&hardware_network_work_rxlock);
+    ExitCache(hardware_network_work_rx);
 }

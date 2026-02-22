@@ -99,22 +99,22 @@
     #define OnlineStatus\
         READ_ONCE(_IsOnline)
     
-    #define InitGlobalCache(type)\
-        static struct kmem_cache*type##_cache;\
-        Void(InitCache_##type,void){\
-            type##_cache=kmem_cache_create(#type,sizeof(type),0,SLAB_HWCACHE_ALIGN,NULL);\
-            BUG_ON(!type##_cache);\
-        }\
-        Void(ExitCache_##type,void){\
-            kmem_cache_destroy(type##_cache);\
-        }\
-        Function(type*,Alloc_##type,void){\
-            return kmem_cache_alloc(type##_cache,GFP_ATOMIC);\
-        }\
-        Void(Free_##type,type*ptr){\
-            kmem_cache_free(type##_cache,ptr);\
-        }
-
+#define InitGlobalCache(type)\
+    static struct kmem_cache*type##_cache;\
+    DefineVoid(Cache,InitCache_##type,void){\
+        type##_cache=kmem_cache_create(#type,sizeof(type),0,SLAB_HWCACHE_ALIGN,NULL);\
+        BUG_ON(!type##_cache);\
+    }\
+    DefineVoid(Cache,ExitCache_##type,void){\
+        kmem_cache_destroy(type##_cache);\
+    }\
+    DefineFunction(type*,Cache,Alloc_##type,void){\
+        return kmem_cache_alloc(type##_cache,GFP_ATOMIC);\
+    }\
+    DefineVoid(Cache,Free_##type,type*ptr){\
+        kmem_cache_free(type##_cache,ptr);\
+    }
+    
     #define InitCache(type)\
             InitCache_##type()
 
