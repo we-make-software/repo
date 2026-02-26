@@ -17,7 +17,9 @@
     #include <linux/blkdev.h>
     #include <linux/mutex.h>
     #include <linux/rtnetlink.h>
-    
+    #include <linux/byteorder/generic.h>
+    #include <linux/if_ether.h>
+
     #ifdef __INTELLISENSE__
         #define MODULE_LICENSE(x)
         #define MODULE_AUTHOR(x)
@@ -94,36 +96,37 @@
 
     #define InitLock(lock)\
         mutex_init(&(lock))
+        
     static bool _IsOnline=true;
    
     #define OnlineStatus\
         READ_ONCE(_IsOnline)
     
-#define InitGlobalCache(type)\
-    static struct kmem_cache*type##_cache;\
-    DefineVoid(Cache,InitCache_##type,void){\
-        type##_cache=kmem_cache_create(#type,sizeof(type),0,SLAB_HWCACHE_ALIGN,NULL);\
-        BUG_ON(!type##_cache);\
-    }\
-    DefineVoid(Cache,ExitCache_##type,void){\
-        kmem_cache_destroy(type##_cache);\
-    }\
-    DefineFunction(type*,Cache,Alloc_##type,void){\
-        return kmem_cache_alloc(type##_cache,GFP_ATOMIC);\
-    }\
-    DefineVoid(Cache,Free_##type,type*ptr){\
-        kmem_cache_free(type##_cache,ptr);\
-    }
-    
+    #define InitGlobalCache(type)\
+        static struct kmem_cache*type##_cache;\
+        DefineVoid(Cache,InitCache_##type,void){\
+            type##_cache=kmem_cache_create(#type,sizeof(type),0,SLAB_HWCACHE_ALIGN,NULL);\
+            BUG_ON(!type##_cache);\
+        }\
+        DefineVoid(Cache,ExitCache_##type,void){\
+            kmem_cache_destroy(type##_cache);\
+        }\
+        DefineFunction(type*,Cache,Alloc_##type,void){\
+            return kmem_cache_alloc(type##_cache,GFP_ATOMIC);\
+        }\
+        DefineVoid(Cache,Free_##type,type*ptr){\
+            kmem_cache_free(type##_cache,ptr);\
+        }
+
     #define InitCache(type)\
-            InitCache_##type()
+            Cache_InitCache_##type()
 
     #define ExitCache(type)\
-            ExitCache_##type()
+            Cache_ExitCache_##type()
 
     #define CacheAlloc(type)\
-            Alloc_##type()
+            Cache_Alloc_##type()
 
     #define CacheFree(type,ptr)\
-            Free_##type(ptr)
+            Cache_Free_##type(ptr)
 #endif

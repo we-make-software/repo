@@ -1,14 +1,8 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 #include "server.h"
-#ifndef HeadView
-#define HeadView
-    #include "define/.h"
-#endif
-#ifndef BodyView
-#define BodyView
-    #include "define/.c"
-#endif
+#include "define/.h"
+#include "define/.c"
 #include "init/.c"
 #include "exit/.c"
 #ifndef MODULE
@@ -23,13 +17,13 @@ static int __init server_Init(void){
     #ifndef MODULE
         register_reboot_notifier(&reboot_nb);
     #endif
-    WRITE_ONCE(_IsOnline,false);
     Call(init,execute);
     return 0;
 }
 #ifdef MODULE
     module_init(server_Init);
     static void __exit server_Exit(void){
+        WRITE_ONCE(_IsOnline,false);
         Call(exit,execute);
     }
     module_exit(server_Exit);

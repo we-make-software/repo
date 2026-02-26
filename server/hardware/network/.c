@@ -32,7 +32,7 @@ Void(hardware_network,work_rx_creator,buffer buff,hardware_network*nh){
     Set(w,nh,nh);
     Set(w,buff,skb_get(buff));
     spin_lock_bh(&hardware_network_work_rxlock);
-    AddBottom(w->node,hardware_network_works);
+    AddList(w->node,hardware_network_works);
     spin_unlock_bh(&hardware_network_work_rxlock);
     queue_work(hardware_network_work_rx_WQ,&w->ws);
 }
@@ -82,11 +82,10 @@ Void(hardware_network,init,void){
             netdev_update_features(dev);
             Set(hn,pt.dev,dev);
             Set(hn,pt.func,hardware_network_incoming);
-            Set(hn,pt.type,htonh(ETH_P_ALL));
+           Set(hn,pt.type,htons(ETH_P_ALL));
             dev_add_pack(&hn->pt);
             rtnl_unlock();
         }
-
         synchronize_net();
 }
 Void(hardware_network,exit,void){
@@ -121,4 +120,20 @@ Void(hardware_network,exit,void){
         }
         synchronize_net();
     }
+}
+Function(buffer,hardware_network,CX,hardware_network*hn,IEEE802_3**ieee802_3){
+    buffer buff=alloc_skb(2048,GFP_KERNEL);
+    if(!buff)return NULL;
+    Set(buff,pkt_type,PACKET_OUTGOING);
+    Set(buff,ip_summed,CHECKSUM_NONE);
+    Set(buff,csum,0);
+    Set(buff,dev,hn->pt.dev);
+    skb_reset_mac_header(buff);
+    *ieee802_3=skb_put(buff,sizeof(IEEE802_3));
+    memcpy(&(*ieee802_3)->src.mac,hn->pt.dev->dev_addr,6);
+    return buff;
+}
+Void(hardware_network,TX,buffer buff,IEEE802_3*ieee802_3){
+    Call(IEEE802_3,TX,ieee802_3);
+    dev_queue_xmit(buff);
 }

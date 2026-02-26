@@ -1,7 +1,6 @@
 #ifndef IEEE802_3_h
     #define IEEE802_3_h
     #include "../hardware/network/.h"
-    #include "../endpoint/device/.h"
     DefineNetworkStruct(IEEE802_3MAC){
         union{
             NetworkAddStruct{

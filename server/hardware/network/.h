@@ -17,4 +17,5 @@
     DefineVoid(hardware_network,init,void);
     DefineVoid(hardware_network,exit,void);
     static LIST_HEAD(hardware_networks);
+    DefineFunction(buffer,hardware_network,CX,hardware_network*hn,IEEE802_3**ieee802_3);
 #endif
