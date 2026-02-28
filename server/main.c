@@ -21,7 +21,7 @@ static struct notifier_block reboot_nb = {
 static int __init server_Init(void)
 {
     int ret=register_reboot_notifier(&reboot_nb);
-    if (ret)
+    if(ret)
         return ret;
 
     core_init();

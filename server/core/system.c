@@ -1,11 +1,13 @@
 #include "core/.h"
-
+#include "network/.h"
 void core_init(void)
 {
-    /* din core init kode */
+    network_init();
+    /*  core init code */
 }
 
 void core_exit(void)
 {
-    /* din core exit kode */
+    network_exit();
+    /* core exit code */
 }

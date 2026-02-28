@@ -1,0 +1,2 @@
+./main.o
+./coresystem.o
