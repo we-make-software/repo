@@ -1,2 +1,3 @@
 ./main.o
-./coresystem.o
+./core/system.o
+./network/core.o

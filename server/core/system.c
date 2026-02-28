@@ -1,5 +1,5 @@
-#include "core/.h"
-#include "network/.h"
+#include ".h"
+#include "../network/.h"
 void core_init(void)
 {
     network_init();

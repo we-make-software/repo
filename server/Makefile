@@ -1,5 +1,5 @@
 obj-m := server.o
-server-objs := main.o core\system.o
+server-objs := main.o core/system.o network/core.o
 ccflags-y := -Iinclude -O2 -Wall
 
 build:

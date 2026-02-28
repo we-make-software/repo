@@ -1,6 +1,7 @@
 #pragma once
 #include "../.h"
-#include "../core/list.h"
-#include "../core/struct.h"
-#include "../core/memory.h"
-#include "../core/lock.h"
+#include "list.h"
+#include "struct.h"
+#include "memory.h"
+#include "lock.h"
+#include "propperty.h"
