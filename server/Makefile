@@ -1,7 +1,6 @@
-
 obj-m := server.o
+server-objs := main.o core\system.o
 ccflags-y := -Iinclude -O2 -Wall
-
 
 build:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
