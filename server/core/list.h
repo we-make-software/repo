@@ -69,6 +69,11 @@
 #define DefineListHead(name)                 LIST_HEAD(name)
 #define DefineListHeadInit(name)             ((struct list_head)LIST_HEAD_INIT(name))
 #define StaticDefineListHead(name)           static LIST_HEAD(name)
+/* only header */
+#define DeclareListHead(name)     extern struct list_head name
+
+/* one .c file */
+#define DefineListHead(name)      LIST_HEAD(name)
 /*
 How to use these list macros
 
