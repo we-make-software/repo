@@ -1,6 +1,6 @@
 obj-m := server.o
-server-objs := main.o core/system.o network/core.o
-ccflags-y := -Iinclude -O2 -Wall
+server-objs := main.o overflow/core.o EUI48/core.o core/system.o network/core.o IEEE802_3/core.o
+ccflags-y := -Iinclude -O2 -Wall 
 
 build:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

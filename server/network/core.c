@@ -1,24 +1,125 @@
 #include ".h"
-//i place this bce it can be a security risk if some other file includes this and it can cause circular dependencies
+#include "../EUI48/.h"
 DefineStructBody(Network){
     struct packet_type pt;
     StructLock(lock);
     u8 ignore:4,valid:4;
-    u128 ref;
-    u8 index;
+    Overflow overflow;
     StructListNode(node,devices);
-    netdev_features_t
-                features_old,
-                wanted_old,
-                gso_partial_features_old;
+    netdev_features_t features_old,wanted_old,gso_partial_features_old;
 };
+EUI48*network_Get(Network*network){
+    return (EUI48*)network->pt.dev->dev_addr;
+}
 InitGlobalMemory(Network);
 DefineListHead(Networks);
 GlobalLock(NetworkLock);
+static bool network_use(Network*network)
+{
+    WaitForLock(network->lock);
+    if(network->valid||!network->ignore){
+        bool result=OverFlowIncrement(&network->overflow);
+        ReleaseLock(network->lock);
+        return result;
+    }
+    ReleaseLock(network->lock);
+    return false;
+}
+static bool network_unused(Network*network)
+{
+    WaitForLock(network->lock);
+    if(network->valid||!network->ignore){
+        bool result=OverFlowDecrement(&network->overflow);
+        ReleaseLock(network->lock);
+        return result;
+    }
+    ReleaseLock(network->lock);
+    return true;
+}
+struct sk_buff*network_PX(Network*network)
+{
+    struct sk_buff*buff=alloc_skb(2048,GFP_KERNEL);
+    if(!buff){
+        WaitForLock(network->lock);
+            OverFlowBlock(&network->overflow);
+        ReleaseLock(network->lock);
+        return NULL;
+    }
+    if(!network_use(network)){
+        kfree_skb(buff);
+        WaitForLock(network->lock);
+            OverFlowBlock(&network->overflow);
+        ReleaseLock(network->lock);
+        return NULL;
+    }
+    Set(buff,pkt_type,PACKET_OUTGOING);
+    Set(buff,ip_summed,CHECKSUM_NONE);
+    Set(buff,csum,0);
+    Set(buff,dev,network->pt.dev);
+    skb_reset_mac_header(buff);
+    return buff;
+}
+void network_CX(Network*network,struct sk_buff*buff){
+    if(buff)
+        kfree_skb(buff);
+    network_unused(network);
+}
+void network_TX(Network*network,struct sk_buff*buff)
+{
+    if(!buff||!IsOnline()){
+        network_CX(network,buff);
+        return;
+    }
+    dev_queue_xmit(buff);
+    network_unused(network);
+}
+
+DefineStructHeadBody(RX){
+    struct sk_buff*skb;
+    Network*network;
+    struct work_struct ws;
+};
+InitGlobalMemory(RX);
+static void network_RX(struct work_struct*ws)
+{
+    RX*rx=container_of(ws,RX,ws);
+    if(IsOnline())
+        IEEE802_3_RX(rx->skb,rx->network,(u8*)skb_mac_header(rx->skb));
+    network_unused(rx->network);
+    kfree_skb(rx->skb);
+    MemoryFree(RX,rx);
+}
+static int network_IRQRX(struct sk_buff*skb,struct net_device*dev,struct packet_type*pt,struct net_device*orig_dev){
+    if(!skb||Get(skb,pkt_type)==PACKET_OUTGOING||!IsOnline()||!Get(skb,dev)||Get(skb,len)<34||!pskb_may_pull(skb,Get(skb,len)))
+        return NET_RX_SUCCESS;
+    Network*network=container_of(pt,Network,pt);
+    WaitForLock(network->lock);
+    if(Get(network,ignore)){
+        ReleaseLock(network->lock);
+        return NET_RX_DROP;
+    }
+    ReleaseLock(network->lock);
+    if(!network_use(network))
+        return NET_RX_DROP;
+    RX*rx=MemoryAlloc(RX);
+    if(!rx){
+        WaitForLock(network->lock);
+        OverFlowBlock(&network->overflow);
+        ReleaseLock(network->lock);
+        network_unused(network);
+        return NET_RX_DROP;
+    }
+    rx->skb=skb_get(skb);
+    rx->network=network;
+    INIT_WORK(&rx->ws,network_RX);
+    queue_work(system_wq,&rx->ws);
+    return NET_RX_DROP;
+}
 void network_init(void)
 {
     InitList(Networks);
     InitLock(NetworkLock);
+    InitMemory(RX);
     InitMemory(Network);
     struct net_device*dev;
     for_each_netdev(&init_net,dev){
@@ -27,6 +128,7 @@ void network_init(void)
             continue;
         InitLockMany(network->lock);
         InitListMany(network->node,network->devices);
+        OverFlowInit(&network->overflow);
         AddTop(network->node,Networks);
             rtnl_lock();
 
@@ -53,8 +155,7 @@ void network_init(void)
             Set(dev,gso_partial_features,0);
             netdev_update_features(dev);
             Set(network,pt.dev,dev);
-            //Set(network,pt.func,PTF);
-            //this its call the overflow system
+            Set(network,pt.func,network_IRQRX);
             Set(network,pt.type,htons(ETH_P_ALL));
             dev_add_pack(&network->pt);
             rtnl_unlock();
@@ -78,6 +179,7 @@ void network_exit(void)
     }
     synchronize_net();
     ExitMemory(Network);
+    ExitMemory(RX);
     /* din network exit kode */
 }
 struct packet_type*GetPacketTypeByNetwork(Network*network)

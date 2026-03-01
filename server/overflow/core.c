@@ -1,11 +1,5 @@
 #include ".h"
-DefineStructHeadBody(OverflowSetting){
-    u128 ref;
-    u8 index;
-};
-DefineStructBody(Overflow){
-    OverflowSetting moment,block;
-};
+
 bool OverFlowIncrement(Overflow*overflow)
 {
     if(overflow->moment.index>overflow->block.index||(overflow->moment.index==overflow->block.index&&overflow->moment.ref>=overflow->block.ref))
@@ -31,9 +25,17 @@ bool OverFlowDecrement(Overflow*overflow)
     overflow->moment.ref--;
     return (overflow->moment.index==0 && overflow->moment.ref==0);
 }
+void OverFlowSetBlock(Overflow*overflow,u8 index,u128 ref)
+{
+    if(index<overflow->block.index||(index==overflow->block.index&&ref<overflow->block.ref)){
+        overflow->block.index=index;
+        overflow->block.ref=ref;
+    }
+}
 void OverFlowBlock(Overflow*overflow)
 {
-    overflow->block=overflow->moment;
+    if(overflow->moment.index<overflow->block.index||(overflow->moment.index==overflow->block.index&&overflow->moment.ref<overflow->block.ref))
+        overflow->block=overflow->moment;
 }
 void OverFlowInit(Overflow*overflow)
 {
