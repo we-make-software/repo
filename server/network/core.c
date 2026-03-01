@@ -1,5 +1,6 @@
 #include ".h"
 #include "../EUI48/.h"
+
 DefineStructBody(Network){
     struct packet_type pt;
     StructLock(lock);
@@ -114,6 +115,28 @@ static int network_IRQRX(struct sk_buff*skb,struct net_device*dev,struct packet_
     INIT_WORK(&rx->ws,network_RX);
     queue_work(system_wq,&rx->ws);
     return NET_RX_DROP;
+}
+void network_DeviceAdd(Network*network,networkDevice*networkdevice,u8 version)
+{
+    networkdevice->version=version;
+    OverFlowInit(&network->overflow);
+    networkdevice->network=network;
+    InitList(networkdevice->node);
+    AddTop(networkdevice->node,network->devices);
+}
+void network_DeviceRemove(Network*network,networkDevice*networkdevice)
+{
+    DelList(networkdevice->node);
+}
+networkDevice*network_DeviceGet(Network*network,u8 version,void*address)
+{
+    networkDevice*dev,*tmp;
+    ForEachEntrySafe(dev,tmp,network->devices,node)
+        if(dev->version==version&&(dev->version==4?network_Device_V4Validate(dev,(__be32*)address):network_Device_V6Validate(dev,(u128*)address))){
+            UpdateList(dev->node,network->devices);
+            return dev;
+        }
+    return NULL;
 }
 void network_init(void)
 {

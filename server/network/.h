@@ -12,3 +12,5 @@ struct sk_buff*network_PX(Network*network);
 void network_CX(Network*network,struct sk_buff*buff);
 void network_TX(Network*network,struct sk_buff*buff);
 EUI48*network_Get(Network*network);
+#include "device/.h"
+
