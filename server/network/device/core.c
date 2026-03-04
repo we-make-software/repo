@@ -8,3 +8,12 @@ DefineStructBody(networkDevice){
     Overflow overflow;
     StructListNode(node);
 };
+networkDevice*networkDeviceUse(Network*network,EUI48*src){
+
+    struct list*n=GetNetworkDevicesByNetwork(network);
+
+    return NULL;
+}
+void networkDeviceUnused(networkDevice*networkdevice){
+
+}

@@ -1,6 +1,6 @@
 #include ".h"
 #include "../EUI48/.h"
-
+#include "../IEEE802_3/.h"
 DefineStructBody(Network){
     struct packet_type pt;
     StructLock(lock);
@@ -65,12 +65,13 @@ void network_CX(Network*network,struct sk_buff*buff){
         kfree_skb(buff);
     network_unused(network);
 }
-void network_TX(Network*network,struct sk_buff*buff)
+void network_TX(Network*network,struct sk_buff*buff,IEEE802_3*ieee802_3)
 {
-    if(!buff||!IsOnline()){
+    if(!buff){
         network_CX(network,buff);
         return;
     }
+    ieee802_3->src=network_Get(network);
     dev_queue_xmit(buff);
     network_unused(network);
 }
@@ -116,28 +117,7 @@ static int network_IRQRX(struct sk_buff*skb,struct net_device*dev,struct packet_
     queue_work(system_wq,&rx->ws);
     return NET_RX_DROP;
 }
-void network_DeviceAdd(Network*network,networkDevice*networkdevice,u8 version)
-{
-    networkdevice->version=version;
-    OverFlowInit(&network->overflow);
-    networkdevice->network=network;
-    InitList(networkdevice->node);
-    AddTop(networkdevice->node,network->devices);
-}
-void network_DeviceRemove(Network*network,networkDevice*networkdevice)
-{
-    DelList(networkdevice->node);
-}
-networkDevice*network_DeviceGet(Network*network,u8 version,void*address)
-{
-    networkDevice*dev,*tmp;
-    ForEachEntrySafe(dev,tmp,network->devices,node)
-        if(dev->version==version&&(dev->version==4?network_Device_V4Validate(dev,(__be32*)address):network_Device_V6Validate(dev,(u128*)address))){
-            UpdateList(dev->node,network->devices);
-            return dev;
-        }
-    return NULL;
-}
+
 void network_init(void)
 {
     InitList(Networks);
