@@ -2,14 +2,3 @@
 #ifndef Project_Name
     #error "Project_Name is not defined"
 #endif
-#include "../core/.setup"
-#if defined(Project_InitAndExit)
-    InitAndExitFunction(Project_Name);
-#else
-  #if defined(Project_Init)
-    InitFunction(Project_Name);
-  #endif
-  #if defined(Project_Exit)  
-    ExitFunction(Project_Name);
-  #endif
-#endif
