@@ -1,4 +1,3 @@
-#pragma once
 #include ".modify"
 
 bool overflowIncrement(overflow*ov)

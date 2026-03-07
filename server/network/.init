@@ -1,0 +1,2 @@
+#include "../core/.setup"
+InitAndExitFunction(network);

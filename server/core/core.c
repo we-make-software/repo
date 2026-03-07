@@ -1,16 +1,15 @@
-#pragma once
-
 #include ".setup"
-#include "../network/.inc"
+#include ".init"
+#include "../network/.init"
 
 InitFunction(core)
 {
-    network_init();
+    Init(network);
     /*  core init code */
 }
 
 ExitFunction(core)
 {
-    network_exit();
+    Exit(network);
     /* core exit code */
 }

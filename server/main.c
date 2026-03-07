@@ -1,7 +1,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 #include "core/.setup"
-#include "core/.inc"
+#include "core/.init"
 static bool _IsOnline=true;
 bool IsOnline(void)
 {
