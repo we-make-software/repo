@@ -1644,7 +1644,6 @@ deps_main.o := \
   core/lock.h \
   core/propperty.h \
   core/../overflow/.inc \
-  core/../overflow/.modify \
   core/../overflow/.setup \
   core/.inc \
 

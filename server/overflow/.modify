@@ -1,4 +1,6 @@
+#pragma once
 #include ".setup"
+#include ".inc"
 DefineStructBody(overflowSetting){
     u128 ref;
     u8 index;

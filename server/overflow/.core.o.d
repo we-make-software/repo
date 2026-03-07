@@ -677,4 +677,4 @@ core.o: overflow/core.c /root/linux/include/linux/compiler-version.h \
  /root/linux/include/uapi/linux/if_addr.h overflow/../core/list.h \
  overflow/../core/struct.h overflow/../core/memory.h \
  overflow/../core/lock.h overflow/../core/propperty.h \
- overflow/../core/../overflow/.inc overflow/../core/../overflow/.modify
+ overflow/../core/../overflow/.inc
