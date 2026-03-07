@@ -1,7 +1,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
-#include ".setup"
 #include "core/.setup"
+#include "core/.inc"
 static bool _IsOnline=true;
 bool IsOnline(void)
 {
@@ -10,7 +10,7 @@ bool IsOnline(void)
 static int server_reboot_notify(struct notifier_block*nb, unsigned long action, void*data)
 {
     WRITE_ONCE(_IsOnline, false);
-    core_exit();
+    Exit(core);
     return NOTIFY_OK;
 }
 
@@ -23,7 +23,7 @@ static int __init server_Init(void)
     int ret=register_reboot_notifier(&reboot_nb);
     if(ret)
         return ret;
-    core_init();
+    Init(core);
     return 0;
 }
 
@@ -33,7 +33,7 @@ module_init(server_Init);
 static void __exit server_Exit(void)
 {
     WRITE_ONCE(_IsOnline, false);
-    core_exit();
+    Exit(core);
     unregister_reboot_notifier(&reboot_nb);
 }
 module_exit(server_Exit);

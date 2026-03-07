@@ -1,7 +1,7 @@
 #pragma once
-#include ".setup"
-void overflowInit(overflow*overflow);
-bool overflowIncrement(overflow*overflow);
-bool overflowDecrement(overflow*overflow);
-void overflowBlock(overflow*overflow);
-void overflowSetBlock(overflow*overflow,u8 index,u128 ref);
+#include ".modify"
+void overflowInit(overflow*);
+bool overflowIncrement(overflow*);
+bool overflowDecrement(overflow*);
+void overflowBlock(overflow*);
+void overflowSetBlock(overflow*,u8,u128);

@@ -1,5 +1,5 @@
 #pragma once
-#include ".h"
+#include ".setup"
 
 #define StructListNode(...) struct list_head __VA_ARGS__
 

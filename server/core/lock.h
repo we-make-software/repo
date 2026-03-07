@@ -1,6 +1,5 @@
-#include ".h"
 #pragma once
-#include ".h"
+#include ".setup"
 
 #define StructLock(...)                 struct mutex __VA_ARGS__
 

@@ -1,0 +1,8 @@
+#include ".setup"
+DefineStructBody(overflowSetting){
+    u128 ref;
+    u8 index;
+};
+DefineStructBody(overflow){
+    overflowSetting moment,block;
+};

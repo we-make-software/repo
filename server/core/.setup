@@ -1,8 +1,19 @@
 #pragma once
-#include "../.h"
+#include "../.setup"
 #include "list.h"
 #include "struct.h"
 #include "memory.h"
 #include "lock.h"
 #include "propperty.h"
-#include "../overflow/.h"
+#include "../overflow/.inc"
+
+
+
+#define InitFunction(name) void name##_init(void)
+#define ExitFunction(name) void name##_exit(void)
+#define InitAndExitFunction(name)\
+    void name##_init(void); \
+    void name##_exit(void)
+
+#define Init(name) name##_init()
+#define Exit(name) name##_exit()

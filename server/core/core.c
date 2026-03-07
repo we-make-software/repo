@@ -1,14 +1,16 @@
 #pragma once
-#include ".h"
-#include "../network/.h"
-void core_init(void)
-{
 
+#include ".setup"
+#include "../network/.inc"
+
+InitFunction(core)
+{
+    network_init();
     /*  core init code */
 }
 
-void core_exit(void)
+ExitFunction(core)
 {
-
+    network_exit();
     /* core exit code */
 }

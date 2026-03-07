@@ -1,5 +1,5 @@
 #pragma once
-#include ".h"
+#include ".setup"
 
 #define Get(obj,field)              ((obj)->field)
 

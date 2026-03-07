@@ -1,5 +1,5 @@
 #pragma once
-#include ".h"
+#include ".setup"
     #define DefineStructHead(name)\
             struct s_##name;\
             typedef struct s_##name name

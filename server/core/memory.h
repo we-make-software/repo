@@ -1,5 +1,5 @@
 #pragma once
-#include ".h"
+#include ".setup"
     #define InitGlobalMemory(type) \
             static struct kmem_cache* type##_memory; \
             static inline void InitMemory_##type(void){ \

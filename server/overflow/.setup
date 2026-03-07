@@ -1,9 +1,4 @@
 #pragma once
 #include "../core/.setup"
-DefineStructHeadBody(overflowSetting){
-    u128 ref;
-    u8 index;
-};
-DefineStructHeadBody(overflow){
-    overflowSetting moment,block;
-};
+DefineStructHead(overflowSetting);
+DefineStructHead(overflow);
