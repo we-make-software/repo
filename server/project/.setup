@@ -4,7 +4,9 @@
 #include "../project_name/.init"
 
 #define Project_Init_Setup\
+    InitFunction(Project_Name);\
     InitFunction(Project_Name)
 
 #define Project_Exit_Setup\
+    ExitFunction(Project_Name);\
     ExitFunction(Project_Name)
