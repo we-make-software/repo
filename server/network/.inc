@@ -1,5 +1,6 @@
 #pragma once
 #include "../core/.h"
+#include "../EUI48/.h"
 DefineStructHead(Network);
 DeclareListHead(Networks);
 DeclareLock(NetworkLock);

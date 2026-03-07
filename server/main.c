@@ -1,8 +1,8 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
-#include ".h"
-static bool _IsOnline = true;
-
+#include ".setup"
+#include "core/.setup"
+static bool _IsOnline=true;
 bool IsOnline(void)
 {
     return READ_ONCE(_IsOnline);
@@ -23,7 +23,6 @@ static int __init server_Init(void)
     int ret=register_reboot_notifier(&reboot_nb);
     if(ret)
         return ret;
-
     core_init();
     return 0;
 }

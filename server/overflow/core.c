@@ -1,6 +1,6 @@
-#include ".h"
+#include ".setup"
 
-bool OverFlowIncrement(Overflow*overflow)
+bool overflowIncrement(overflow*overflow)
 {
     if(overflow->moment.index>overflow->block.index||(overflow->moment.index==overflow->block.index&&overflow->moment.ref>=overflow->block.ref))
         return false;
@@ -13,7 +13,7 @@ bool OverFlowIncrement(Overflow*overflow)
     overflow->moment.ref++;
     return true;
 }
-bool OverFlowDecrement(Overflow*overflow)
+bool overflowDecrement(overflow*overflow)
 {
     if(overflow->moment.ref==0){
         if(overflow->moment.index==0)
@@ -25,19 +25,19 @@ bool OverFlowDecrement(Overflow*overflow)
     overflow->moment.ref--;
     return (overflow->moment.index==0 && overflow->moment.ref==0);
 }
-void OverFlowSetBlock(Overflow*overflow,u8 index,u128 ref)
+void overflowSetBlock(overflow*overflow,u8 index,u128 ref)
 {
     if(index<overflow->block.index||(index==overflow->block.index&&ref<overflow->block.ref)){
         overflow->block.index=index;
         overflow->block.ref=ref;
     }
 }
-void OverFlowBlock(Overflow*overflow)
+void overflowBlock(overflow*overflow)
 {
     if(overflow->moment.index<overflow->block.index||(overflow->moment.index==overflow->block.index&&overflow->moment.ref<overflow->block.ref))
         overflow->block=overflow->moment;
 }
-void OverFlowInit(Overflow*overflow)
+void overflowInit(overflow*overflow)
 {
     overflow->moment.ref=0;
     overflow->moment.index=0;

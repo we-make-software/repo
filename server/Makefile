@@ -1,37 +1,43 @@
-obj-m := server.o
-server-objs := main.o overflow/core.o EUI48/core.o core/system.o network/core.o IEEE802_3/core.o
-ccflags-y := -Iinclude -O2 -Wall 
+ifneq ($(KERNELRELEASE),)
+
+SERVER_DIRS := $(shell cat project_manager)
+SERVER_FILES := $(addsuffix /core.o,$(SERVER_DIRS))
+
+obj-m += server.o
+server-y := main.o $(SERVER_FILES) core/core.o
+ccflags-y := -Iinclude -O2 -Wall
+
+else
+
+KDIR := /lib/modules/$(shell uname -r)/build
+PWD := $(shell pwd)
 
 build:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 all:
 	rmmod server 2>/dev/null || true
-	make build
-	insmod server.ko
-
-
+	$(MAKE) build
+	insmod ./server.ko
 
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
 
 stop:
 	rmmod server 2>/dev/null || true
 	$(MAKE) clean
 
-
 start:
-	dmesg -C
-	clear
-	rm -rf -- "/root/repo/server/debug";
-	mkdir -p -- "/root/repo/server/debug"
-	make all
+	dmesg -C || true
+	clear || true
+	rm -rf -- "$(PWD)/debug"
+	mkdir -p -- "$(PWD)/debug"
+	$(MAKE) all
 	dmesg -w
-
-pp:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) server.i
 
 github:
 	git add -A
 	git commit -m "Update" || true
 	git push
+
+endif
