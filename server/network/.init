@@ -1,3 +1,4 @@
 #pragma once
-#include "../core/.setup"
-InitAndExitFunction(network);
+#define Project_Name network
+#include "../project/.init"
+InitAndExitFunction(Project_Name);

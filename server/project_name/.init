@@ -1,0 +1,4 @@
+#pragma once
+#ifndef Project_Name
+    #error "Project_Name is not defined"
+#endif
