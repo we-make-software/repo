@@ -1,10 +1,9 @@
-#include ".init"
+#define Project_Name network
+#include "../project/.setup"
 
-InitFunction(network)
-{
-    /* network init code */
+Project_Init_Setup(){
+
 }
-ExitFunction(network)
-{
-    /* network exit code */
+Project_Exit_Setup(){
+
 }

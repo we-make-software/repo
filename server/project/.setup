@@ -1,0 +1,9 @@
+#pragma once
+#include "../core/.setup"
+#include "../overflow/.inc"
+#include "../project_name/.init"
+
+#define Project_Init_Setup()\
+    InitFunction(Project_Name)
+#define Project_Exit_Setup()\
+    ExitFunction(Project_Name)

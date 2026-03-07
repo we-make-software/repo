@@ -1,4 +1,5 @@
 #pragma once
 #define Project_Name network
+#define Project_InitAndExit
 #include "../project/.init"
-InitAndExitFunction(Project_Name);
+

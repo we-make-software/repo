@@ -1,3 +1,4 @@
 #pragma once
+#include "../core/.setup"
 #include "../overflow/.inc"
 #include "../project_name/.init"
