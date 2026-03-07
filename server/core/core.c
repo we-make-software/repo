@@ -1,6 +1,6 @@
 #include ".setup"
 #include ".init"
-InitAndExitFunction(network);
+#include "../network/.init"
 
 InitFunction(core)
 {
