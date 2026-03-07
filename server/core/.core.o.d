@@ -1,13 +1,12 @@
-core.o: overflow/core.c /root/linux/include/linux/compiler-version.h \
+core.o: core/core.c /root/linux/include/linux/compiler-version.h \
  /root/linux/include/generated/gcc-plugins.h \
  /root/linux/include/linux/kconfig.h \
  /root/linux/include/generated/autoconf.h \
  /root/linux/include/linux/compiler_types.h \
  /root/linux/include/linux/compiler-context-analysis.h \
  /root/linux/include/linux/compiler_attributes.h \
- /root/linux/include/linux/compiler-gcc.h overflow/.modify \
- overflow/.setup overflow/../core/.setup overflow/../core/../.setup \
- overflow/../core/../linux.h /root/linux/include/linux/module.h \
+ /root/linux/include/linux/compiler-gcc.h core/.setup core/../.setup \
+ core/../linux.h /root/linux/include/linux/module.h \
  /root/linux/include/linux/list.h \
  /root/linux/include/linux/container_of.h \
  /root/linux/include/linux/build_bug.h \
@@ -674,7 +673,5 @@ core.o: overflow/core.c /root/linux/include/linux/compiler-version.h \
  /root/linux/include/linux/sbitmap.h \
  /root/linux/include/linux/rtnetlink.h \
  /root/linux/include/uapi/linux/rtnetlink.h \
- /root/linux/include/uapi/linux/if_addr.h overflow/../core/list.h \
- overflow/../core/struct.h overflow/../core/memory.h \
- overflow/../core/lock.h overflow/../core/propperty.h \
- overflow/../core/../overflow/.inc
+ /root/linux/include/uapi/linux/if_addr.h core/list.h core/struct.h \
+ core/memory.h core/lock.h core/propperty.h core/../network/.inc

@@ -1,8 +1,8 @@
-savedcmd_main.o := gcc -Wp,-MMD,./.main.o.d -nostdinc -I/root/linux/arch/x86/include -I/root/linux/arch/x86/include/generated -I/root/linux/include -I/root/linux/include -I/root/linux/arch/x86/include/uapi -I/root/linux/arch/x86/include/generated/uapi -I/root/linux/include/uapi -I/root/linux/include/generated/uapi -include /root/linux/include/linux/compiler-version.h -include /root/linux/include/linux/kconfig.h -include /root/linux/include/linux/compiler_types.h -D__KERNEL__ -std=gnu11 -fshort-wchar -funsigned-char -fno-common -fno-PIE -fno-strict-aliasing -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -mno-sse4a -fcf-protection=branch -fno-jump-tables -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -march=x86-64 -mtune=generic -mno-red-zone -mcmodel=kernel -mstack-protector-guard-reg=gs -mstack-protector-guard-symbol=__ref_stack_chk_guard -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mindirect-branch-cs-prefix -mfunction-return=thunk-extern -fno-jump-tables -mharden-sls=all -fpatchable-function-entry=16,16 -fno-delete-null-pointer-checks -O2 -fno-allow-store-data-races -fstack-protector-strong -ftrivial-auto-var-init=zero -fzero-init-padding-bits=all -fno-stack-clash-protection -fdiagnostics-show-context=2 -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -fmin-function-alignment=16 -fstrict-flex-arrays=3 -fms-extensions -fno-strict-overflow -fno-stack-check -fconserve-stack -fno-builtin-wcslen -Wall -Wextra -Wundef -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Werror=strict-prototypes -Wno-format-security -Wno-trigraphs -Wno-frame-address -Wno-address-of-packed-member -Wmissing-declarations -Wmissing-prototypes -Wframe-larger-than=2048 -Wno-main -Wno-type-limits -Wno-dangling-pointer -Wvla-larger-than=1 -Wno-pointer-sign -Wcast-function-type -Wno-unterminated-string-initialization -Wno-array-bounds -Wno-stringop-overflow -Wno-alloc-size-larger-than -Wimplicit-fallthrough=5 -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wenum-conversion -Wunused -Wno-unused-but-set-variable -Wno-unused-const-variable -Wno-packed-not-aligned -Wno-format-overflow -Wno-format-truncation -Wno-stringop-truncation -Wno-override-init -Wno-missing-field-initializers -Wno-shift-negative-value -Wno-maybe-uninitialized -Wno-sign-compare -Wno-unused-parameter -g -DGCC_PLUGINS -Iinclude -O2 -Wall  -DMODULE  -DKBUILD_BASENAME='"main"' -DKBUILD_MODNAME='"server"' -D__KBUILD_MODNAME=server -c -o main.o main.c  
+savedcmd_overflow/core.o := gcc -Wp,-MMD,overflow/.core.o.d -nostdinc -I/root/linux/arch/x86/include -I/root/linux/arch/x86/include/generated -I/root/linux/include -I/root/linux/include -I/root/linux/arch/x86/include/uapi -I/root/linux/arch/x86/include/generated/uapi -I/root/linux/include/uapi -I/root/linux/include/generated/uapi -include /root/linux/include/linux/compiler-version.h -include /root/linux/include/linux/kconfig.h -include /root/linux/include/linux/compiler_types.h -D__KERNEL__ -std=gnu11 -fshort-wchar -funsigned-char -fno-common -fno-PIE -fno-strict-aliasing -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -mno-sse4a -fcf-protection=branch -fno-jump-tables -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -march=x86-64 -mtune=generic -mno-red-zone -mcmodel=kernel -mstack-protector-guard-reg=gs -mstack-protector-guard-symbol=__ref_stack_chk_guard -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mindirect-branch-cs-prefix -mfunction-return=thunk-extern -fno-jump-tables -mharden-sls=all -fpatchable-function-entry=16,16 -fno-delete-null-pointer-checks -O2 -fno-allow-store-data-races -fstack-protector-strong -ftrivial-auto-var-init=zero -fzero-init-padding-bits=all -fno-stack-clash-protection -fdiagnostics-show-context=2 -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -fmin-function-alignment=16 -fstrict-flex-arrays=3 -fms-extensions -fno-strict-overflow -fno-stack-check -fconserve-stack -fno-builtin-wcslen -Wall -Wextra -Wundef -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Werror=strict-prototypes -Wno-format-security -Wno-trigraphs -Wno-frame-address -Wno-address-of-packed-member -Wmissing-declarations -Wmissing-prototypes -Wframe-larger-than=2048 -Wno-main -Wno-type-limits -Wno-dangling-pointer -Wvla-larger-than=1 -Wno-pointer-sign -Wcast-function-type -Wno-unterminated-string-initialization -Wno-array-bounds -Wno-stringop-overflow -Wno-alloc-size-larger-than -Wimplicit-fallthrough=5 -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wenum-conversion -Wunused -Wno-unused-but-set-variable -Wno-unused-const-variable -Wno-packed-not-aligned -Wno-format-overflow -Wno-format-truncation -Wno-stringop-truncation -Wno-override-init -Wno-missing-field-initializers -Wno-shift-negative-value -Wno-maybe-uninitialized -Wno-sign-compare -Wno-unused-parameter -g -DGCC_PLUGINS -Iinclude -O2 -Wall  -DMODULE  -DKBUILD_BASENAME='"core"' -DKBUILD_MODNAME='"server"' -D__KBUILD_MODNAME=server -c -o overflow/core.o overflow/core.c  
 
-source_main.o := main.c
+source_overflow/core.o := overflow/core.c
 
-deps_main.o := \
+deps_overflow/core.o := \
   /root/linux/include/linux/compiler-version.h \
     $(wildcard include/config/CC_VERSION_TEXT) \
   /root/linux/include/generated/gcc-plugins.h \
@@ -38,9 +38,11 @@ deps_main.o := \
     $(wildcard include/config/SHADOW_CALL_STACK) \
     $(wildcard include/config/KCOV) \
     $(wildcard include/config/CC_HAS_TYPEOF_UNQUAL) \
-  core/.setup \
-  core/../.setup \
-  core/../linux.h \
+  overflow/.modify \
+  overflow/.setup \
+  overflow/../core/.setup \
+  overflow/../core/../.setup \
+  overflow/../core/../linux.h \
   /root/linux/include/linux/module.h \
     $(wildcard include/config/MODULES) \
     $(wildcard include/config/SYSFS) \
@@ -1638,13 +1640,12 @@ deps_main.o := \
     $(wildcard include/config/NET_INGRESS) \
   /root/linux/include/uapi/linux/rtnetlink.h \
   /root/linux/include/uapi/linux/if_addr.h \
-  core/list.h \
-  core/struct.h \
-  core/memory.h \
-  core/lock.h \
-  core/propperty.h \
-  core/.inc \
+  overflow/../core/list.h \
+  overflow/../core/struct.h \
+  overflow/../core/memory.h \
+  overflow/../core/lock.h \
+  overflow/../core/propperty.h \
 
-main.o: $(deps_main.o)
+overflow/core.o: $(deps_overflow/core.o)
 
-$(deps_main.o):
+$(deps_overflow/core.o):

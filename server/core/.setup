@@ -5,13 +5,11 @@
 #include "memory.h"
 #include "lock.h"
 #include "propperty.h"
-#include "../overflow/.inc"
-
-
 
 #define InitFunction(name) void name##_init(void)
 #define ExitFunction(name) void name##_exit(void)
-#define InitAndExitFunction(name)\
+
+#define InitAndExitFunction(name) \
     void name##_init(void); \
     void name##_exit(void)
 
