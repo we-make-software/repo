@@ -3,14 +3,13 @@
 #include "../overflow/.inc"
 #include "../project_name/.init"
 #if defined(Project_InitAndExit)
-    extern InitFunction(Project_Name);
-    extern ExitFunction(Project_Name);
-#else
-  #if defined(Project_Init)
-    extern InitFunction(Project_Name);
-  #endif
-  #if defined(Project_Exit)  
-    extern ExitFunction(Project_Name);
-  #endif
+    #define Project_Init
+    #define Project_Exit
+#endif
+#if defined(Project_Init)
+    InitFunction(Project_Name);
+#endif
+#if defined(Project_Exit)  
+    ExitFunction(Project_Name);
 #endif
 #undef Project_Name

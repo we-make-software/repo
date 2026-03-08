@@ -1,3 +1,4 @@
 #pragma once
-#include ".setup"
-InitAndExitFunction(core);
+#define Project_Name core
+#define Project_InitAndExit
+#include "../project/.init"

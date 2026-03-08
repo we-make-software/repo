@@ -4,7 +4,7 @@ SERVER_DIRS := $(shell cat project_manager)
 SERVER_FILES := $(addsuffix /core.o,$(SERVER_DIRS))
 
 obj-m += server.o
-server-y := main.o $(SERVER_FILES) core/core.o
+server-y := main.o core/core.o
 ccflags-y := -Iinclude -O2 -Wall
 
 else
