@@ -11,11 +11,13 @@ Shared resources and utilities used across the Server project.
 
 <p align="center">
   <b>Navigate to Submodules:</b><br>
-  <a href="Sync/readme.md" style="color: #fff;">Sync</a>
+  <a href="Sync/readme.md" style="color: #fff;">Sync</a> | 
+  <a href="Sync/Protection/readme.md" style="color: #fff;">Protection</a>
 </p>
 
 ## Project Structure
 
 - **Sync/**: Reference-counted synchronization framework.
+- **Sync/Protection/**: Time-based and count-based synchronization extensions.
 
 </div>
