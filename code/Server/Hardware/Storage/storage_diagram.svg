@@ -1,0 +1,13 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="400" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Hardware:Storage:SubSystem</text>
+    
+    <text x="400" y="100">Block:BlockDeviceI/O,Config:Parameters</text>
+    <text x="400" y="130">Local:FileSystemInterface,Upgrade:Firmware</text>
+    <text x="400" y="160">Delete:ResourceCleanup</text>
+
+    <text x="400" y="240">LibraryInit(Server,Hardware,Storage,...)</text>
+    <text x="400" y="300">InitLibrary(Server,Hardware,Storage)</text>
+  </g>
+</svg>
