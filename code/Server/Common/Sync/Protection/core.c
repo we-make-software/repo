@@ -50,11 +50,6 @@ Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protect
         SyncUnlock(&scsp->scs);
         return false;
     }
-    if(!scsp->limition)
-    {
-        SyncUnlock(&scsp->scs);
-        return false;
-    }
     s64 diff=utc.tv_sec-scsp->utc.tv_sec;
     if(diff>5)
     {
@@ -64,7 +59,7 @@ Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protect
         diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
         mod_delayed_work(system_wq,&scsp->work,diff);
     }
-    if(SyncGet(&scsp->scs))
+    if(scsp->limition&&SyncGet(&scsp->scs))
     {
         scsp->limition--;
         SyncUnlock(&scsp->scs);
@@ -81,7 +76,6 @@ Fn(bool,Server,Common,Sync,Protection,Lock)(StructHelp(Server,Common,Sync,Protec
     if(scsp->limition)
         return true;
     SyncUnlock(&scsp->scs);
-    SyncDelete(&scsp->scs);
     return false;
 }
 
