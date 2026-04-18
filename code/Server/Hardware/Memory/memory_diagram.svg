@@ -1,16 +1,29 @@
 <svg width="800" height="350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
+    </marker>
+  </defs>
   <rect x="0" y="0" width="800" height="350" fill="#0d0d0d" stroke="#fff" stroke-width="2"/>
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <!-- Group 0 -->
+    <rect x="50" y="20" width="700" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="45" font-weight="bold">Hardware:MemoryManagement</text>
-    
+    <line x1="400" y1="60" x2="400" y2="75" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <!-- Group 1 -->
+    <rect x="50" y="75" width="700" height="90" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="100">MemoryPrepare(args...):InitializePool</text>
     <text x="400" y="125">MemoryGet(name,args...):Allocate&amp;NullCheck</text>
     <text x="400" y="150">MemoryDelete(name):Deallocate</text>
-
+    <line x1="400" y1="165" x2="400" y2="185" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <!-- Group 2 -->
+    <rect x="50" y="185" width="700" height="90" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="210">Fn(void,Server,Hardware,Memory,Prepare)(ID)</text>
     <text x="400" y="235">Fn(void*,Server,Hardware,Memory,Get)(ID)</text>
     <text x="400" y="260">Fn(void,Server,Hardware,Memory,Delete)(shm,ID)</text>
-
+    <line x1="400" y1="275" x2="400" y2="295" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <!-- Group 3 -->
+    <rect x="50" y="295" width="700" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="320">InitLibrary(Server,Hardware,Memory)</text>
   </g>
 </svg>
