@@ -1,0 +1,8 @@
+<svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="300" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Network:Device:Abstraction</text>
+    <text x="400" y="120">DeviceManagement&amp;KernelHooks</text>
+    <text x="400" y="200">InitLibrary(Server,Network,Device)</text>
+  </g>
+</svg>

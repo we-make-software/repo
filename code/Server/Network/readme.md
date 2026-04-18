@@ -9,6 +9,10 @@ High-level management of network devices and integration with the Linux networki
   <img src="network_diagram.svg" alt="Network Diagram">
 </p>
 
+<p align="center">
+  <a href="Device/readme.md" style="color: #fff;">Device</a>
+</p>
+
 ## Submodules
 
 ### Device

@@ -1,3 +1,5 @@
+<div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
+
 # Debug Module
 
 A custom real-time logging framework that writes directly to the kernel filesystem.
@@ -8,12 +10,10 @@ A custom real-time logging framework that writes directly to the kernel filesyst
 </p>
 
 ## Overview
-The module provides a layered approach to logging:
-1. **Output**: Represents a file on disk.
-2. **Message**: A unique category within a log file.
-3. **Value**: The actual data logged under a message category.
+The module provides a layered approach to logging, allowing for organized real-time tracing of kernel events.
 
-## Core Macros
-- `DebugOutput(args...)`: Defines a static output handle.
-- `DebugMessages(name,args...)`: Defines a static message handle.
-- `DebugValuePrepare(name,value,args...)`: Logs a value to the specified message.
+- **Output**: Represents a log file on disk.
+- **Message**: A unique category within a log file.
+- **Value**: Data logged under a message category.
+
+</div>

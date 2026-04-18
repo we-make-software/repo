@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="60">
+<rect width="100%" height="100%" fill="#0d0d0d"/>
+<text x="50%" y="25" font-family="monospace" font-size="14" fill="#fff" text-anchor="middle">IEEE8023:EthernetMAC</text>
+<text x="50%" y="45" font-family="monospace" font-size="14" fill="#fff" text-anchor="middle">InitLibrary(Server,OSI,IEEE8023)</text>
+</svg>

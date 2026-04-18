@@ -9,15 +9,17 @@ Low-level abstractions for system memory, networking hardware, and storage devic
   <img src="hardware_diagram.svg" alt="Hardware Diagram">
 </p>
 
-## Submodules
+<p align="center">
+  <b>Navigate to Submodules:</b><br>
+  <a href="Memory/readme.md" style="color: #fff;">Memory</a> | 
+  <a href="Network/readme.md" style="color: #fff;">Network</a> | 
+  <a href="Storage/readme.md" style="color: #fff;">Storage</a>
+</p>
 
-### Memory
-Manages kernel memory pools and provides a consistent interface for object allocation and deletion.
+## Project Structure
 
-### Network
-Handles network interface controllers (NICs) and integrates them with the higher-level OSI stack.
-
-### Storage
-Provides abstractions for block devices, local storage, and configuration management across different storage types.
+- **Memory/**: Kernel memory pool management.
+- **Network/**: Network interface controller drivers.
+- **Storage/**: Block device and local storage management.
 
 </div>

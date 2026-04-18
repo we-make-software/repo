@@ -1,0 +1,13 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="400" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">OSI:ProtocolStack</text>
+    
+    <text x="400" y="100">Layer2:EUI48,IEEE8023,RFC7042,RFC2464,RFC826</text>
+    <text x="400" y="130">Layer3:RFC791(IPv4),RFC8200(IPv6)</text>
+    <text x="400" y="160">Control:RFC4443(ICMPv6)</text>
+
+    <text x="400" y="240">LibraryInit(Server,OSI,...)</text>
+    <text x="400" y="300">InitLibrary(Server,OSI)</text>
+  </g>
+</svg>

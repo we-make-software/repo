@@ -1,0 +1,16 @@
+<svg width="800" height="350" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="350" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Hardware:MemoryManagement</text>
+    
+    <text x="400" y="100">MemoryPrepare(args...):InitializePool</text>
+    <text x="400" y="125">MemoryGet(name,args...):Allocate&amp;NullCheck</text>
+    <text x="400" y="150">MemoryDelete(name):Deallocate</text>
+
+    <text x="400" y="210">Fn(void,Server,Hardware,Memory,Prepare)(ID)</text>
+    <text x="400" y="235">Fn(void*,Server,Hardware,Memory,Get)(ID)</text>
+    <text x="400" y="260">Fn(void,Server,Hardware,Memory,Delete)(shm,ID)</text>
+
+    <text x="400" y="320">InitLibrary(Server,Hardware,Memory)</text>
+  </g>
+</svg>

@@ -9,14 +9,13 @@ Shared resources and utilities used across the Server project.
   <img src="common_diagram.svg" alt="Common Diagram">
 </p>
 
-## Submodules
+<p align="center">
+  <b>Navigate to Submodules:</b><br>
+  <a href="Sync/readme.md" style="color: #fff;">Sync</a>
+</p>
 
-### Sync
-A reference-counted synchronization framework using mutexes. It ensures safe object deletion by tracking active references and providing initialization/cleanup hooks.
+## Project Structure
 
-- **SyncInit**: Initialize synchronization object.
-- **SyncGet**: Increment reference count.
-- **SyncLock/Unlock**: Safe mutex operations.
-- **SyncDelete**: Decrement count and trigger cleanup if zero.
+- **Sync/**: Reference-counted synchronization framework.
 
 </div>
