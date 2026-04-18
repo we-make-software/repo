@@ -1,0 +1,7 @@
+#pragma once
+#include "../../../.setup"
+
+EnumHelp(Server,Hardware,Storage,Upgrade,Status){
+    EnumValueHelp(Server,Hardware,Storage,Upgrade,Status,Complete),
+    EnumValueHelp(Server,Hardware,Storage,Upgrade,Status,InProgress)
+};

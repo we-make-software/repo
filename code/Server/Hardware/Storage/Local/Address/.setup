@@ -1,0 +1,7 @@
+#pragma once
+#include "../../../../.setup"
+
+StructAlign(Server,Hardware,Storage,Local,Address){
+    u16 storageid;
+    u64 blockid;
+};

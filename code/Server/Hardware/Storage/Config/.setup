@@ -1,0 +1,17 @@
+#pragma once
+#include "../.setup"
+#include "../Local/Address/.setup"
+#include "../Upgrade/.setup"
+
+Fn(void,Server,Hardware,Storage,Config,Init)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(void,Server,Hardware,Storage,Config,Quit)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(u64,Server,Hardware,Storage,Config,Get,Used)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(u64,Server,Hardware,Storage,Config,Get,Deleted)(StructMemory(Server,Hardware,Storage)*shs);
+
+StructDisk(Server,Hardware,Storage,Config){
+    u8 magic[6],deleteindex;
+    u16 versionstorage;
+    EnumHelp(Server,Hardware,Storage,Upgrade,Status) scus;
+    u64 used,deleted,deletepointer;
+    StructAlign(Server,Hardware,Storage,Local,Address) shna_shsla;
+};

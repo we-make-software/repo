@@ -1,0 +1,16 @@
+#pragma once
+#include "../../../.setup"
+
+struct NAME(_,Server,Hardware,Storage,Memory);
+struct NAME(_,Server,Hardware,Storage,Block,Memory);
+
+Fn(void,Server,Hardware,Storage,Delete,Init)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
+Fn(void,Server,Hardware,Storage,Delete,Quit)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
+
+Fn(void,Server,Hardware,Storage,Delete,By,Pointer)(struct NAME(_,Server,Hardware,Storage,Block,Memory)*block);
+
+Fn(struct NAME(_,Server,Hardware,Storage,Block,Memory)*,Server,Hardware,Storage,Delete,Use)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
+
+StructDisk(Server,Hardware,Storage,Delete){
+    u64 ids[127],prev;
+};

@@ -1,0 +1,23 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="600" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Debug:Structs</text>
+    <text x="400" y="80">StructMemory(Server,Debug,Output)</text>
+    <text x="400" y="105">StructMemory(Server,Debug,Output,Message)</text>
+    <text x="400" y="130">StructMemory(Server,Debug,Output,Message,Value)</text>
+
+    <text x="400" y="185" font-weight="bold">Debug:Macros</text>
+    <text x="400" y="220">DebugOutput(args...)</text>
+    <text x="400" y="245">DebugMessages(name,args...)</text>
+    <text x="400" y="270">DebugOutputPrepare(args...)</text>
+    <text x="400" y="295">DebugMessagesPrepare(name,args...)</text>
+    <text x="400" y="320">DebugValuePrepare(name,value,args...)</text>
+
+    <text x="400" y="385" font-weight="bold">Debug:Functions</text>
+    <text x="400" y="420">Fn(void,Server,Debug,Output,Write)(sdo,data,len)</text>
+    <text x="400" y="445">Fn(void,Server,Debug,Output,Message,Write)(sdom)</text>
+    <text x="400" y="470">Fn(StructMemory(Server,Debug,Output)*,Server,Debug,Output,New)(path)</text>
+    <text x="400" y="495">Fn(void,Server,Debug,Output,Message,Value,New)(sdom,value)</text>
+    <text x="400" y="520">InitLibrary(Server,Debug)</text>
+  </g>
+</svg>

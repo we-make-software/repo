@@ -1,0 +1,24 @@
+<svg width="600" height="750" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="600" height="750" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="300" y="45" font-weight="bold">module_init(server_Init)</text>
+
+    <text x="300" y="125" font-weight="bold" text-decoration="underline">Start(void)</text>
+    <a href="Debug/readme.md"><text x="300" y="160" fill="#fff" text-decoration="underline">LibraryInit(Server,Debug)</text></a>
+    <text x="300" y="190">LibraryInit(Server,Common)</text>
+    <text x="300" y="220">LibraryInit(Server,Hardware)</text>
+    <text x="300" y="250">LibraryInit(Server,Network)</text>
+    <text x="300" y="280">LibraryInit(Server,OSI)</text>
+
+    <text x="300" y="375" font-weight="bold">IsRunning()==true</text>
+
+    <text x="300" y="465" font-weight="bold" text-decoration="underline">Quit(void)</text>
+    <text x="300" y="500">LibraryQuit(Server,OSI)</text>
+    <text x="300" y="530">LibraryQuit(Server,Network)</text>
+    <text x="300" y="560">LibraryQuit(Server,Hardware)</text>
+    <text x="300" y="590">LibraryQuit(Server,Common)</text>
+    <text x="300" y="620">LibraryQuit(Server,Debug)</text>
+
+    <text x="300" y="705" font-weight="bold">module_exit(server_Exit)</text>
+  </g>
+</svg>

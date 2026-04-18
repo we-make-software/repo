@@ -1,0 +1,21 @@
+#pragma once
+#include "../RFC2464/.setup"
+
+StructAlign(Server,OSI,RFC8200){
+    union {
+        u32 info;
+        struct __attribute__((packed)){
+#if IS_LITTLE_ENDIAN
+            u32 flow_label:20,traffic_class:8,version:4;
+#else
+            u32 version:4,traffic_class:8,flow_label:20;
+#endif
+        } data;
+    } head;
+    __be16 payload_length;
+    u8 next_header,hop_limit;
+    u128 source,destination;
+};
+
+Fn(bool,Server,OSI,RFC8200,Is,Link,Local)(u128 address);
+Fn(bool,Server,OSI,RFC8200,Is,Global,Unicast)(u128 address);

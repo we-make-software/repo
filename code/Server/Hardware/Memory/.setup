@@ -1,0 +1,16 @@
+#pragma once
+#include "../../.setup"
+
+Fn(void,Server,Hardware,Memory,Prepare)(u16 ID);
+Fn(void*,Server,Hardware,Memory,Get)(u16 ID);
+Fn(void,Server,Hardware,Memory,Delete)(void*shm,u16 ID);
+
+#define MemoryPrepare(...)\
+    Call(Server,Hardware,Memory,Prepare)(sizeof(StructMemory(__VA_ARGS__)))
+
+#define MemoryGet(name,...)\
+    StructMemory(__VA_ARGS__)*name=Call(Server,Hardware,Memory,Get)(sizeof(*name));\
+    if(!name)
+
+#define MemoryDelete(name)\
+    Call(Server,Hardware,Memory,Delete)(name,sizeof(*name))

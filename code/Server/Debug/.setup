@@ -1,0 +1,55 @@
+#pragma once
+#include "../.setup"
+
+StructMemory(Server,Debug,Output);
+StructMemory(Server,Debug,Output,Message);
+StructMemory(Server,Debug,Output,Message,Value);
+
+StructMemory(Server,Debug,Output){
+	struct list_head node,sdom_node;
+	struct file*file;
+};
+
+StructMemory(Server,Debug,Output,Message){
+	struct list_head node,sdomv_node;
+	StructMemory(Server,Debug,Output)*sdo;
+	u8*message;
+};
+
+StructMemory(Server,Debug,Output,Message,Value){
+	struct list_head node;
+	u8*value;
+};
+
+Fn(void,Server,Debug,Output,Write)(StructMemory(Server,Debug,Output)*sdo,u8*data,u32 len);
+Fn(void,Server,Debug,Output,Message,Write)(StructMemory(Server,Debug,Output,Message)*sdom);
+Fn(StructMemory(Server,Debug,Output)*,Server,Debug,Output,New)(u8*path);
+Fn(void,Server,Debug,Output,Delete)(StructMemory(Server,Debug,Output)*sdo);
+Fn(StructMemory(Server,Debug,Output,Message)*,Server,Debug,Output,Message,New)(StructMemory(Server,Debug,Output)*sdo,u8*message);
+Fn(void,Server,Debug,Output,Message,Value,New)(StructMemory(Server,Debug,Output,Message)*sdom,u8*value);
+
+#define DebugNameOutput(...)NAME(_,pccprc,code,__VA_ARGS__,Debug,Output)
+#define DebugNameMessage(name,...)NAME(_,pccprc,code,__VA_ARGS__,name,Debug,Message)
+
+#define DebugOutput(...)\
+	static StructMemory(Server,Debug,Output)*DebugNameOutput(__VA_ARGS__)
+
+#define DebugMessages(name,...)\
+	static StructMemory(Server,Debug,Output,Message)*DebugNameMessage(name,__VA_ARGS__)
+
+#define DebugMessagesPrepare(name,...)\
+{\
+	static u8 NAME(_,pccprc,code,__VA_ARGS__,name,Debug,Message,Content,__LINE__)[]=#name;\
+	DebugNameMessage(name,__VA_ARGS__)=Call(Server,Debug,Output,Message,New)(DebugNameOutput(__VA_ARGS__),NAME(_,pccprc,code,__VA_ARGS__,name,Debug,Message,Content,__LINE__));\
+}
+
+#define DebugValuePrepare(name,value,...)\
+{\
+	Call(Server,Debug,Output,Message,Value,New)(DebugNameMessage(name,__VA_ARGS__),(u8*)value);\
+}
+
+#define DebugOutputPrepare(...)\
+	DebugNameOutput(__VA_ARGS__)=Call(Server,Debug,Output,New)((u8*)"/root/pccprc_code_"#__VA_ARGS__"_debug")
+
+void NAME(_,Server,Debug,Init)(void);
+void NAME(_,Server,Debug,Quit)(void);

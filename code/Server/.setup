@@ -1,0 +1,113 @@
+#pragma once
+#include<linux/version.h>
+#include<linux/module.h>
+#include<linux/kernel.h>
+#include<linux/notifier.h>
+#include<linux/reboot.h>
+#include<linux/ethtool.h>
+#include<linux/netdevice.h>
+#include<linux/skbuff.h>
+#include<linux/etherdevice.h>
+#include<linux/if_packet.h>
+#include<linux/ktime.h>
+#include<linux/timekeeping.h>
+#include<linux/slab.h>
+#include<linux/types.h>
+#include<linux/atomic.h>
+#include<linux/blkdev.h>
+#include<linux/mutex.h>
+#include<linux/rtnetlink.h>
+#include<linux/byteorder/generic.h>
+#include<linux/if_ether.h>
+#include<linux/mm.h>
+#include<linux/fs.h> 
+
+#define VERSION_STORAGE 0
+
+#ifdef __INTELLISENSE__
+    #define MODULE_LICENSE(x)
+    #define MODULE_AUTHOR(x)
+    #define MODULE_DESCRIPTION(x)
+    typedef struct{s64 counter;}atomic64_t;
+    #define READ_ONCE(x)(x)
+    #define WRITE_ONCE(x,v)((x)=(v))
+#endif
+
+#define IS_LITTLE_ENDIAN (__BYTE_ORDER__==__ORDER_LITTLE_ENDIAN__)
+
+
+#define NAME0COMMAND(symbol,a)a
+#define NAME1COMMAND(symbol,a,b)a##symbol##b
+#define NAME2COMMAND(symbol,a,b,c)a##symbol##b##symbol##c
+#define NAME3COMMAND(symbol,a,b,c,d)a##symbol##b##symbol##c##symbol##d
+#define NAME4COMMAND(symbol,a,b,c,d,e)a##symbol##b##symbol##c##symbol##d##symbol##e
+#define NAME5COMMAND(symbol,a,b,c,d,e,f)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f
+#define NAME6COMMAND(symbol,a,b,c,d,e,f,g)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g
+#define NAME7COMMAND(symbol,a,b,c,d,e,f,g,h)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g##symbol##h
+#define NAME8COMMAND(symbol,a,b,c,d,e,f,g,h,i)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g##symbol##h##symbol##i
+#define NAME9COMMAND(symbol,a,b,c,d,e,f,g,h,i,j)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g##symbol##h##symbol##i##symbol##j
+#define NAME10COMMAND(symbol,a,b,c,d,e,f,g,h,i,j,k)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g##symbol##h##symbol##i##symbol##j##symbol##k
+#define NAME11COMMAND(symbol,a,b,c,d,e,f,g,h,i,j,k,l)a##symbol##b##symbol##c##symbol##d##symbol##e##symbol##f##symbol##g##symbol##h##symbol##i##symbol##j##symbol##k##symbol##l
+
+#define NAMECOMMAND(symbol,_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,command,...) command
+#define NAME(symbol,...)NAMECOMMAND(symbol,__VA_ARGS__,NAME11COMMAND,NAME10COMMAND,NAME9COMMAND,NAME8COMMAND,NAME7COMMAND,NAME6COMMAND,NAME5COMMAND,NAME4COMMAND,NAME3COMMAND,NAME2COMMAND,NAME1COMMAND,NAME0COMMAND)(symbol,__VA_ARGS__)
+
+
+#define InitLibrary(...)\
+    void NAME(_,__VA_ARGS__,Init)(void);\
+    void NAME(_,__VA_ARGS__,Init)(void)
+
+#define QuitLibrary(...)\
+    void NAME(_,__VA_ARGS__,Quit)(void);\
+    void NAME(_,__VA_ARGS__,Quit)(void)
+
+
+#define LibraryInit(...)\
+    void NAME(_,__VA_ARGS__,Init)(void);\
+    NAME(_,__VA_ARGS__,Init)();
+    
+#define LibraryQuit(...)\
+    void NAME(_,__VA_ARGS__,Quit)(void);\
+    NAME(_,__VA_ARGS__,Quit)();
+
+
+#define StructDisk(...)struct __attribute__((aligned(1024))) NAME(_,__VA_ARGS__,Disk)
+
+#define StructAlign(...)struct __attribute__((packed)) NAME(_,__VA_ARGS__,Align)
+
+#define StructMemory(...)struct NAME(_,__VA_ARGS__,Memory)
+
+#define StructHelp(...)struct NAME(_,__VA_ARGS__,Help)
+
+#define EnumHelp(...)enum NAME(_,__VA_ARGS__,Help)
+
+#define EnumValueHelp(...) NAME(_,__VA_ARGS__)
+
+#define Fn(type,...)type NAME(_,__VA_ARGS__)
+
+#define Call(...) NAME(_,__VA_ARGS__)
+
+
+#define FnNew(...)Fn(struct sk_buff*,__VA_ARGS__,New)
+
+#define New(...) Call(__VA_ARGS__,New)
+
+#define FnTX(...)Fn(void,__VA_ARGS__,TX)
+
+#define TX(...)Call(__VA_ARGS__,TX)
+
+#define FnRX(...)Fn(void,__VA_ARGS__,RX)
+
+#define RX(...)Call(__VA_ARGS__,RX)
+
+#define FnShutdown(...)Fn(void,__VA_ARGS__,Shutdown)
+
+#define Shutdown(...)Call(__VA_ARGS__,Shutdown)
+
+Fn(void,Linux,SKB,Free)(struct sk_buff**skb);
+Fn(void,Linux,SKB,Send)(struct sk_buff*skb,bool debug);
+
+bool IsRunning(void);
+
+#include "Hardware/Memory/.setup"
+#include "Debug/.setup"

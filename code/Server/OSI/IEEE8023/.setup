@@ -1,0 +1,9 @@
+#pragma once
+#include "../EUI48/.setup"
+
+StructAlign(Server,OSI,IEEE8023){
+    StructAlign(Server,OSI,EUI48) Destination,Source;
+    __be16 Type;
+};
+
+FnRX(Server,OSI,IEEE8023,Type,Choice)(struct sk_buff*skb,StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,IEEE8023)*soi);

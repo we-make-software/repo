@@ -1,0 +1,7 @@
+#pragma once
+#include "../RFC8200/.setup"
+
+StructAlign(Server,OSI,RFC4443){
+    u8 type,code;
+    __be16 checksum;
+};

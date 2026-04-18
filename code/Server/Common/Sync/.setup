@@ -1,0 +1,37 @@
+#pragma once
+#include "../../.setup"
+
+EnumHelp(Server,Common,Sync,Status){
+    EnumValueHelp(Server,Common,Sync,Status,Active),
+    EnumValueHelp(Server,Common,Sync,Status,Delete),
+    EnumValueHelp(Server,Common,Sync,Status,ProcessDeleting)
+};
+
+StructHelp(Server,Common,Sync){
+    u32 ref;
+    struct mutex lock;
+    EnumHelp(Server,Common,Sync,Status) status;
+    void(*before)(StructHelp(Server,Common,Sync)*);
+    void(*after)(StructHelp(Server,Common,Sync)*);
+};
+
+Fn(void,Server,Common,Sync,Init)(StructHelp(Server,Common,Sync)*scs,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*));
+Fn(bool,Server,Common,Sync,Get)(StructHelp(Server,Common,Sync)*scs);
+Fn(bool,Server,Common,Sync,Lock)(StructHelp(Server,Common,Sync)*scs);
+Fn(void,Server,Common,Sync,Unlock)(StructHelp(Server,Common,Sync)*scs);
+Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs);
+
+#define SyncInit(scs,before,after)\
+    Call(Server,Common,Sync,Init)(scs,before,after)
+
+#define SyncGet(scs)\
+    Call(Server,Common,Sync,Get)(scs)
+
+#define SyncLock(scs)\
+    if(!Call(Server,Common,Sync,Lock)(scs))
+
+#define SyncUnlock(scs)\
+    Call(Server,Common,Sync,Unlock)(scs)
+
+#define SyncDelete(scs)\
+    Call(Server,Common,Sync,Delete)(scs)

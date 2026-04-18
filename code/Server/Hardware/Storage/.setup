@@ -1,0 +1,25 @@
+#pragma once
+#include "../../.setup"
+#include "../../Common/Sync/.setup"
+
+StructMemory(Server,Hardware,Storage){
+    StructHelp(Server,Common,Sync) scs;
+    u16 id;
+    u64 size;
+    struct file*file;
+    struct list_head node,block_node;
+    struct Server_Hardware_Storage_Block_Memory*shsb,*shsb_;
+};
+
+Fn(StructMemory(Server,Hardware,Storage)*,Server,Hardware,Storage,Get,Or,Null)(u16 id);
+Fn(bool,Server,Hardware,Storage,Use)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(void,Server,Hardware,Storage,Release)(StructMemory(Server,Hardware,Storage)*shs);
+
+#define StorageGet(name,id)\
+    StructMemory(Server,Hardware,Storage)*name=Call(Server,Hardware,Storage,Get,Or,Null)(id);if(!name)
+
+#define StorageUse(shs)\
+    Call(Server,Hardware,Storage,Use)(shs)
+
+#define StorageRelease(shs)\
+    Call(Server,Hardware,Storage,Release)(shs)

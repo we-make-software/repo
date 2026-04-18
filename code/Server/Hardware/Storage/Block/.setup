@@ -1,0 +1,38 @@
+#pragma once
+#include "../../../.setup"
+#include "../../../Common/Sync/.setup"
+#include "../.setup"
+
+StructMemory(Server,Hardware,Storage,Block){
+    StructHelp(Server,Common,Sync) scs;
+    u64 id;
+    u8 data[1024];
+    u32 flush;
+    struct Server_Hardware_Storage_Memory*shs_storage;
+    struct list_head node;
+};
+
+Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Block,Get)(u16 storageid,u64 blockid);
+Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Block,New)(u16 storageid);
+Fn(bool,Server,Hardware,Storage,Block,Lock)(StructMemory(Server,Hardware,Storage,Block)*shsb);
+Fn(void,Server,Hardware,Storage,Block,Unlock)(StructMemory(Server,Hardware,Storage,Block)*shsb);
+Fn(void,Server,Hardware,Storage,Block,Flush)(StructMemory(Server,Hardware,Storage,Block)*shsb);
+Fn(void,Server,Hardware,Storage,Block,Release)(StructMemory(Server,Hardware,Storage,Block)*shsb);
+
+#define BlockLock(shsb)\
+    if(!Call(Server,Hardware,Storage,Block,Lock)(shsb))
+
+#define BlockUnlock(shsb)\
+    Call(Server,Hardware,Storage,Block,Unlock)(shsb)
+
+#define BlockFlush(shsb)\
+    Call(Server,Hardware,Storage,Block,Flush)(shsb)
+
+#define BlockGet(ptr,storageid,blockid)\
+    StructMemory(Server,Hardware,Storage,Block)*ptr=Call(Server,Hardware,Storage,Block,Get)(storageid,blockid);if(!ptr)
+
+#define BlockSet(ptr,storageid,blockid)\
+    ptr=Call(Server,Hardware,Storage,Block,Get)(storageid,blockid);if(!ptr)
+
+#define BlockRelease(shsb)\
+    Call(Server,Hardware,Storage,Block,Release)(shsb)
