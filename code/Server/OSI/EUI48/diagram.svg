@@ -1,24 +1,26 @@
-<svg width="600" height="200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
-    </marker>
-  </defs>
-  <rect x="0" y="0" width="600" height="200" fill="#0d0d0d" stroke="#fff" stroke-width="2"/>
+<svg width="600" height="250" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="600" height="250" fill="#0d0d0d" stroke="#fff" stroke-width="2"/>
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
-    <!-- Group 0 -->
-    <rect x="50" y="5" width="500" height="90" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="300" y="30" font-family="sans-serif" font-size="16" font-weight="bold">EUI-48:MAC:Address:Structure</text>
-    <text x="50" y="80">Byte0</text>
-    <text x="150" y="80">Byte1</text>
-    <text x="250" y="80">Byte2</text>
-    <text x="350" y="80">Byte3</text>
-    <text x="450" y="80">Byte4</text>
-    <text x="550" y="80">Byte5</text>
-    <line x1="300" y1="95" x2="300" y2="115" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
-    <!-- Group 1 -->
-    <rect x="50" y="115" width="500" height="80" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="50" y="140" font-size="12">IG,UL,RES</text>
-    <text x="300" y="180" font-size="10">IG:Individual/Group,UL:Universal/Local</text>
+    
+    <!-- Byte 0-5 -->
+    <rect x="25" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="70" y="85">Byte0</text>
+    <rect x="115" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="160" y="85">Byte1</text>
+    <rect x="205" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="250" y="85">Byte2</text>
+    <rect x="295" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="340" y="85">Byte3</text>
+    <rect x="385" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="430" y="85">Byte4</text>
+    <rect x="475" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="520" y="85">Byte5</text>
+
+    <!-- Detail for Byte 0 -->
+    <line x1="70" y1="100" x2="70" y2="140" stroke="#fff" stroke-width="1" stroke-dasharray="4"/>
+    <rect x="25" y="140" width="540" height="80" fill="none" stroke="#fff" stroke-width="1"/>
+    <text x="295" y="165" font-weight="bold">Byte0:Bit:Details</text>
+    <text x="295" y="195">Bit0:IG(Individual/Group)|Bit1:UL(Universal/Local)|Bits2-7:RES</text>
   </g>
 </svg>
