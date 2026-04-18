@@ -5,22 +5,22 @@
     <text x="300" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff">EUI-48:MAC:Address:Structure</text>
     
     <!-- Byte 0-5 -->
-    <rect x="25" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="25" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="70" y="85" fill="#fff">Byte0</text>
-    <rect x="115" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="115" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="160" y="85" fill="#fff">Byte1</text>
-    <rect x="205" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="205" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="250" y="85" fill="#fff">Byte2</text>
-    <rect x="295" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="295" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="340" y="85" fill="#fff">Byte3</text>
-    <rect x="385" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="385" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="430" y="85" fill="#fff">Byte4</text>
-    <rect x="475" y="60" width="90" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <rect x="475" y="60" width="90" height="40" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="520" y="85" fill="#fff">Byte5</text>
 
     <!-- Detail for Byte 0 -->
-    <line x1="70" y1="100" x2="70" y2="140" stroke="#fff" stroke-width="1" stroke-dasharray="4" stroke="#fff" />
-    <rect x="25" y="140" width="540" height="80" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <line x1="70" y1="100" x2="70" y2="140" stroke-width="1" stroke-dasharray="4" stroke="#fff" />
+    <rect x="25" y="140" width="540" height="80" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="295" y="165" font-weight="bold" fill="#fff">Byte0:Bit:Details</text>
     <text x="295" y="195" fill="#fff">Bit0:IG(Individual/Group)|Bit1:UL(Universal/Local)|Bits2-7:RES</text>
   </g>
