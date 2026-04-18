@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="60">
-<rect width="100%" height="100%" fill="#0d0d0d"/>
+<rect width="100%" height="100%" fill="#0d0d0d" stroke="#fff" stroke-width="2"/>
 <text x="50%" y="25" font-family="monospace" font-size="14" fill="#fff" text-anchor="middle">RFC4443:ICMPv6</text>
 <text x="50%" y="45" font-family="monospace" font-size="14" fill="#fff" text-anchor="middle">InitLibrary(Server,OSI,RFC4443)</text>
 </svg>
