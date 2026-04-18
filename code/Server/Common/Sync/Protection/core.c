@@ -27,7 +27,7 @@ static void Work(struct work_struct*thread)
     SyncDelete(&scsp->scs);
 }
 
-Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*),void(*event)(StructHelp(Server,Common,Sync,Protection)*))
+Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*),void(*event)(StructHelp(Server,Common,Sync,Protection)*),bool immediate)
 {
     SyncSetup(&scsp->scs,before,after);
     SyncLock(&scsp->scs)return;
@@ -40,6 +40,7 @@ Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Prote
     scsp->limition=limition;
     scsp->utc=utc;
     scsp->event=event;
+    scsp->immediate=immediate;
     INIT_DELAYED_WORK(&scsp->work,Work);
 
     struct timespec64 now;
@@ -52,11 +53,7 @@ Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Prote
 Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc)
 {
     SyncLock(&scsp->scs)return false;
-    if(delayed_work_pending(&scsp->work)&&(s64)(scsp->work.timer.expires-jiffies)<msecs_to_jiffies(50))
-    {
-        SyncUnlock(&scsp->scs);
-        return false;
-    }
+
     s64 diff=utc.tv_sec-scsp->utc.tv_sec;
     if(diff>5)
     {
@@ -66,16 +63,27 @@ Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protect
         diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
         mod_delayed_work(system_wq,&scsp->work,diff);
     }
+
     if(scsp->limition&&SyncGet(&scsp->scs))
     {
-        scsp->limition--;
-        if(!scsp->limition&&scsp->event)
+        if(!--scsp->limition&&scsp->immediate)
         {
-            scsp->event(scsp);
-            scsp->event=NULL;
+            scsp->immediate=false;
+            mod_delayed_work(system_wq,&scsp->work,0);
+            SyncUnlock(&scsp->scs);
+            SyncDelete(&scsp->scs);
+            return false;
         }
         SyncUnlock(&scsp->scs);
         return true;
+    }
+    if(scsp->immediate)
+    {
+        scsp->immediate=false;
+        mod_delayed_work(system_wq,&scsp->work,0);
+        SyncUnlock(&scsp->scs);
+        SyncDelete(&scsp->scs);
+        return false;
     }
     SyncUnlock(&scsp->scs);
     return false;
@@ -96,22 +104,33 @@ Fn(void,Server,Common,Sync,Protection,Unlock)(StructHelp(Server,Common,Sync,Prot
     SyncUnlock(&scsp->scs);
 }
 
-Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc)
+Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc)
 {
     SyncLock(&scsp->scs)return;
-    scsp->limition+=limition;
+
     if(!scsp->limition&&scsp->event)
     {
         scsp->event(scsp);
         scsp->event=NULL;
     }
 
-    if(cancel_delayed_work_sync(&scsp->work))
-        SyncDelete(&scsp->scs);
-
-    mutex_lock(&lock);
-    list_del(&scsp->node);
-    mutex_unlock(&lock);
+    if(!scsp->limition&&scsp->immediate)
+    {
+        scsp->immediate=false;
+        mod_delayed_work(system_wq,&scsp->work,0);
+    }
+    else
+    {
+        s64 diff=utc.tv_sec-scsp->utc.tv_sec;
+        if(diff>5)
+        {
+            scsp->utc=utc;
+            struct timespec64 now;
+            ktime_get_real_ts64(&now);
+            diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
+            mod_delayed_work(system_wq,&scsp->work,diff);
+        }
+    }
 
     SyncUnlock(&scsp->scs);
     SyncDelete(&scsp->scs);
@@ -121,21 +140,68 @@ Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Prote
 {
     SyncLock(&scsp->scs)return;
     scsp->limition=0;
-    s64 diff=utc.tv_sec-scsp->utc.tv_sec;
-    if(diff>5)
-    {
-        scsp->utc=utc;
-        struct timespec64 now;
-        ktime_get_real_ts64(&now);
-        diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
-        mod_delayed_work(system_wq,&scsp->work,diff);
-    }
+    scsp->utc=utc;
     if(scsp->event)
     {
         scsp->event(scsp);
         scsp->event=NULL;
     }
+    if(scsp->immediate)
+    {
+        scsp->immediate=false;
+        mod_delayed_work(system_wq,&scsp->work,0);
+    }
+    else
+    {
+        s64 diff=utc.tv_sec-scsp->utc.tv_sec;
+        if(diff>5)
+        {
+            scsp->utc=utc;
+            struct timespec64 now;
+            ktime_get_real_ts64(&now);
+            diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
+            mod_delayed_work(system_wq,&scsp->work,diff);
+        }
+    }
+
     SyncUnlock(&scsp->scs);
+}
+
+Fn(void,Server,Common,Sync,Protection,Event)(StructHelp(Server,Common,Sync,Protection)*scsp,void(*event)(StructHelp(Server,Common,Sync,Protection)*))
+{
+    SyncLock(&scsp->scs)return;
+    scsp->event=event;
+    SyncUnlock(&scsp->scs);
+}
+
+Fn(void,Server,Common,Sync,Protection,Immediate)(StructHelp(Server,Common,Sync,Protection)*scsp,bool immediate)
+{
+    SyncLock(&scsp->scs)return;
+    scsp->immediate=immediate;
+    SyncUnlock(&scsp->scs);
+}
+
+Fn(void,Server,Common,Sync,Protection,Set,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
+{
+    SyncLock(&scsp->scs)return;
+    scsp->limition=limition;
+    SyncUnlock(&scsp->scs);
+}
+
+Fn(void,Server,Common,Sync,Protection,Add,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
+{
+    SyncLock(&scsp->scs)return;
+    scsp->limition+=limition;
+    SyncUnlock(&scsp->scs);
+}
+
+Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp)
+{
+    u32 limition;
+    SyncLock(&scsp->scs)return 0;
+    limition=scsp->limition;
+    SyncUnlock(&scsp->scs);
+    return limition;
 }
 
 InitLibrary(Server,Common,Sync,Protection)
