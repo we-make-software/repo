@@ -2,6 +2,7 @@
   <rect width="100%" height="100%" fill="#0d0d0d"/>
   
   
+  
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
     <text x="300" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff">EUI-48:MAC:Address:Structure</text>
     

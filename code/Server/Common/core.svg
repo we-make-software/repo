@@ -6,22 +6,23 @@
   </defs>
   <rect width="100%" height="100%" fill="#0d0d0d"/>
   
+  
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
     <!-- Group 0 -->
     <rect x="50" y="20" width="700" height="60" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="45" font-weight="bold" fill="#fff">Common:Synchronization&amp;Utilities</text>
-    <line x1="400" y1="60" x2="400" y2="75" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
+    <line x1="400" y1="60" x2="400" y2="75" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" stroke="#fff" />
     <!-- Group 1 -->
     <rect x="50" y="75" width="700" height="85" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="100" fill="#fff">StructHelp(Server,Common,Sync)</text>
     <text x="400" y="125" fill="#fff">EnumHelp(Server,Common,Sync,Status)</text>
-    <line x1="400" y1="140" x2="400" y2="155" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
+    <line x1="400" y1="140" x2="400" y2="155" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" stroke="#fff" />
     <!-- Group 2 -->
     <rect x="50" y="155" width="700" height="110" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="180" fill="#fff">SyncInit(scs,before,after)</text>
     <text x="400" y="205" fill="#fff">SyncGet(scs),SyncLock(scs)</text>
     <text x="400" y="230" fill="#fff">SyncUnlock(scs),SyncDelete(scs)</text>
-    <line x1="400" y1="245" x2="400" y2="260" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
+    <line x1="400" y1="245" x2="400" y2="260" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" stroke="#fff" />
     <!-- Group 3 -->
     <rect x="50" y="260" width="700" height="60" fill="none" stroke="#fff" stroke-width="1"/>
     <text x="400" y="285" fill="#fff">InitLibrary(Server,Common)</text>
