@@ -114,6 +114,14 @@ Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Prot
         scsp->event(scsp);
         scsp->event=NULL;
     }
+
+    if(cancel_delayed_work_sync(&scsp->work))
+        SyncDelete(&scsp->scs);
+
+    mutex_lock(&lock);
+    list_del(&scsp->node);
+    mutex_unlock(&lock);
+
     SyncUnlock(&scsp->scs);
     SyncDelete(&scsp->scs);
 }
