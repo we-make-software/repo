@@ -1,3 +1,5 @@
+<div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
+
 # Server Kernel Module
 
 A custom Linux kernel module for high-performance network processing and hardware management.
@@ -20,6 +22,15 @@ The system follows a strict layer-by-layer initialization order (and reverse de-
   <img src="main_diagram.svg" alt="Main Diagram">
 </p>
 
+<p align="center">
+  <b>Navigate to Modules:</b><br>
+  <a href="Debug/readme.md" style="color: #fff;">Debug</a> | 
+  <a href="Common/readme.md" style="color: #fff;">Common</a> | 
+  <a href="Hardware/readme.md" style="color: #fff;">Hardware</a> | 
+  <a href="Network/readme.md" style="color: #fff;">Network</a> | 
+  <a href="OSI/readme.md" style="color: #fff;">OSI</a>
+</p>
+
 ## Project Structure
 
 - **Debug/**: Custom logging framework.
@@ -27,3 +38,5 @@ The system follows a strict layer-by-layer initialization order (and reverse de-
 - **Hardware/**: Low-level drivers for Memory, Network, and Storage.
 - **Network/**: Integration with Linux networking stack.
 - **OSI/**: Implementation of networking protocols.
+
+</div>

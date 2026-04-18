@@ -4,7 +4,7 @@
     <text x="300" y="45" font-weight="bold">module_init(server_Init)</text>
 
     <text x="300" y="125" font-weight="bold" text-decoration="underline">Start(void)</text>
-    <a href="Debug/readme.md"><text x="300" y="160" fill="#fff" text-decoration="underline">LibraryInit(Server,Debug)</text></a>
+    <text x="300" y="160" fill="#fff" text-decoration="underline">LibraryInit(Server,Debug)</text>
     <text x="300" y="190">LibraryInit(Server,Common)</text>
     <text x="300" y="220">LibraryInit(Server,Hardware)</text>
     <text x="300" y="250">LibraryInit(Server,Network)</text>
