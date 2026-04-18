@@ -6,7 +6,7 @@ High-level management of network devices and integration with the Linux networki
 
 ## Architecture
 <p align="center">
-  <img src="network_diagram.svg" alt="Network Diagram">
+  <img src="core.svg" alt="Network Diagram">
 </p>
 
 <p align="center">

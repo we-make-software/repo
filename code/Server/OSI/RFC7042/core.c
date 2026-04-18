@@ -35,3 +35,7 @@ InitLibrary(Server,OSI,RFC7042)
     DebugMessagesPrepare(IEEE8023_Universal_Type,Server,OSI,RFC7042)
     DebugMessagesPrepare(IEEE8023_Local_Type,Server,OSI,RFC7042)
 }
+
+QuitLibrary(Server,OSI,RFC7042)
+{
+}

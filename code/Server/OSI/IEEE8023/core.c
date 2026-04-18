@@ -16,3 +16,7 @@ InitLibrary(Server,OSI,IEEE8023)
     DebugOutputPrepare(Server,OSI,IEEE8023);
     DebugMessagesPrepare(IEEE8023_Type,Server,OSI,IEEE8023)
 }
+
+QuitLibrary(Server,OSI,IEEE8023)
+{
+}

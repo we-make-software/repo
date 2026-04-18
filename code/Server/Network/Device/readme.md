@@ -6,7 +6,7 @@ Abstractions for physical and virtual network devices.
 
 ## Architecture
 <p align="center">
-  <img src="device_diagram.svg" alt="Device Diagram">
+  <img src="core.svg" alt="Device Diagram">
 </p>
 
 ## Overview

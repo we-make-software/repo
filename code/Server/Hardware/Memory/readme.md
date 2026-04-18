@@ -6,7 +6,7 @@ Low-level memory pool management and allocation framework.
 
 ## Architecture
 <p align="center">
-  <img src="memory_diagram.svg" alt="Memory Diagram">
+  <img src="core.svg" alt="Memory Diagram">
 </p>
 
 ## Overview

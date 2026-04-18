@@ -6,7 +6,7 @@ Implementation of the networking protocol stack following the Open Systems Inter
 
 ## Architecture
 <p align="center">
-  <img src="osi_diagram.svg" alt="OSI Diagram">
+  <img src="core.svg" alt="OSI Diagram">
 </p>
 
 <p align="center">

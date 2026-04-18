@@ -39,3 +39,7 @@ InitLibrary(Server,OSI,RFC2464)
     DebugMessagesPrepare(Universal_ICMPv6,Server,OSI,RFC2464)
     DebugMessagesPrepare(Local_ICMPv6,Server,OSI,RFC2464)
 }
+
+QuitLibrary(Server,OSI,RFC2464)
+{
+}

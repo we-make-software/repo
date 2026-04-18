@@ -56,3 +56,11 @@ Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs)
     }
     SyncUnlock(scs);
 }
+
+InitLibrary(Server,Common,Sync)
+{
+}
+
+QuitLibrary(Server,Common,Sync)
+{
+}

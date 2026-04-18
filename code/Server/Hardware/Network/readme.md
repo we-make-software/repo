@@ -6,7 +6,7 @@ Low-level drivers and hardware interface for network controllers.
 
 ## Architecture
 <p align="center">
-  <img src="network_hw_diagram.svg" alt="Network Hardware Diagram">
+  <img src="core.svg" alt="Network Hardware Diagram">
 </p>
 
 ## Overview

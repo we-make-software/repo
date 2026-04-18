@@ -8,7 +8,7 @@ Note: The module is named `IEEE8023` in the code and filesystem to remain compat
 
 ## Architecture
 <p align="center">
-  <img src="diagram.svg" alt="IEEE 802.3 Diagram">
+  <img src="core.svg" alt="IEEE 802.3 Diagram">
 </p>
 
 ## Overview

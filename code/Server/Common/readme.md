@@ -6,7 +6,7 @@ Shared resources and utilities used across the Server project.
 
 ## Architecture
 <p align="center">
-  <img src="common_diagram.svg" alt="Common Diagram">
+  <img src="core.svg" alt="Common Diagram">
 </p>
 
 <p align="center">

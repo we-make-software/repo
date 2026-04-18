@@ -6,7 +6,7 @@ A custom real-time logging framework that writes directly to the kernel filesyst
 
 ## Debug Architecture
 <p align="center">
-  <img src="debug_diagram.svg" alt="Debug Diagram">
+  <img src="core.svg" alt="Debug Diagram">
 </p>
 
 ## Overview

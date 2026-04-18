@@ -35,3 +35,11 @@ Fn(u64,Server,Hardware,Storage,Config,Get,Deleted)(StructMemory(Server,Hardware,
     SyncUnlock(&shs->scs);
     return deleted;
 }
+
+InitLibrary(Server,Hardware,Storage,Config)
+{
+}
+
+QuitLibrary(Server,Hardware,Storage,Config)
+{
+}

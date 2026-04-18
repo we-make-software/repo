@@ -23,6 +23,10 @@ InitLibrary(Server,Hardware,Storage,Block)
     MemoryPrepare(Server,Hardware,Storage,Block);
 }
 
+QuitLibrary(Server,Hardware,Storage,Block)
+{
+}
+
 Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Block,Get)(u16 storageid,u64 blockid)
 {
     StorageGet(shs,storageid)return NULL;

@@ -17,3 +17,11 @@ FnRX(Server,OSI,EUI48,Destination)(struct sk_buff*skb,StructMemory(Server,Hardwa
     }
     RX(Server,OSI,IEEE8023,Type,Choice)(skb,shn,(void*)soe);
 }
+
+InitLibrary(Server,OSI,EUI48)
+{
+}
+
+QuitLibrary(Server,OSI,EUI48)
+{
+}

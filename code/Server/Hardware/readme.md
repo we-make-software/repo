@@ -6,7 +6,7 @@ Low-level abstractions for system memory, networking hardware, and storage devic
 
 ## Architecture
 <p align="center">
-  <img src="hardware_diagram.svg" alt="Hardware Diagram">
+  <img src="core.svg" alt="Hardware Diagram">
 </p>
 
 <p align="center">

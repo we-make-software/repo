@@ -22,3 +22,7 @@ InitLibrary(Server,OSI,RFC8200)
 {
     DebugOutputPrepare(Server,OSI,RFC8200);
 }
+
+QuitLibrary(Server,OSI,RFC8200)
+{
+}

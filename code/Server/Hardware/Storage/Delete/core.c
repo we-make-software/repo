@@ -107,3 +107,11 @@ Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Delete,U
     BlockFlush(shsb);
     return shsb;
 }
+
+InitLibrary(Server,Hardware,Storage,Delete)
+{
+}
+
+QuitLibrary(Server,Hardware,Storage,Delete)
+{
+}

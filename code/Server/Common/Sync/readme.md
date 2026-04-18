@@ -6,7 +6,7 @@ A reference-counted synchronization framework built on Linux kernel mutexes.
 
 ## Architecture
 <p align="center">
-  <img src="sync_diagram.svg" alt="Sync Diagram">
+  <img src="core.svg" alt="Sync Diagram">
 </p>
 
 ## Overview

@@ -6,7 +6,7 @@ Management of storage devices, block I/O, and local data persistence.
 
 ## Architecture
 <p align="center">
-  <img src="storage_diagram.svg" alt="Storage Diagram">
+  <img src="core.svg" alt="Storage Diagram">
 </p>
 
 <p align="center">

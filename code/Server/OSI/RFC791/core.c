@@ -7,3 +7,7 @@ InitLibrary(Server,OSI,RFC791)
 {
     DebugOutputPrepare(Server,OSI,RFC791);
 }
+
+QuitLibrary(Server,OSI,RFC791)
+{
+}
