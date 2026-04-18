@@ -92,6 +92,12 @@
 
 #define New(...) Call(__VA_ARGS__,New)
 
+
+#define FnAuto(...)Fn(void,__VA_ARGS__,Auto)
+
+#define Auto(...)Call(__VA_ARGS__,Auto)
+
+
 #define FnTX(...)Fn(void,__VA_ARGS__,TX)
 
 #define TX(...)Call(__VA_ARGS__,TX)
