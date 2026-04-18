@@ -3,8 +3,8 @@
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
     <text x="300" y="45" font-weight="bold">module_init(server_Init)</text>
 
-    <text x="300" y="125" font-weight="bold" text-decoration="underline">Start(void)</text>
-    <text x="300" y="160" fill="#fff" text-decoration="underline">LibraryInit(Server,Debug)</text>
+    <text x="300" y="125" font-weight="bold">Start(void)</text>
+    <text x="300" y="160">LibraryInit(Server,Debug)</text>
     <text x="300" y="190">LibraryInit(Server,Common)</text>
     <text x="300" y="220">LibraryInit(Server,Hardware)</text>
     <text x="300" y="250">LibraryInit(Server,Network)</text>
@@ -12,7 +12,7 @@
 
     <text x="300" y="375" font-weight="bold">IsRunning()==true</text>
 
-    <text x="300" y="465" font-weight="bold" text-decoration="underline">Quit(void)</text>
+    <text x="300" y="465" font-weight="bold">Quit(void)</text>
     <text x="300" y="500">LibraryQuit(Server,OSI)</text>
     <text x="300" y="530">LibraryQuit(Server,Network)</text>
     <text x="300" y="560">LibraryQuit(Server,Hardware)</text>
