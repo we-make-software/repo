@@ -11,14 +11,12 @@ static void Start(void)
     LibraryInit(Server,Debug)
     LibraryInit(Server,Common)
     LibraryInit(Server,Hardware)
-    LibraryInit(Server,Network)
     LibraryInit(Server,OSI)
 }
 
 static void Quit(void)
 {
     LibraryQuit(Server,OSI)
-    LibraryQuit(Server,Network)
     LibraryQuit(Server,Hardware)
     LibraryQuit(Server,Common)
     LibraryQuit(Server,Debug)

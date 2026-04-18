@@ -4,8 +4,8 @@
 struct NAME(_,Server,Hardware,Storage,Memory);
 struct NAME(_,Server,Hardware,Storage,Block,Memory);
 
-Fn(void,Server,Hardware,Storage,Delete,Init)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
-Fn(void,Server,Hardware,Storage,Delete,Quit)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
+Fn(void,Server,Hardware,Storage,Delete,Setup)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
+Fn(void,Server,Hardware,Storage,Delete,Exit)(struct NAME(_,Server,Hardware,Storage,Memory)*Storage);
 
 Fn(void,Server,Hardware,Storage,Delete,By,Pointer)(struct NAME(_,Server,Hardware,Storage,Block,Memory)*block);
 

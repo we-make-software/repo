@@ -1,14 +1,11 @@
 #include ".setup"
-
 struct Block{
     u16 ID;
     struct kmem_cache*cache;
     struct list_head node;
 };
-
 static LIST_HEAD(nodes);
 static DEFINE_MUTEX(lock);
-
 Fn(void,Server,Hardware,Memory,Prepare)(u16 ID){
     char name[32];
     struct Block*block;

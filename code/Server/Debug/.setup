@@ -44,12 +44,8 @@ Fn(void,Server,Debug,Output,Message,Value,New)(StructMemory(Server,Debug,Output,
 }
 
 #define DebugValuePrepare(name,value,...)\
-{\
-	Call(Server,Debug,Output,Message,Value,New)(DebugNameMessage(name,__VA_ARGS__),(u8*)value);\
-}
+	Call(Server,Debug,Output,Message,Value,New)(DebugNameMessage(name,__VA_ARGS__),(u8*)value)
 
 #define DebugOutputPrepare(...)\
 	DebugNameOutput(__VA_ARGS__)=Call(Server,Debug,Output,New)((u8*)"/root/pccprc_code_"#__VA_ARGS__"_debug")
 
-void NAME(_,Server,Debug,Init)(void);
-void NAME(_,Server,Debug,Quit)(void);

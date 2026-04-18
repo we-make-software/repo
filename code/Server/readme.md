@@ -31,6 +31,12 @@ The system follows a strict layer-by-layer initialization order (and reverse de-
   <a href="OSI/readme.md" style="color: #fff;">OSI</a>
 </p>
 
+## Packet Handling Life-cycle
+
+- **FnNew**: An automatic process that creates the packet, identifies its structure, and places everything in the right spot.
+- **FnRX**: Handles data coming into the system from the network.
+- **FnTX**: Final instance for small corrections that might need to be made, like checksums or other adjustments that are not related to the Data Link layer, just before sending.
+
 ## Project Structure
 
 - **Debug/**: Custom logging framework.

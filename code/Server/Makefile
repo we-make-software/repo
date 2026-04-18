@@ -1,7 +1,22 @@
 ifneq ($(KERNELRELEASE),)
 
 obj-m += server.o
-server-y := main.o Debug/core.o Common/core.o Common/Sync/core.o Hardware/core.o Hardware/Memory/core.o Hardware/Network/core.o Hardware/Storage/core.o Hardware/Storage/Block/core.o Hardware/Storage/Config/core.o Hardware/Storage/Delete/core.o Hardware/Storage/Upgrade/core.o Network/core.o Network/Device/core.o OSI/core.o OSI/EUI48/core.o OSI/RFC7042/core.o OSI/RFC2464/core.o OSI/IEEE8023/core.o OSI/RFC791/core.o OSI/RFC8200/core.o OSI/RFC826/core.o OSI/RFC4443/core.o
+server-y := main.o \
+			Debug/core.o \
+			Common/core.o \
+			Common/Sync/core.o \
+			Common/Sync/Protection/core.o \
+			Hardware/core.o \
+			Hardware/Memory/core.o \
+			Hardware/Network/core.o \
+			Hardware/Storage/core.o \
+			Hardware/Storage/Block/core.o \
+			Hardware/Storage/Config/core.o \
+			Hardware/Storage/Delete/core.o \
+			Hardware/Storage/Upgrade/core.o \
+			OSI/core.o OSI/EUI48/core.o \
+			OSI/IEEE8023/core.o \
+			OSI/RFC2464/core.o
  
 ccflags-y := -Iinclude -O2 -Wall
 
@@ -36,8 +51,6 @@ stop:
 start:
 	clear || true
 	rmmod server 2>/dev/null || true
-	rm -rf -- "$(PWD)/debug"
-	mkdir -p -- "$(PWD)/debug"
 	$(MAKE) build
 	insmod ./server.ko
 

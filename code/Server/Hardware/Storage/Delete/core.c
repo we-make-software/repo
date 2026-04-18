@@ -2,7 +2,7 @@
 #include "../Block/.setup"
 #include "../Config/.setup"
 
-Fn(void,Server,Hardware,Storage,Delete,Init)(StructMemory(Server,Hardware,Storage)*shs)
+Fn(void,Server,Hardware,Storage,Delete,Setup)(StructMemory(Server,Hardware,Storage)*shs)
 {
     SyncLock(&shs->scs)return;
     StructDisk(Server,Hardware,Storage,Config)*shsc=(void*)shs->shsb->data;
@@ -17,7 +17,7 @@ Fn(void,Server,Hardware,Storage,Delete,Init)(StructMemory(Server,Hardware,Storag
     SyncUnlock(&shs->scs);
 }
 
-Fn(void,Server,Hardware,Storage,Delete,Quit)(StructMemory(Server,Hardware,Storage)*shs)
+Fn(void,Server,Hardware,Storage,Delete,Exit)(StructMemory(Server,Hardware,Storage)*shs)
 {
     BlockRelease(shs->shsb_);
 }
@@ -29,7 +29,7 @@ Fn(void,Server,Hardware,Storage,Delete,By,Pointer)(StructMemory(Server,Hardware,
     if(!shsb->shs_storage->shsb_)
     {
         SyncUnlock(&shsb->shs_storage->scs);
-        Call(Server,Hardware,Storage,Delete,Init)(shsb->shs_storage);
+        Call(Server,Hardware,Storage,Delete,Setup)(shsb->shs_storage);
         SyncLock(&shsb->shs_storage->scs)return;
     }
     memset(shsb->data,0,1024);
@@ -69,7 +69,7 @@ Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Delete,U
     if(!shs->shsb_)
     {
         SyncUnlock(&shs->scs);
-        Call(Server,Hardware,Storage,Delete,Init)(shs);
+        Call(Server,Hardware,Storage,Delete,Setup)(shs);
         SyncLock(&shs->scs)return NULL;
     }
     StructDisk(Server,Hardware,Storage,Config)*shsc=(void*)shs->shsb->data;

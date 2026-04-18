@@ -15,14 +15,14 @@ StructHelp(Server,Common,Sync){
     void(*after)(StructHelp(Server,Common,Sync)*);
 };
 
-Fn(void,Server,Common,Sync,Init)(StructHelp(Server,Common,Sync)*scs,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*));
+Fn(void,Server,Common,Sync,Setup)(StructHelp(Server,Common,Sync)*scs,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*));
 Fn(bool,Server,Common,Sync,Get)(StructHelp(Server,Common,Sync)*scs);
 Fn(bool,Server,Common,Sync,Lock)(StructHelp(Server,Common,Sync)*scs);
 Fn(void,Server,Common,Sync,Unlock)(StructHelp(Server,Common,Sync)*scs);
 Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs);
 
-#define SyncInit(scs,before,after)\
-    Call(Server,Common,Sync,Init)(scs,before,after)
+#define SyncSetup(scs,before,after)\
+    Call(Server,Common,Sync,Setup)(scs,before,after)
 
 #define SyncGet(scs)\
     Call(Server,Common,Sync,Get)(scs)
@@ -35,3 +35,5 @@ Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs);
 
 #define SyncDelete(scs)\
     Call(Server,Common,Sync,Delete)(scs)
+
+#include "Protection/.setup"

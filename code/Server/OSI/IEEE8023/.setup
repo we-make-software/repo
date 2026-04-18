@@ -1,4 +1,5 @@
 #pragma once
+#include "../../Hardware/Network/.setup"
 #include "../EUI48/.setup"
 
 StructAlign(Server,OSI,IEEE8023){
@@ -6,4 +7,22 @@ StructAlign(Server,OSI,IEEE8023){
     __be16 Type;
 };
 
-FnRX(Server,OSI,IEEE8023,Type,Choice)(struct sk_buff*skb,StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,IEEE8023)*soi);
+FnRX(Server,OSI,IEEE8023)(struct sk_buff*skb,StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,IEEE8023)*soi);
+FnTX(Server,OSI,IEEE8023,Type,Choice)(StructAlign(Server,OSI,IEEE8023)*soi);
+FnNew(Server,OSI,IEEE8023)(StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,IEEE8023)**soi);
+Fn(void,Server,OSI,IEEE8023,Set,Destination)(StructAlign(Server,OSI,IEEE8023)*soi,StructAlign(Server,OSI,EUI48)*soe);
+Fn(void,Server,OSI,IEEE8023,Set,Type)(StructAlign(Server,OSI,IEEE8023)*soi,__be16 type);
+Fn(bool,Server,OSI,IEEE8023,Is,Broadcast)(StructAlign(Server,OSI,IEEE8023)*soi);
+
+#define IEEE8023New(shn,soi)\
+    New(Server,OSI,IEEE8023)(shn,soi)
+
+#define IEEE8023SetDestination(soi,dest)\
+    Call(Server,OSI,IEEE8023,Set,Destination)(soi,dest)
+
+#define IEEE8023SetType(soi,type)\
+    Call(Server,OSI,IEEE8023,Set,Type)(soi,type)
+
+#define IEEE8023IsBroadcast(soi)\
+    Call(Server,OSI,IEEE8023,Is,Broadcast)(soi)
+

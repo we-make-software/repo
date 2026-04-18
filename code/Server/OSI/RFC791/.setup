@@ -1,5 +1,0 @@
-#pragma once
-#include "../RFC7042/.setup"
-
-StructAlign(Server,OSI,RFC791){
-};

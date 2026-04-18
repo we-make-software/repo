@@ -1,5 +1,8 @@
 #pragma once
+#include "../../.setup"
 #include "../IEEE8023/.setup"
 
-Fn(bool,Server,OSI,RFC2464,Is,Multicast)(StructAlign(Server,OSI,EUI48)*soe);
-FnRX(Server,OSI,RFC2464,Universal,Or,Local,Choice)(struct sk_buff*skb,StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,IEEE8023)*soi);
+Fn(bool,Server,OSI,RFC2464,Is,Multicast)(StructAlign(Server,OSI,IEEE8023)*soi);
+
+#define RFC2464IsMulticast(soi)\
+    Call(Server,OSI,RFC2464,Is,Multicast)(soi)

@@ -1,7 +1,5 @@
 #include ".setup"
-#include "../Memory/.setup"
-#include "../../OSI/EUI48/.setup"
-
+#include "../../OSI/IEEE8023/.setup"
 #ifndef MODULE
 StructMemory(Server,Hardware,Network,Receive,Relay){
     StructMemory(Server,Hardware,Network)*shn;
@@ -50,7 +48,7 @@ static void Work(struct work_struct*thread)
     }
     if(NetworkAdapterUse(shnr->shn))
     {
-        RX(Server,OSI,EUI48,Destination)(shnr->skb,shnr->shn,(void*)skb_mac_header(shnr->skb));
+        RX(Server,OSI,IEEE8023)(shnr->skb,shnr->shn,(void*)skb_mac_header(shnr->skb));
         NetworkAdapterRelease(shnr->shn);
     }
     dev_kfree_skb_any(shnr->skb);
@@ -132,6 +130,7 @@ FnNew(Server,Hardware,Network)(StructMemory(Server,Hardware,Network)*shn)
 
 static FnTX(Server,Hardware,Network)(struct sk_buff*skb,bool debug)
 {
+    TX(Server,OSI,IEEE8023,Type,Choice)((void*)skb_mac_header(skb));
     if(debug)
     {
         dev_kfree_skb_any(skb);
@@ -171,10 +170,10 @@ InitLibrary(Server,Hardware,Network)
         MemoryGet(shn,Server,Hardware,Network)continue;
         shn->id=id++;
         shn->dev=dev;
-        SyncInit(&shn->scs,NULL,After);
+        SyncSetup(&shn->scs,NULL,After);
         SyncGet(&shn->scs);
         list_add_tail(&shn->node,&nodes);
-        INIT_LIST_HEAD(&shn->snd_node);
+        INIT_LIST_HEAD(&shn->shnd_node);
 
         shn->features_old=dev->features;
         shn->wanted_features_old=dev->wanted_features;

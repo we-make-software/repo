@@ -49,7 +49,7 @@ InitLibrary(Server,Hardware,Storage)
             shs->id=i;
             shs->file=file;
             shs->size=i_size_read(file_inode(file))>>10;
-            SyncInit(&shs->scs,NULL,NULL);
+            SyncSetup(&shs->scs,NULL,NULL);
             INIT_LIST_HEAD(&shs->block_node);
             list_add(&shs->node,&nodes);
         }
@@ -57,8 +57,8 @@ InitLibrary(Server,Hardware,Storage)
     StructMemory(Server,Hardware,Storage)*shs;
     list_for_each_entry(shs,&nodes,node)
     {
-        Call(Server,Hardware,Storage,Config,Init)(shs);
-        Call(Server,Hardware,Storage,Delete,Init)(shs);
+        Call(Server,Hardware,Storage,Config,Setup)(shs);
+        Call(Server,Hardware,Storage,Delete,Setup)(shs);
     }
 }
 
@@ -67,8 +67,8 @@ QuitLibrary(Server,Hardware,Storage)
     StructMemory(Server,Hardware,Storage)*shs,*tmp;
     list_for_each_entry_safe(shs,tmp,&nodes,node)
     {
-        Call(Server,Hardware,Storage,Delete,Quit)(shs);
-        Call(Server,Hardware,Storage,Config,Quit)(shs);
+        Call(Server,Hardware,Storage,Delete,Exit)(shs);
+        Call(Server,Hardware,Storage,Config,Exit)(shs);
         filp_close(shs->file,NULL);
         list_del(&shs->node);
         MemoryDelete(shs);

@@ -54,7 +54,7 @@ Fn(StructMemory(Server,Hardware,Storage,Block)*,Server,Hardware,Storage,Block,Ge
     }
     shsb->id=blockid;
     shsb->shs_storage=shs;
-    SyncInit(&shsb->scs,Before,After);
+    SyncSetup(&shsb->scs,Before,After);
     SyncGet(&shsb->scs);
     loff_t pos=(loff_t)blockid*1024;
     if(kernel_read(shs->file,shsb->data,1024,&pos)!=1024)

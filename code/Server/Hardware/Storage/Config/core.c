@@ -1,7 +1,7 @@
 #include ".setup"
 #include "../Block/.setup"
 
-Fn(void,Server,Hardware,Storage,Config,Init)(StructMemory(Server,Hardware,Storage)*shs)
+Fn(void,Server,Hardware,Storage,Config,Setup)(StructMemory(Server,Hardware,Storage)*shs)
 {
     BlockSet(shs->shsb,shs->id,0)return;
     StructDisk(Server,Hardware,Storage,Config)*shsc=(void*)shs->shsb->data;
@@ -13,7 +13,7 @@ Fn(void,Server,Hardware,Storage,Config,Init)(StructMemory(Server,Hardware,Storag
     BlockFlush(shs->shsb);
 }
 
-Fn(void,Server,Hardware,Storage,Config,Quit)(StructMemory(Server,Hardware,Storage)*shs)
+Fn(void,Server,Hardware,Storage,Config,Exit)(StructMemory(Server,Hardware,Storage)*shs)
 {
     BlockRelease(shs->shsb);
 }

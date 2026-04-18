@@ -1,10 +1,9 @@
 #pragma once
 #include "../../.setup"
-#include "../../Hardware/Network/.setup"
-
 StructAlign(Server,OSI,EUI48){
     union {
-        u8 bytes[6];
+        u8 byte8[6];
+        u16 byte16[3];
         struct __attribute__((packed)){
 #if IS_LITTLE_ENDIAN
             u8 ig:1,ul:1,res:6;
@@ -15,4 +14,3 @@ StructAlign(Server,OSI,EUI48){
     } data;
 };
 
-FnRX(Server,OSI,EUI48,Destination)(struct sk_buff*skb,StructMemory(Server,Hardware,Network)*shn,StructAlign(Server,OSI,EUI48)*soe);

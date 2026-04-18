@@ -9,6 +9,7 @@
 #include<linux/skbuff.h>
 #include<linux/etherdevice.h>
 #include<linux/if_packet.h>
+#include<linux/workqueue.h>
 #include<linux/ktime.h>
 #include<linux/timekeeping.h>
 #include<linux/slab.h>
@@ -117,3 +118,4 @@ bool IsRunning(void);
 
 #include "Hardware/Memory/.setup"
 #include "Debug/.setup"
+#include "Common/Sync/.setup"

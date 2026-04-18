@@ -1,0 +1,9 @@
+#pragma once
+#include "../.setup"
+#include "../../../OSI/EUI48/.setup"
+StructMemory(Server,Hardware,Network,Device){
+    StructAlign(Server,OSI,EUI48) soe;
+    StructHelp(Server,Common,Sync,Protection) scsp;
+    StructMemory(Server,Hardware,Network)*shn;
+    struct list_head node;
+};

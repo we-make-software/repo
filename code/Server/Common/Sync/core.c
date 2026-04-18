@@ -1,6 +1,6 @@
 #include ".setup"
 
-Fn(void,Server,Common,Sync,Init)(StructHelp(Server,Common,Sync)*scs,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*))
+Fn(void,Server,Common,Sync,Setup)(StructHelp(Server,Common,Sync)*scs,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*))
 {
     scs->ref=0;
     mutex_init(&scs->lock);
@@ -59,8 +59,10 @@ Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs)
 
 InitLibrary(Server,Common,Sync)
 {
+    LibraryInit(Server,Common,Sync,Protection)
 }
 
 QuitLibrary(Server,Common,Sync)
 {
+    LibraryQuit(Server,Common,Sync,Protection)
 }

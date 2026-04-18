@@ -1,7 +1,4 @@
 #include ".setup"
-#include "../Hardware/Memory/.setup"
-#include<linux/string.h>
-
 static LIST_HEAD(nodes);
 
 Fn(void,Server,Debug,Output,Write)(StructMemory(Server,Debug,Output)*sdo,u8*data,u32 len)

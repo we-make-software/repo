@@ -3,8 +3,8 @@
 #include "../Local/Address/.setup"
 #include "../Upgrade/.setup"
 
-Fn(void,Server,Hardware,Storage,Config,Init)(StructMemory(Server,Hardware,Storage)*shs);
-Fn(void,Server,Hardware,Storage,Config,Quit)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(void,Server,Hardware,Storage,Config,Setup)(StructMemory(Server,Hardware,Storage)*shs);
+Fn(void,Server,Hardware,Storage,Config,Exit)(StructMemory(Server,Hardware,Storage)*shs);
 Fn(u64,Server,Hardware,Storage,Config,Get,Used)(StructMemory(Server,Hardware,Storage)*shs);
 Fn(u64,Server,Hardware,Storage,Config,Get,Deleted)(StructMemory(Server,Hardware,Storage)*shs);
 

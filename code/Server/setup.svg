@@ -1,35 +1,36 @@
 <svg width="800" height="810" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="0" width="800" height="810" fill="none" stroke="#fff" stroke-width="2"/>
+  <rect width="100%" height="100%" fill="#0d0d0d"/>
+  
   <text x="400" y="50" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#fff">Server.setup:MacroDefinitions&amp;Status</text>
   
   <g font-family="monospace" font-size="14" fill="#fff">
-    <text x="70" y="100">NAME(symbol,args...):HierarchicalNamingLogic</text>
+    <text x="70" y="100" fill="#fff">NAME(symbol,args...):HierarchicalNamingLogic</text>
     
-    <text x="70" y="140">InitLibrary/QuitLibrary:ModuleImplementationBlocks</text>
-    <text x="70" y="170">LibraryInit/LibraryQuit:AutomaticModuleLifecycle</text>
+    <text x="70" y="140" fill="#fff">InitLibrary/QuitLibrary:ModuleImplementationBlocks</text>
+    <text x="70" y="170" fill="#fff">LibraryInit/LibraryQuit:AutomaticModuleLifecycle</text>
     
-    <text x="70" y="210">StructDisk(aligned1024),StructAlign(packed)</text>
-    <text x="70" y="240">StructMemory,StructHelp,EnumHelp,EnumValueHelp</text>
+    <text x="70" y="210" fill="#fff">StructDisk(aligned1024),StructAlign(packed)</text>
+    <text x="70" y="240" fill="#fff">StructMemory,StructHelp,EnumHelp,EnumValueHelp</text>
     
-    <text x="70" y="280">Fn(type,args...):FunctionDeclaration</text>
-    <text x="70" y="310">Call(args...):FunctionCall</text>
+    <text x="70" y="280" fill="#fff">Fn(type,args...):FunctionDeclaration</text>
+    <text x="70" y="310" fill="#fff">Call(args...):FunctionCall</text>
     
-    <text x="70" y="350">FnNew/New:AllocationLifecycle</text>
-    <text x="70" y="380">FnAuto/Auto:AutomatedProcedures</text>
-    <text x="70" y="410">FnTX/TX:TransmissionPath</text>
-    <text x="70" y="440">FnRX/RX:ReceptionPath</text>
-    <text x="70" y="470">FnShutdown/Shutdown:TerminationPath</text>
+    <text x="70" y="350" fill="#fff">FnNew/New:AllocationLifecycle</text>
+    <text x="70" y="380" fill="#fff">FnAuto/Auto:AutomatedProcedures</text>
+    <text x="70" y="410" fill="#fff">FnTX/TX:TransmissionPath</text>
+    <text x="70" y="440" fill="#fff">FnRX/RX:ReceptionPath</text>
+    <text x="70" y="470" fill="#fff">FnShutdown/Shutdown:TerminationPath</text>
 
-    <text x="70" y="510">MemoryPrepare(size):InitializeMemoryPool</text>
-    <text x="70" y="540">MemoryGet(name,args...):Allocation&amp;NullCheck</text>
-    <text x="70" y="570">MemoryDelete(name):Deallocation</text>
+    <text x="70" y="510" fill="#fff">MemoryPrepare(size):InitializeMemoryPool</text>
+    <text x="70" y="540" fill="#fff">MemoryGet(name,args...):Allocation&amp;NullCheck</text>
+    <text x="70" y="570" fill="#fff">MemoryDelete(name):Deallocation</text>
 
-    <text x="70" y="610">DebugOutput(args...):DefineOutputHandle</text>
-    <text x="70" y="640">DebugMessages(name,args...):DefineMessageHandle</text>
-    <text x="70" y="670">DebugOutputPrepare(args...):OpenLogFile</text>
-    <text x="70" y="700">DebugMessagesPrepare(name,args...):CreateMessage</text>
-    <text x="70" y="730">DebugValuePrepare(name,value,args...):LogValue</text>
+    <text x="70" y="610" fill="#fff">DebugOutput(args...):DefineOutputHandle</text>
+    <text x="70" y="640" fill="#fff">DebugMessages(name,args...):DefineMessageHandle</text>
+    <text x="70" y="670" fill="#fff">DebugOutputPrepare(args...):OpenLogFile</text>
+    <text x="70" y="700" fill="#fff">DebugMessagesPrepare(name,args...):CreateMessage</text>
+    <text x="70" y="730" fill="#fff">DebugValuePrepare(name,value,args...):LogValue</text>
     
-    <text x="70" y="760">IsRunning(void):CheckModuleExecutionStatus</text>
+    <text x="70" y="760" fill="#fff">IsRunning(void):CheckModuleExecutionStatus</text>
   </g>
 </svg>

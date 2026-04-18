@@ -1,10 +1,8 @@
 #pragma once
 #include "../../.setup"
-#include "../../Common/Sync/.setup"
+
 
 StructMemory(Server,Hardware,Network);
-
-#include "../../OSI/EUI48/.setup"
 
 StructMemory(Server,Hardware,Network){
     StructHelp(Server,Common,Sync) scs;
@@ -12,7 +10,7 @@ StructMemory(Server,Hardware,Network){
     struct net_device*dev;
     netdev_features_t features_old,wanted_features_old,gso_partial_features_old;
     struct packet_type pt;
-    struct list_head node,snd_node;
+    struct list_head node,shnd_node;
 };
 
 StructMemory(Server,Hardware,Network,Receive){
@@ -24,7 +22,9 @@ StructMemory(Server,Hardware,Network,Receive){
 Fn(StructMemory(Server,Hardware,Network)*,Server,Hardware,Network,Get,Or,Null)(u16 id);
 Fn(bool,Server,Hardware,Network,Use)(StructMemory(Server,Hardware,Network)*shn);
 Fn(void,Server,Hardware,Network,Release)(StructMemory(Server,Hardware,Network)*shn);
+
 FnNew(Server,Hardware,Network)(StructMemory(Server,Hardware,Network)*shn);
+
 
 #define NetworkAdapterGet(id)\
     Call(Server,Hardware,Network,Get,Or,Null)(id)

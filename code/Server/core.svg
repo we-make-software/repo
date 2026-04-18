@@ -1,47 +1,48 @@
 <svg width="600" height="750" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fff"  stroke="#fff"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="600" height="750" fill="none" stroke="#fff" stroke-width="2"/>
+  <rect width="100%" height="100%" fill="#0d0d0d"/>
+  
   <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
     <!-- module_init -->
-    <rect x="150" y="20" width="300" height="40" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="300" y="45" font-weight="bold">module_init(server_Init)</text>
+    <rect x="150" y="20" width="300" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <text x="300" y="45" font-weight="bold" fill="#fff">module_init(server_Init)</text>
 
-    <line x1="300" y1="60" x2="300" y2="100" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <line x1="300" y1="60" x2="300" y2="100" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
 
     <!-- Start -->
-    <rect x="150" y="100" width="300" height="200" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="300" y="125" font-weight="bold">Start(void)</text>
-    <text x="300" y="160">LibraryInit(Server,Debug)</text>
-    <text x="300" y="190">LibraryInit(Server,Common)</text>
-    <text x="300" y="220">LibraryInit(Server,Hardware)</text>
-    <text x="300" y="250">LibraryInit(Server,Network)</text>
-    <text x="300" y="280">LibraryInit(Server,OSI)</text>
+    <rect x="150" y="100" width="300" height="200" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <text x="300" y="125" font-weight="bold" fill="#fff">Start(void)</text>
+    <text x="300" y="160" fill="#fff">LibraryInit(Server,Debug)</text>
+    <text x="300" y="190" fill="#fff">LibraryInit(Server,Common)</text>
+    <text x="300" y="220" fill="#fff">LibraryInit(Server,Hardware)</text>
+    <text x="300" y="250" fill="#fff">LibraryInit(Server,Network)</text>
+    <text x="300" y="280" fill="#fff">LibraryInit(Server,OSI)</text>
 
-    <line x1="300" y1="300" x2="300" y2="350" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <line x1="300" y1="300" x2="300" y2="350" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
 
     <!-- Running -->
-    <rect x="150" y="350" width="300" height="40" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="300" y="375" font-weight="bold">IsRunning()==true</text>
+    <rect x="150" y="350" width="300" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <text x="300" y="375" font-weight="bold" fill="#fff">IsRunning()==true</text>
 
-    <line x1="300" y1="390" x2="300" y2="440" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <line x1="300" y1="390" x2="300" y2="440" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
 
     <!-- Quit -->
-    <rect x="150" y="440" width="300" height="200" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="300" y="465" font-weight="bold">Quit(void)</text>
-    <text x="300" y="500">LibraryQuit(Server,OSI)</text>
-    <text x="300" y="530">LibraryQuit(Server,Network)</text>
-    <text x="300" y="560">LibraryQuit(Server,Hardware)</text>
-    <text x="300" y="590">LibraryQuit(Server,Common)</text>
-    <text x="300" y="620">LibraryQuit(Server,Debug)</text>
+    <rect x="150" y="440" width="300" height="200" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <text x="300" y="465" font-weight="bold" fill="#fff">Quit(void)</text>
+    <text x="300" y="500" fill="#fff">LibraryQuit(Server,OSI)</text>
+    <text x="300" y="530" fill="#fff">LibraryQuit(Server,Network)</text>
+    <text x="300" y="560" fill="#fff">LibraryQuit(Server,Hardware)</text>
+    <text x="300" y="590" fill="#fff">LibraryQuit(Server,Common)</text>
+    <text x="300" y="620" fill="#fff">LibraryQuit(Server,Debug)</text>
 
-    <line x1="300" y1="640" x2="300" y2="680" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)"/>
+    <line x1="300" y1="640" x2="300" y2="680" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
 
     <!-- module_exit -->
-    <rect x="150" y="680" width="300" height="40" fill="none" stroke="#fff" stroke-width="1"/>
-    <text x="300" y="705" font-weight="bold">module_exit(server_Exit)</text>
+    <rect x="150" y="680" width="300" height="40" fill="transparent" stroke="#fff" stroke-width="1"/>
+    <text x="300" y="705" font-weight="bold" fill="#fff">module_exit(server_Exit)</text>
   </g>
 </svg>

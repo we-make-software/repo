@@ -1,0 +1,35 @@
+#pragma once
+#include "../.setup"
+
+StructHelp(Server,Common,Sync,Protection){
+    StructHelp(Server,Common,Sync) scs;
+    u32 limition;
+    struct timespec64 utc;
+    struct delayed_work work;
+    struct list_head node;
+};
+
+Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*));
+Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
+Fn(bool,Server,Common,Sync,Protection,Lock)(StructHelp(Server,Common,Sync,Protection)*scsp);
+Fn(void,Server,Common,Sync,Protection,Unlock)(StructHelp(Server,Common,Sync,Protection)*scsp);
+Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc);
+Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
+
+#define SyncProtectionSetup(scsp,limition,utc,before,after)\
+    Call(Server,Common,Sync,Protection,Setup)(scsp,limition,utc,before,after)
+
+#define SyncProtectionGet(scsp,utc)\
+    Call(Server,Common,Sync,Protection,Get)(scsp,utc)
+
+#define SyncProtectionLock(scsp)\
+    Call(Server,Common,Sync,Protection,Lock)(scsp)
+
+#define SyncProtectionUnlock(scsp)\
+    Call(Server,Common,Sync,Protection,Unlock)(scsp)
+
+#define SyncProtectionDelete(scsp,limition,utc)\
+    Call(Server,Common,Sync,Protection,Delete)(scsp,limition,utc)
+
+#define SyncProtectionBlock(scsp,utc)\
+    Call(Server,Common,Sync,Protection,Block)(scsp,utc)
