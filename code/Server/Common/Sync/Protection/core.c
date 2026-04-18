@@ -100,15 +100,6 @@ Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Prot
 {
     SyncLock(&scsp->scs)return;
     scsp->limition+=limition;
-    s64 diff=utc.tv_sec-scsp->utc.tv_sec;
-    if(diff>5)
-    {
-        scsp->utc=utc;
-        struct timespec64 now;
-        ktime_get_real_ts64(&now);
-        diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
-        mod_delayed_work(system_wq,&scsp->work,diff);
-    }
     if(!scsp->limition&&scsp->event)
     {
         scsp->event(scsp);
