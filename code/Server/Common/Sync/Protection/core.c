@@ -65,6 +65,7 @@ Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protect
     if(scsp->limition&&SyncGet(&scsp->scs))
     {
         scsp->limition--;
+        if(!scsp->limition&&scsp->event)scsp->event(scsp);
         SyncUnlock(&scsp->scs);
         return true;
     }
@@ -118,6 +119,7 @@ Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Prote
         diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
         mod_delayed_work(system_wq,&scsp->work,diff);
     }
+    if(scsp->event)scsp->event(scsp);
     SyncUnlock(&scsp->scs);
 }
 
