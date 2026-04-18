@@ -1,0 +1,15 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="400" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Common:Synchronization&amp;Utilities</text>
+    
+    <text x="400" y="100">StructHelp(Server,Common,Sync)</text>
+    <text x="400" y="125">EnumHelp(Server,Common,Sync,Status)</text>
+
+    <text x="400" y="180">SyncInit(scs,before,after)</text>
+    <text x="400" y="205">SyncGet(scs),SyncLock(scs)</text>
+    <text x="400" y="230">SyncUnlock(scs),SyncDelete(scs)</text>
+
+    <text x="400" y="285">InitLibrary(Server,Common)</text>
+  </g>
+</svg>

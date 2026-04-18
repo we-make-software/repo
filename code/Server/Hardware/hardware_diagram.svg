@@ -1,0 +1,16 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="800" height="400" fill="#0d0d0d"/>
+  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
+    <text x="400" y="45" font-weight="bold">Hardware:AbstractionLayer</text>
+    
+    <text x="400" y="100">Memory:Allocation&amp;PoolManagement</text>
+    <text x="400" y="130">Network:Interface&amp;DeviceIntegration</text>
+    <text x="400" y="160">Storage:BlockDevice&amp;ConfigManagement</text>
+
+    <text x="400" y="240">LibraryInit(Server,Hardware,Memory)</text>
+    <text x="400" y="265">LibraryInit(Server,Hardware,Storage)</text>
+    <text x="400" y="290">LibraryInit(Server,Hardware,Network)</text>
+
+    <text x="400" y="350">InitLibrary(Server,Hardware)</text>
+  </g>
+</svg>
