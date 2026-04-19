@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fff" />
+    </marker>
+  </defs>
+
+  <style>
+    .text { font-family: sans-serif; fill: #fff; text-anchor: middle; }
+    .title { font-size: 18px; font-weight: bold; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; }
+    .box { fill: #1a1a1a; stroke: #fff; stroke-width: 1.5; rx: 6; }
+    .flow { fill: none; stroke: #fff; stroke-width: 1.5; marker-end: url(#arrow); }
+    .dash { fill: none; stroke: #fff; stroke-width: 1.5; stroke-dasharray: 6,4; marker-end: url(#arrow); }
+  </style>
+
+  <rect width="100%" height="100%" fill="#0d0d0d" />
+
+  <text x="400" y="30" class="text title">Debug Module: Output and Trace Flow</text>
+
+  <rect x="45" y="115" width="170" height="60" class="box" />
+  <text x="130" y="150" class="text label">Instrumented Code</text>
+
+  <rect x="285" y="90" width="230" height="155" class="box" />
+  <text x="400" y="120" class="text label">Debug Output</text>
+  <text x="400" y="150" class="text small">file-backed output</text>
+  <text x="400" y="175" class="text small">message registry</text>
+  <text x="400" y="200" class="text small">value registry</text>
+  <text x="400" y="225" class="text small">kernel_write path</text>
+
+  <rect x="60" y="360" width="170" height="80" class="box" />
+  <text x="145" y="395" class="text label">Message Bucket</text>
+  <text x="145" y="420" class="text small">named trace category</text>
+
+  <rect x="565" y="360" width="180" height="80" class="box" />
+  <text x="655" y="395" class="text label">Value Record</text>
+  <text x="655" y="420" class="text small">new observed value</text>
+
+  <path d="M 215 145 C 255 145, 270 145, 285 145" class="flow" />
+  <text x="250" y="130" class="text small">DebugOutputPrepare</text>
+
+  <path d="M 155 175 C 245 225, 300 255, 340 360" class="dash" />
+  <text x="260" y="245" class="text small">DebugMessagesPrepare</text>
+
+  <path d="M 460 245 C 530 290, 585 330, 620 360" class="flow" />
+  <text x="560" y="300" class="text small">DebugValuePrepare</text>
+
+  <path d="M 230 395 C 305 330, 330 285, 355 245" class="dash" />
+  <text x="290" y="335" class="text small">resolve category</text>
+
+  <path d="M 515 170 H 620" class="flow" />
+  <text x="565" y="150" class="text small">write path</text>
+
+  <path d="M 230 420 C 350 480, 500 480, 565 420" class="dash" />
+  <text x="400" y="505" class="text small">deduplicate and append newly observed values</text>
+</svg>
