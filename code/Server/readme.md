@@ -2,42 +2,61 @@
 
 # Server Kernel Module
 
+A layered kernel module for shared infrastructure, debugging, hardware control, and protocol processing.
+
 <p align="center">
   <b>Navigate to Submodules:</b><br>
   <a href="Common/readme.md" style="color: #fff;">Common</a> | <a href="Debug/readme.md" style="color: #fff;">Debug</a> | <a href="Hardware/readme.md" style="color: #fff;">Hardware</a> | <a href="OSI/readme.md" style="color: #fff;">OSI</a>
 </p>
 
-A custom Linux kernel module for high-performance network processing and hardware management.
+## Overview
+The Server module is the root of the project. It does not contain one isolated subsystem. It coordinates the full runtime stack:
 
-## System Architecture
+- `Debug` for structured tracing
+- `Common` for shared lifecycle foundations
+- `Hardware` for device and storage control
+- `OSI` for protocol behavior
 
-The core of the system is built on a highly compact macro-based naming convention and a layered initialization sequence.
+Its main role is to establish startup order, maintain the running-state gate, and unwind the system cleanly during shutdown or reboot.
+
+## Architecture
+The system is built on two top-level foundations:
+
+- the macro and setup layer in `.setup`
+- the runtime init/quit flow in `main.c`
 
 ### Setup & Macro Layer
-The fundamental naming, memory management, and debugging facilities are unified in `.setup`.
+The naming system, memory helpers, debug interfaces, and shared module includes are centralized in `.setup`.
 
 <p align="center">
   <img src="setup.svg" alt="Setup Diagram">
 </p>
 
 ### Initialization Flow
-The system follows a strict layer-by-layer initialization order (and reverse de-initialization) managed in `main.c`.
+The runtime follows a strict layer-by-layer initialization path, then unwinds in reverse order.
 
 <p align="center">
-  <img src="core.svg" alt="Main Diagram">
+  <img src="module.svg" alt="Main Diagram">
 </p>
 
-## Packet Handling Life-cycle
+## Runtime Flow
+From `main.c`, the top-level flow is:
 
-- **FnNew**: An automatic process that creates the packet, identifies its structure, and places everything in the right spot.
-- **FnRX**: Handles data coming into the system from the network.
-- **FnTX**: Final instance for small corrections that might need to be made, like checksums or other adjustments that are not related to the Data Link layer, just before sending.
+1. register reboot handling
+2. initialize `Debug`
+3. initialize `Common`
+4. initialize `Hardware`
+5. initialize `OSI`
+6. keep the module in the running state until shutdown
+7. unwind in reverse order when the module exits or the system reboots
 
-## Project Structure
+That ordering gives the project a stable base: lower-level services come up first, higher-level behavior comes later, and teardown follows the
+same structure in reverse.
 
-- **Debug/**: Custom logging framework.
-- **Common/**: Shared resources and utilities.
-- **Hardware/**: Low-level drivers for Memory, Network, and Storage.
-- **OSI/**: Implementation of networking protocols.
+## Structure
+- `Debug/`: structured trace and output pipeline
+- `Common/`: shared foundations and ownership mechanics
+- `Hardware/`: memory, network, and storage control
+- `OSI/`: protocol and packet-processing layers
 
 </div>
