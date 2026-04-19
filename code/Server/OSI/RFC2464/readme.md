@@ -1,8 +1,12 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# RFC2464 Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
 
-Implementation of IPv6 over Ethernet.
+# RFC 2464 (IPv6 over Ethernet)
+
+Transmission of IPv6 packets over Ethernet networks.
 
 ## Architecture
 <p align="center">
@@ -10,6 +14,6 @@ Implementation of IPv6 over Ethernet.
 </p>
 
 ## Overview
-The RFC2464 module handles the encapsulation and transmission of IPv6 packets over Ethernet networks. It ensures correct mapping of IPv6 addresses to Ethernet multicast addresses and defines the protocol identifier (0x86DD) used in Ethernet frames.
+Specifies the method for encapsulating IPv6 packets within Ethernet frames and handling the associated multicast mapping.
 
 </div>

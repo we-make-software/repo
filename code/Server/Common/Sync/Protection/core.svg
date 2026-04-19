@@ -19,8 +19,8 @@
     <text x="400" y="130" fill="#fff">SyncProtectionGet(scsp,utc)</text>
     <text x="400" y="160" fill="#fff">SyncProtectionLock(scsp)/SyncProtectionUnlock(scsp)</text>
     <text x="400" y="190" fill="#fff">SyncProtectionDelete(scsp,utc)/SyncProtectionBlock(scsp,utc)</text>
-    <text x="400" y="220" fill="#fff">SyncProtectionSetLimition(scsp,limition)</text>
-    <text x="400" y="250" fill="#fff">SyncProtectionAddLimition(scsp,limition)</text>
+    <text x="400" y="220" fill="#fff">SyncProtectionIncreaseLimition(scsp,limition)</text>
+    <text x="400" y="250" fill="#fff">SyncProtectionDecreaseLimition(scsp,limition)</text>
     <text x="400" y="280" fill="#fff">SyncProtectionGetLimition(scsp)</text>
     <text x="400" y="310" fill="#fff">SyncProtectionEvent(scsp,event)</text>
     <text x="400" y="340" fill="#fff">SyncProtectionImmediate(scsp,immediate)</text>

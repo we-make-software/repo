@@ -1,8 +1,12 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# RFC919 Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
 
-Implementation of Broadcasting Internet Datagrams.
+# RFC 919 (Broadcasting)
+
+Implementation of broadcasting IP datagrams in the presence of subnets.
 
 ## Architecture
 <p align="center">
@@ -10,6 +14,6 @@ Implementation of Broadcasting Internet Datagrams.
 </p>
 
 ## Overview
-The RFC919 module handles the broadcasting of IP datagrams within local networks. It ensures that broadcast packets are correctly addressed and distributed to all hosts on a subnet.
+This module handles the logic for broadcasting data within a network segment according to RFC 919 standards.
 
 </div>

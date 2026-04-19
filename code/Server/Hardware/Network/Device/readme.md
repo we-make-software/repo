@@ -1,15 +1,19 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# Hardware Network Device Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to Network</a>
+</p>
 
-Low-level interface for physical network devices.
+# Network Device Module
+
+Unified interface for physical network adapters.
 
 ## Architecture
 <p align="center">
-  <img src="core.svg" alt="Hardware Network Device Diagram">
+  <img src="core.svg" alt="Device Diagram">
 </p>
 
 ## Overview
-The Hardware Network Device module provides a unified interface for physical NICs. It handles low-level initialization, state management, and basic transmission/reception primitives for various hardware adapters.
+Provides a consistent abstraction layer for various networking hardware, enabling higher-level protocols to interact with physical devices seamlessly.
 
 </div>

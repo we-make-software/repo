@@ -37,7 +37,7 @@ Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Prote
     mutex_unlock(&lock);
 
     SyncGet(&scsp->scs);
-    scsp->limition=limition;
+    scsp->limition=limition+1;
     scsp->utc=utc;
     scsp->event=event;
     scsp->immediate=immediate;
@@ -46,6 +46,7 @@ Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Prote
     struct timespec64 now;
     ktime_get_real_ts64(&now);
     s64 diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
+    if(diff<0)diff=0;
     schedule_delayed_work(&scsp->work,diff);
     SyncUnlock(&scsp->scs);
 }
@@ -53,17 +54,15 @@ Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Prote
 Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc)
 {
     SyncLock(&scsp->scs)return false;
-
+    struct timespec64 now;
+    ktime_get_real_ts64(&now);
     s64 diff=utc.tv_sec-scsp->utc.tv_sec;
     if(diff>5)
     {
         scsp->utc=utc;
-        struct timespec64 now;
-        ktime_get_real_ts64(&now);
         diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
-        mod_delayed_work(system_wq,&scsp->work,diff);
+        if(diff>0)mod_delayed_work(system_wq,&scsp->work,diff);
     }
-
     if(scsp->limition&&SyncGet(&scsp->scs))
     {
         if(!--scsp->limition&&scsp->immediate)
@@ -128,7 +127,7 @@ Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Prot
             struct timespec64 now;
             ktime_get_real_ts64(&now);
             diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
-            mod_delayed_work(system_wq,&scsp->work,diff);
+            if(diff>0)mod_delayed_work(system_wq,&scsp->work,diff);
         }
     }
 
@@ -160,7 +159,7 @@ Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Prote
             struct timespec64 now;
             ktime_get_real_ts64(&now);
             diff=timespec64_to_jiffies(&utc)-timespec64_to_jiffies(&now);
-            mod_delayed_work(system_wq,&scsp->work,diff);
+            if(diff>0)mod_delayed_work(system_wq,&scsp->work,diff);
         }
     }
 
@@ -169,39 +168,28 @@ Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Prote
 
 Fn(void,Server,Common,Sync,Protection,Event)(StructHelp(Server,Common,Sync,Protection)*scsp,void(*event)(StructHelp(Server,Common,Sync,Protection)*))
 {
-    SyncLock(&scsp->scs)return;
     scsp->event=event;
-    SyncUnlock(&scsp->scs);
 }
 
 Fn(void,Server,Common,Sync,Protection,Immediate)(StructHelp(Server,Common,Sync,Protection)*scsp,bool immediate)
 {
-    SyncLock(&scsp->scs)return;
     scsp->immediate=immediate;
-    SyncUnlock(&scsp->scs);
 }
 
-Fn(void,Server,Common,Sync,Protection,Set,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
+Fn(void,Server,Common,Sync,Protection,Increase,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
 {
-    SyncLock(&scsp->scs)return;
-    scsp->limition=limition;
-    SyncUnlock(&scsp->scs);
-}
-
-Fn(void,Server,Common,Sync,Protection,Add,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
-{
-    SyncLock(&scsp->scs)return;
     scsp->limition+=limition;
-    SyncUnlock(&scsp->scs);
+}
+
+Fn(void,Server,Common,Sync,Protection,Decrease,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition)
+{
+    if(scsp->limition>limition)scsp->limition-=limition;
+    else scsp->limition=0;
 }
 
 Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp)
 {
-    u32 limition;
-    SyncLock(&scsp->scs)return 0;
-    limition=scsp->limition;
-    SyncUnlock(&scsp->scs);
-    return limition;
+    return scsp->limition?scsp->limition-1:0;
 }
 
 InitLibrary(Server,Common,Sync,Protection)

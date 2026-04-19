@@ -1,4 +1,9 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
+
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
+
 # EUI-48 (MAC Address)
 
 Structure for handling 48-bit Ethernet addresses (MAC addresses).
@@ -12,7 +17,9 @@ Structure for handling 48-bit Ethernet addresses (MAC addresses).
 | **0** | 2-7 | **RES** | Remaining part of the first byte. |
 | **1-5** | - | **Bytes** | The remaining 5 bytes of the address. |
 
-<p align="center"><img src="core.svg"></p>
+<p align="center">
+  <img src="core.svg">
+</p>
 
 ## Detailed Definitions
 
@@ -28,4 +35,5 @@ The least significant bit of the first byte of the address is used to distinguis
 The second least significant bit of the first byte of the address indicates how the address was assigned:
 *   **0 (Universal):** The address is globally unique and was assigned by the manufacturer (using their OUI - Organizationally Unique Identifier).
 *   **1 (Local):** The address is locally administered. This is commonly seen in virtualized environments (like VMs or Docker containers) or when a MAC address has been manually overridden by a network administrator.
+
 </div>

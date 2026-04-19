@@ -1,17 +1,19 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# IEEE 802.3 Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
 
-Implementation of the Ethernet framing standard (IEEE 802.3). 
+# IEEE 802.3 (Ethernet)
 
-Note: The module is named `IEEE8023` in the code and filesystem to remain compatible with hierarchical macro naming conventions.
+Implementation of the IEEE 802.3 standard for Ethernet framing.
 
 ## Architecture
 <p align="center">
-  <img src="core.svg" alt="IEEE 802.3 Diagram">
+  <img src="core.svg" alt="IEEE8023 Diagram">
 </p>
 
 ## Overview
-This module handles Ethernet framing, providing the base layer for all upper-level protocols in the OSI stack. It is responsible for identifying the EtherType and routing the packet to the appropriate protocol handler.
+Handles the construction and parsing of Ethernet frames, including header management and payload encapsulation.
 
 </div>

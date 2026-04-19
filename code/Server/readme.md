@@ -2,6 +2,11 @@
 
 # Server Kernel Module
 
+<p align="center">
+  <b>Navigate to Submodules:</b><br>
+  <a href="Common/readme.md" style="color: #fff;">Common</a> | <a href="Debug/readme.md" style="color: #fff;">Debug</a> | <a href="Hardware/readme.md" style="color: #fff;">Hardware</a> | <a href="OSI/readme.md" style="color: #fff;">OSI</a>
+</p>
+
 A custom Linux kernel module for high-performance network processing and hardware management.
 
 ## System Architecture
@@ -20,15 +25,6 @@ The system follows a strict layer-by-layer initialization order (and reverse de-
 
 <p align="center">
   <img src="core.svg" alt="Main Diagram">
-</p>
-
-<p align="center">
-  <b>Navigate to Modules:</b><br>
-  <a href="Debug/readme.md" style="color: #fff;">Debug</a> | 
-  <a href="Common/readme.md" style="color: #fff;">Common</a> | 
-  <a href="Hardware/readme.md" style="color: #fff;">Hardware</a> | 
-  <a href="Hardware/Network/readme.md" style="color: #fff;">Network</a> | 
-  <a href="OSI/readme.md" style="color: #fff;">OSI</a>
 </p>
 
 ## Packet Handling Life-cycle

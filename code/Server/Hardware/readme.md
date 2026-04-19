@@ -1,5 +1,9 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to Server</a>
+</p>
+
 # Hardware Module
 
 Low-level abstractions for system memory, networking hardware, and storage devices.
@@ -11,11 +15,8 @@ Low-level abstractions for system memory, networking hardware, and storage devic
 
 <p align="center">
   <b>Navigate to Submodules:</b><br>
-  <a href="Memory/readme.md" style="color: #fff;">Memory</a> | 
-  <a href="Network/readme.md" style="color: #fff;">Network</a> | 
-  <a href="Storage/readme.md" style="color: #fff;">Storage</a>
+  <a href="Memory/readme.md" style="color: #fff;">Memory</a> | <a href="Network/readme.md" style="color: #fff;">Network</a> | <a href="Storage/readme.md" style="color: #fff;">Storage</a>
 </p>
-
 ## Project Structure
 
 - **Memory/**: Kernel memory pool management.

@@ -19,8 +19,8 @@ Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Prot
 Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
 Fn(void,Server,Common,Sync,Protection,Event)(StructHelp(Server,Common,Sync,Protection)*scsp,void(*event)(StructHelp(Server,Common,Sync,Protection)*));
 Fn(void,Server,Common,Sync,Protection,Immediate)(StructHelp(Server,Common,Sync,Protection)*scsp,bool immediate);
-Fn(void,Server,Common,Sync,Protection,Set,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
-Fn(void,Server,Common,Sync,Protection,Add,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
+Fn(void,Server,Common,Sync,Protection,Increase,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
+Fn(void,Server,Common,Sync,Protection,Decrease,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
 Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp);
 
 #define SyncProtectionSetup(scsp,limition,utc,before,after,event,immediate)\
@@ -30,7 +30,7 @@ Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync
     Call(Server,Common,Sync,Protection,Get)(scsp,utc)
 
 #define SyncProtectionLock(scsp)\
-    Call(Server,Common,Sync,Protection,Lock)(scsp)
+    if(!Call(Server,Common,Sync,Protection,Lock)(scsp))
 
 #define SyncProtectionUnlock(scsp)\
     Call(Server,Common,Sync,Protection,Unlock)(scsp)
@@ -47,11 +47,11 @@ Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync
 #define SyncProtectionImmediate(scsp,immediate)\
     Call(Server,Common,Sync,Protection,Immediate)(scsp,immediate)
 
-#define SyncProtectionSetLimition(scsp,limition)\
-    Call(Server,Common,Sync,Protection,Set,Limition)(scsp,limition)
+#define SyncProtectionIncreaseLimition(scsp,limition)\
+    Call(Server,Common,Sync,Protection,Increase,Limition)(scsp,limition)
 
-#define SyncProtectionAddLimition(scsp,limition)\
-    Call(Server,Common,Sync,Protection,Add,Limition)(scsp,limition)
+#define SyncProtectionDecreaseLimition(scsp,limition)\
+    Call(Server,Common,Sync,Protection,Decrease,Limition)(scsp,limition)
 
 #define SyncProtectionGetLimition(scsp)\
     Call(Server,Common,Sync,Protection,Get,Limition)(scsp)

@@ -1,8 +1,12 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to Hardware</a>
+</p>
+
 # Storage Module
 
-Management of storage devices, block I/O, and local data persistence.
+Management of block devices, local storage, and configuration.
 
 ## Architecture
 <p align="center">
@@ -10,6 +14,7 @@ Management of storage devices, block I/O, and local data persistence.
 </p>
 
 <p align="center">
+  <b>Navigate to Submodules:</b><br>
   <a href="Block/readme.md" style="color: #fff;">Block</a> | 
   <a href="Config/readme.md" style="color: #fff;">Config</a> | 
   <a href="Delete/readme.md" style="color: #fff;">Delete</a> | 
@@ -19,19 +24,10 @@ Management of storage devices, block I/O, and local data persistence.
 
 ## Submodules
 
-### Block
-Handles low-level block device operations and requests.
-
-### Config
-Manages storage-specific configurations and parameters.
-
-### Delete
-Handles safe removal of storage resources and cleanup.
-
-### Local
-Interface for local storage management and data access.
-
-### Upgrade
-Logic for upgrading storage components or firmware.
+- **Block**: Low-level block device operations.
+- **Config**: Storage-specific configurations.
+- **Delete**: Removal of storage resources and cleanup.
+- **Local**: Interface for local storage management.
+- **Upgrade**: Logic for upgrading storage components.
 
 </div>

@@ -1,8 +1,12 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# RFC826 Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
 
-Implementation of Address Resolution Protocol (ARP).
+# RFC 826 (ARP)
+
+Address Resolution Protocol (ARP) for Ethernet networks.
 
 ## Architecture
 <p align="center">
@@ -10,6 +14,6 @@ Implementation of Address Resolution Protocol (ARP).
 </p>
 
 ## Overview
-The RFC826 module provides dynamic mapping between IPv4 addresses and hardware addresses (Ethernet MAC). It manages the ARP cache and handles ARP requests and replies to resolve network layer addresses.
+Implements the protocol for mapping IP addresses to physical MAC addresses as defined in RFC 826.
 
 </div>

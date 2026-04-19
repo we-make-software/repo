@@ -1,8 +1,12 @@
 <div style="background-color: #0d0d0d; color: #fff; padding: 20px; border-radius: 10px;">
 
-# RFC8200 Module
+<p align="center">
+  <a href="../readme.md" style="color: #fff;">Back to OSI</a>
+</p>
 
-Implementation of Internet Protocol version 6 (IPv6) Specification.
+# RFC 8200 (IPv6)
+
+Implementation of the Internet Protocol, Version 6 (IPv6) Specification.
 
 ## Architecture
 <p align="center">
@@ -10,6 +14,6 @@ Implementation of Internet Protocol version 6 (IPv6) Specification.
 </p>
 
 ## Overview
-The RFC8200 module implements the core IPv6 protocol. It handles packet routing, header parsing, extension headers, and fragmentation for the next generation of the Internet Protocol.
+Handles IPv6 packet formatting, addressing, and routing logic according to the RFC 8200 standard.
 
 </div>
