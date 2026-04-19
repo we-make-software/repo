@@ -12,9 +12,6 @@ Time-based and count-based lifecycle protection built on the Sync module.
 <p align="center">
   <img src="module.svg" alt="Protection Module Architecture">
 </p>
-<p align="center" style="color: #fff; font-family: sans-serif;">
-  <a href="#" style="color: #fff;">Lease</a> | <a href="#" style="color: #fff;">Sentinel</a> | <a href="#" style="color: #fff;">Transition</a>
-</p>
 
 ## Overview
 The Protection module extends Sync with lease-based lifetime control.
