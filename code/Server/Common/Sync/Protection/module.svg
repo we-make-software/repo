@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fff" />
+    </marker>
+  </defs>
+
+  <style>
+    .text { font-family: sans-serif; fill: #fff; text-anchor: middle; }
+    .title { font-size: 18px; font-weight: bold; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; }
+    .box { fill: #1a1a1a; stroke: #fff; stroke-width: 1.5; rx: 6; }
+    .flow { fill: none; stroke: #fff; stroke-width: 1.5; marker-end: url(#arrow); }
+    .dash { fill: none; stroke: #fff; stroke-width: 1.5; stroke-dasharray: 6,4; marker-end: url(#arrow); }
+  </style>
+
+  <rect width="100%" height="100%" fill="#0d0d0d" />
+
+  <text x="400" y="30" class="text title">Protection Module: Lease and Finality Flow</text>
+
+  <rect x="40" y="110" width="170" height="60" class="box" />
+  <text x="125" y="145" class="text label">External Caller</text>
+
+  <rect x="285" y="95" width="230" height="150" class="box" />
+  <text x="400" y="125" class="text label">Protected Lease</text>
+  <text x="400" y="155" class="text small">Status: Active</text>
+  <text x="400" y="180" class="text small">UTC Horizon</text>
+  <text x="400" y="200" class="text small">Limition Counter</text>
+  <text x="400" y="220" class="text small">Sync-owned lifetime</text>
+
+  <rect x="50" y="360" width="150" height="60" class="box" />
+  <text x="125" y="395" class="text label">Sentinel Work</text>
+
+  <rect x="585" y="95" width="165" height="150" class="box" />
+  <text x="667" y="125" class="text label">Before State</text>
+  <text x="667" y="155" class="text small">new Get / Lock denied</text>
+  <text x="667" y="180" class="text small">removed from registry</text>
+  <text x="667" y="205" class="text small">handler may run</text>
+
+  <rect x="580" y="360" width="175" height="80" class="box" />
+  <text x="667" y="395" class="text label">After State</text>
+  <text x="667" y="420" class="text small">SyncDelete releases</text>
+
+  <path d="M 210 140 C 255 140, 265 140, 285 140" class="flow" />
+  <text x="250" y="125" class="text small">Get / Lock</text>
+
+  <path d="M 150 170 C 230 210, 300 230, 350 240" class="dash" />
+  <text x="260" y="220" class="text small">extend UTC horizon</text>
+
+  <path d="M 340 245 C 285 300, 210 340, 165 360" class="dash" />
+  <text x="255" y="325" class="text small">deadline monitoring</text>
+
+  <path d="M 125 360 V 285 H 285" class="flow" />
+  <text x="215" y="315" class="text small">deadline reached</text>
+
+  <path d="M 515 170 H 585" class="flow" />
+  <text x="550" y="150" class="text small">flip to Before</text>
+
+  <path d="M 665 245 V 360" class="flow" />
+  <text x="700" y="310" class="text small">handler done</text>
+
+  <path d="M 200 390 C 330 450, 500 465, 580 420" class="flow" />
+  <text x="390" y="485" class="text small">single final path through Sentinel</text>
+</svg>

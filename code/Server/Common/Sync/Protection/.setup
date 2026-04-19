@@ -1,30 +1,37 @@
 #pragma once
 #include "../.setup"
 
+EnumHelp(Server,Common,Sync,Protection,Status){
+    EnumValueHelp(Server,Common,Sync,Protection,Status,Active),
+    EnumValueHelp(Server,Common,Sync,Protection,Status,Before),
+    EnumValueHelp(Server,Common,Sync,Protection,Status,After)
+};
+
 StructHelp(Server,Common,Sync,Protection){
     StructHelp(Server,Common,Sync) scs;
     u32 limition;
     struct timespec64 utc;
     struct delayed_work work;
     struct list_head node;
-    void(*event)(StructHelp(Server,Common,Sync,Protection)*);
+    EnumHelp(Server,Common,Sync,Protection,Status) status;
+    void(*handler)(StructHelp(Server,Common,Sync,Protection)*);
     bool immediate;
+    bool listed;
 };
 
-Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc,void(*before)(StructHelp(Server,Common,Sync)*),void(*after)(StructHelp(Server,Common,Sync)*),void(*event)(StructHelp(Server,Common,Sync,Protection)*),bool immediate);
+Fn(void,Server,Common,Sync,Protection,Setup)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition,struct timespec64 utc,void(*sync_before)(StructHelp(Server,Common,Sync)*),void(*sync_after)(StructHelp(Server,Common,Sync)*),void(*handler)(StructHelp(Server,Common,Sync,Protection)*),bool immediate);
 Fn(bool,Server,Common,Sync,Protection,Get)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
 Fn(bool,Server,Common,Sync,Protection,Lock)(StructHelp(Server,Common,Sync,Protection)*scsp);
 Fn(void,Server,Common,Sync,Protection,Unlock)(StructHelp(Server,Common,Sync,Protection)*scsp);
 Fn(void,Server,Common,Sync,Protection,Delete)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
 Fn(void,Server,Common,Sync,Protection,Block)(StructHelp(Server,Common,Sync,Protection)*scsp,struct timespec64 utc);
-Fn(void,Server,Common,Sync,Protection,Event)(StructHelp(Server,Common,Sync,Protection)*scsp,void(*event)(StructHelp(Server,Common,Sync,Protection)*));
 Fn(void,Server,Common,Sync,Protection,Immediate)(StructHelp(Server,Common,Sync,Protection)*scsp,bool immediate);
 Fn(void,Server,Common,Sync,Protection,Increase,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
 Fn(void,Server,Common,Sync,Protection,Decrease,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp,u32 limition);
 Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync,Protection)*scsp);
 
-#define SyncProtectionSetup(scsp,limition,utc,before,after,event,immediate)\
-    Call(Server,Common,Sync,Protection,Setup)(scsp,limition,utc,before,after,event,immediate)
+#define SyncProtectionSetup(scsp,limition,utc,sync_before,sync_after,handler,immediate)\
+    Call(Server,Common,Sync,Protection,Setup)(scsp,limition,utc,sync_before,sync_after,handler,immediate)
 
 #define SyncProtectionGet(scsp,utc)\
     Call(Server,Common,Sync,Protection,Get)(scsp,utc)
@@ -40,9 +47,6 @@ Fn(u32,Server,Common,Sync,Protection,Get,Limition)(StructHelp(Server,Common,Sync
 
 #define SyncProtectionBlock(scsp,utc)\
     Call(Server,Common,Sync,Protection,Block)(scsp,utc)
-
-#define SyncProtectionEvent(scsp,event)\
-    Call(Server,Common,Sync,Protection,Event)(scsp,event)
 
 #define SyncProtectionImmediate(scsp,immediate)\
     Call(Server,Common,Sync,Protection,Immediate)(scsp,immediate)

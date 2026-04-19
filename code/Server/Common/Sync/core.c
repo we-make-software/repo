@@ -38,23 +38,30 @@ Fn(void,Server,Common,Sync,Unlock)(StructHelp(Server,Common,Sync)*scs)
 Fn(void,Server,Common,Sync,Delete)(StructHelp(Server,Common,Sync)*scs)
 {
     SyncLock(scs)return;
-    if(!--scs->ref)
+    if(!scs->ref)
     {
-        scs->status=EnumValueHelp(Server,Common,Sync,Status,ProcessDeleting);
         SyncUnlock(scs);
-        SyncLock(scs)return;
-        if(scs->status==EnumValueHelp(Server,Common,Sync,Status,Active))
-        {
-            SyncUnlock(scs);
-            return;
-        }
-        scs->status=EnumValueHelp(Server,Common,Sync,Status,Delete);
-        SyncUnlock(scs);
-        if(scs->before)scs->before(scs);
-        if(scs->after)scs->after(scs);
         return;
     }
+    if(--scs->ref)
+    {
+        SyncUnlock(scs);
+        return;
+    }
+    scs->status=EnumValueHelp(Server,Common,Sync,Status,ProcessDeleting);
     SyncUnlock(scs);
+
+    /* Re-enter once to allow a concurrent Get to restore ownership. */
+    SyncLock(scs)return;
+    if(scs->status==EnumValueHelp(Server,Common,Sync,Status,Active)||scs->ref)
+    {
+        SyncUnlock(scs);
+        return;
+    }
+    scs->status=EnumValueHelp(Server,Common,Sync,Status,Delete);
+    SyncUnlock(scs);
+    if(scs->before)scs->before(scs);
+    if(scs->after)scs->after(scs);
 }
 
 InitLibrary(Server,Common,Sync)
