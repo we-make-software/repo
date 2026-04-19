@@ -1,31 +1,50 @@
-<svg width="800" height="420" xmlns="http://www.w3.org/2000/svg">
-  <defs >
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#fff" stroke="#fff" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fff" />
     </marker>
   </defs>
-  <rect width="100%" height="100%" fill="#0d0d0d" stroke="#fff" />
-  
-  
-  <g font-family="monospace" font-size="14" text-anchor="middle" fill="#fff">
-    <!-- Group 0 -->
-    <rect x="50" y="20" width="700" height="60" fill="none" stroke="#fff" stroke-width="1" />
-    <text x="400" y="45" font-weight="bold" fill="#fff">Common:Synchronization&amp;Utilities</text>
-    <line x1="400" y1="60" x2="400" y2="75" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
-    <!-- Group 1 -->
-    <rect x="50" y="75" width="700" height="85" fill="none" stroke="#fff" stroke-width="1" />
-    <text x="400" y="100" fill="#fff">StructHelp(Server,Common,Sync)</text>
-    <text x="400" y="125" fill="#fff">EnumHelp(Server,Common,Sync,Status)</text>
-    <line x1="400" y1="140" x2="400" y2="155" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
-    <!-- Group 2 -->
-    <rect x="50" y="155" width="700" height="110" fill="none" stroke="#fff" stroke-width="1" />
-    <text x="400" y="180" fill="#fff">SyncInit(scs,before,after)</text>
-    <text x="400" y="205" fill="#fff">SyncGet(scs),SyncLock(scs)</text>
-    <text x="400" y="230" fill="#fff">SyncUnlock(scs),SyncDelete(scs)</text>
-    <line x1="400" y1="245" x2="400" y2="260" stroke="#fff" stroke-width="1" marker-end="url(#arrowhead)" />
-    <!-- Group 3 -->
-    <rect x="50" y="260" width="700" height="60" fill="none" stroke="#fff" stroke-width="1" />
-    <text x="400" y="285" fill="#fff">InitLibrary(Server,Common)</text>
-    <text x="400" y="305" fill="#fff">QuitLibrary(Server,Common)</text>
-  </g>
+
+  <style>
+    .text { font-family: sans-serif; fill: #fff; text-anchor: middle; }
+    .title { font-size: 18px; font-weight: bold; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; }
+    .box { fill: #1a1a1a; stroke: #fff; stroke-width: 1.5; rx: 6; }
+    .flow { fill: none; stroke: #fff; stroke-width: 1.5; marker-end: url(#arrow); }
+    .dash { fill: none; stroke: #fff; stroke-width: 1.5; stroke-dasharray: 6,4; marker-end: url(#arrow); }
+  </style>
+
+  <rect width="100%" height="100%" fill="#0d0d0d" />
+
+  <text x="400" y="30" class="text title">Common Module: Shared Foundation Flow</text>
+
+  <rect x="55" y="120" width="170" height="60" class="box" />
+  <text x="140" y="155" class="text label">Server Modules</text>
+
+  <rect x="290" y="95" width="220" height="145" class="box" />
+  <text x="400" y="125" class="text label">Common Layer</text>
+  <text x="400" y="155" class="text small">shared ownership rules</text>
+  <text x="400" y="180" class="text small">shared lifecycle utilities</text>
+  <text x="400" y="205" class="text small">base for reusable modules</text>
+
+  <rect x="70" y="360" width="180" height="80" class="box" />
+  <text x="160" y="395" class="text label">Sync</text>
+  <text x="160" y="420" class="text small">ownership and finality</text>
+
+  <rect x="550" y="360" width="180" height="80" class="box" />
+  <text x="640" y="395" class="text label">Protection</text>
+  <text x="640" y="420" class="text small">lease-based lifetime policy</text>
+
+  <path d="M 225 150 C 260 150, 270 150, 290 150" class="flow" />
+  <text x="255" y="135" class="text small">shared access</text>
+
+  <path d="M 355 240 C 300 300, 235 335, 200 360" class="flow" />
+  <text x="285" y="315" class="text small">foundation for ownership</text>
+
+  <path d="M 445 240 C 500 300, 565 335, 600 360" class="flow" />
+  <text x="515" y="315" class="text small">foundation for policy</text>
+
+  <path d="M 250 395 C 340 455, 465 455, 550 395" class="dash" />
+  <text x="400" y="485" class="text small">Protection extends the Common base through Sync</text>
 </svg>
