@@ -17,6 +17,7 @@ A reference-counted ownership and finality framework built on Linux kernel mutex
   <b>Navigate to Submodules:</b><br>
   <a href="Protection/readme.md" style="color: #fff;">Protection</a>
 </p>
+
 ## Overview
 The Sync module exists to decide whether an object still belongs to the living system.
 
